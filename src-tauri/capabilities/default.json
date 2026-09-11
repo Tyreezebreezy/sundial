@@ -2,6 +2,6 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "SUNDIAL baseline: no plugin-exposed Tauri commands beyond the app's own IPC surface.",
-  "windows": ["main"],
+  "windows": ["main", "widget"],
   "permissions": []
 }
