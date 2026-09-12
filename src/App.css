@@ -34,7 +34,6 @@ body,
 
 body {
   margin: 0;
-  min-width: 260px;
   color: var(--text);
   background: transparent;
 }
@@ -488,6 +487,21 @@ label.row input:not([type]) {
   bottom: 0.35rem;
   display: flex;
   gap: 0.3rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.widget:hover .widget-controls,
+.widget:focus-within .widget-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .widget-controls {
+    transition: none;
+  }
 }
 
 .widget-controls button {
@@ -506,8 +520,4 @@ label.row input:not([type]) {
   flex-direction: row;
   gap: 0.4rem;
   border-radius: 999px;
-}
-
-.widget-small .widget-controls {
-  position: static;
 }

@@ -15,9 +15,9 @@
         "label": "main",
         "title": "SUNDIAL",
         "width": 900,
-        "height": 680,
+        "height": 760,
         "minWidth": 640,
-        "minHeight": 480,
+        "minHeight": 560,
         "center": true
       }
     ],

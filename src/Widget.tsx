@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTimer } from "./useTimer";
 import { api } from "./tauri";
 import { Disk } from "./visuals/Disk";
@@ -30,7 +29,6 @@ function Visual({
 }
 
 export function Widget() {
-  const [hovering, setHovering] = useState(false);
   // The widget never plays audio itself, avoiding double playback with the
   // main window - it stays a silent, always-available view of the engine.
   const { state, settings, remainingMs } = useTimer((_kind: PhaseKind) => {});
@@ -58,12 +56,7 @@ export function Widget() {
       .filter((p) => p.kind === "study").length ?? 0;
 
   return (
-    <div
-      className={`widget widget-${size}`}
-      data-tauri-drag-region
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-    >
+    <div className={`widget widget-${size}`} data-tauri-drag-region>
       {size === "large" && plan?.label && (
         <div className="widget-label">{plan.label}</div>
       )}
@@ -97,66 +90,62 @@ export function Widget() {
         </div>
       )}
 
-      {hovering && (
-        <div className="widget-controls">
-          {state.isRunning && !state.awaitingAdvance && (
-            <>
-              <button
-                type="button"
-                onClick={() =>
-                  void (state.isPaused ? api.resume() : api.pause())
-                }
-                title={state.isPaused ? "Resume" : "Pause"}
-                aria-label={state.isPaused ? "Resume" : "Pause"}
-              >
-                {state.isPaused ? "▶" : "❚❚"}
-              </button>
-              <button
-                type="button"
-                onClick={() => void api.addMinutes(5)}
-                title="+5 minutes"
-                aria-label="Add 5 minutes"
-              >
-                +5
-              </button>
-              <button
-                type="button"
-                onClick={() => void api.advancePhase()}
-                title="Skip phase"
-                aria-label="Skip phase"
-              >
-                ⏭
-              </button>
-              <button
-                type="button"
-                onClick={() => void api.reset()}
-                title="Reset"
-                aria-label="Reset"
-              >
-                ⟲
-              </button>
-            </>
-          )}
-          {state.awaitingAdvance && (
+      <div className="widget-controls">
+        {state.isRunning && !state.awaitingAdvance && (
+          <>
+            <button
+              type="button"
+              onClick={() => void (state.isPaused ? api.resume() : api.pause())}
+              title={state.isPaused ? "Resume" : "Pause"}
+              aria-label={state.isPaused ? "Resume" : "Pause"}
+            >
+              {state.isPaused ? "▶" : "❚❚"}
+            </button>
+            <button
+              type="button"
+              onClick={() => void api.addMinutes(5)}
+              title="+5 minutes"
+              aria-label="Add 5 minutes"
+            >
+              +5
+            </button>
             <button
               type="button"
               onClick={() => void api.advancePhase()}
-              title="Start next phase"
-              aria-label="Start next phase"
+              title="Skip phase"
+              aria-label="Skip phase"
             >
-              ▶
+              ⏭
             </button>
-          )}
+            <button
+              type="button"
+              onClick={() => void api.reset()}
+              title="Reset"
+              aria-label="Reset"
+            >
+              ⟲
+            </button>
+          </>
+        )}
+        {state.awaitingAdvance && (
           <button
             type="button"
-            onClick={() => void api.openMainWindow()}
-            title="Open SUNDIAL"
-            aria-label="Open SUNDIAL"
+            onClick={() => void api.advancePhase()}
+            title="Start next phase"
+            aria-label="Start next phase"
           >
-            ⤢
+            ▶
           </button>
-        </div>
-      )}
+        )}
+        <button
+          type="button"
+          onClick={() => void api.openMainWindow()}
+          title="Open SUNDIAL"
+          aria-label="Open SUNDIAL"
+        >
+          ⤢
+        </button>
+      </div>
     </div>
   );
 }
