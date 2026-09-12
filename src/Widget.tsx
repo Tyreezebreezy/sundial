@@ -107,6 +107,7 @@ export function Widget() {
                   void (state.isPaused ? api.resume() : api.pause())
                 }
                 title={state.isPaused ? "Resume" : "Pause"}
+                aria-label={state.isPaused ? "Resume" : "Pause"}
               >
                 {state.isPaused ? "▶" : "❚❚"}
               </button>
@@ -114,6 +115,7 @@ export function Widget() {
                 type="button"
                 onClick={() => void api.addMinutes(5)}
                 title="+5 minutes"
+                aria-label="Add 5 minutes"
               >
                 +5
               </button>
@@ -121,6 +123,7 @@ export function Widget() {
                 type="button"
                 onClick={() => void api.advancePhase()}
                 title="Skip phase"
+                aria-label="Skip phase"
               >
                 ⏭
               </button>
@@ -128,6 +131,7 @@ export function Widget() {
                 type="button"
                 onClick={() => void api.reset()}
                 title="Reset"
+                aria-label="Reset"
               >
                 ⟲
               </button>
@@ -138,6 +142,7 @@ export function Widget() {
               type="button"
               onClick={() => void api.advancePhase()}
               title="Start next phase"
+              aria-label="Start next phase"
             >
               ▶
             </button>
@@ -146,6 +151,7 @@ export function Widget() {
             type="button"
             onClick={() => void api.openMainWindow()}
             title="Open SUNDIAL"
+            aria-label="Open SUNDIAL"
           >
             ⤢
           </button>
