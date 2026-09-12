@@ -47,7 +47,9 @@ pub fn fire_completions(app: &AppHandle, kinds: &[PhaseKind]) {
             PhaseKind::Break => ("Break complete", "Back to it.", "break"),
             PhaseKind::Timer => ("Timer complete", "Time's up.", "timer"),
         };
-        let _ = app.notification().builder().title(title).body(body).show();
+        if let Err(e) = app.notification().builder().title(title).body(body).show() {
+            eprintln!("[sundial] notification failed: {e}");
+        }
         let _ = app.emit("phase-complete", tag);
     }
 }
