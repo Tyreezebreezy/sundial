@@ -1,15 +1,18 @@
+import { useEffect, useState } from "react";
 import "./App.css";
+import { currentWindowLabel } from "./tauri";
+import { MainApp } from "./MainApp";
+import { Widget } from "./Widget";
 
 function App() {
-  return (
-    <div className="app-shell">
-      <main>
-        <p className="eyebrow">Visual Study Timer</p>
-        <h1>SUNDIAL</h1>
-        <p className="lede">Study and General Timer modes are coming online.</p>
-      </main>
-    </div>
-  );
+  const [label, setLabel] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLabel(currentWindowLabel());
+  }, []);
+
+  if (label === null) return null;
+  return label === "widget" ? <Widget /> : <MainApp />;
 }
 
 export default App;

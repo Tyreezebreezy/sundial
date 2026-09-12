@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "SUNDIAL baseline: no plugin-exposed Tauri commands beyond the app's own IPC surface.",
+  "description": "SUNDIAL baseline: the app's own commands plus the core event bus both windows use to stay in sync with the Rust-owned timer state.",
   "windows": ["main", "widget"],
-  "permissions": []
+  "permissions": ["core:event:default", "core:window:allow-start-dragging"]
 }

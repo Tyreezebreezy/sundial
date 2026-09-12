@@ -412,6 +412,41 @@ mod tests {
     }
 
     #[test]
+    fn persisted_data_round_trips_through_json_and_catches_up_after_a_gap() {
+        // Mirrors what actually happens on disk: a session was running when
+        // the app was last closed, wall-clock time moved on while it was
+        // gone, and on the next launch we deserialize exactly what was
+        // written and reconcile it against "now".
+        let mut original = PersistedData::default();
+        original.state.start(
+            plan(
+                true,
+                vec![
+                    (PhaseKind::Study, 60_000),
+                    (PhaseKind::Break, 60_000),
+                    (PhaseKind::Study, 60_000),
+                ],
+            ),
+            0,
+        );
+
+        let json = serde_json::to_string(&original).expect("serialize");
+        let mut restored: PersistedData = serde_json::from_str(&json).expect("deserialize");
+
+        assert_eq!(restored.state.current_index, 0);
+        assert!(restored.state.is_running);
+
+        // "Now" is 150s after the session started: phase 1 (ends at 60s) and
+        // phase 2 (ends at 120s) are both long over; phase 3 (ends at 180s)
+        // still has 30s left.
+        let completed = restored.state.catch_up(150_000);
+        assert_eq!(completed, vec![PhaseKind::Study, PhaseKind::Break]);
+        assert_eq!(restored.state.current_index, 2);
+        assert!(restored.state.is_running);
+        assert_eq!(restored.state.ends_at, Some(180_000));
+    }
+
+    #[test]
     fn reset_returns_to_idle_default() {
         let mut s = TimerState::default();
         s.start(plan(true, vec![(PhaseKind::Study, 1_000)]), 0);
