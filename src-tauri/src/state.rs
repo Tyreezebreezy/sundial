@@ -33,7 +33,7 @@ pub struct SessionPlan {
     pub phases: Vec<Phase>,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct TimerState {
     pub plan: Option<SessionPlan>,
@@ -48,23 +48,6 @@ pub struct TimerState {
     /// A phase just completed and auto_advance is off; the next phase is
     /// queued (current_index already points at it) but not yet started.
     pub awaiting_advance: bool,
-}
-
-impl Default for TimerState {
-    fn default() -> Self {
-        TimerState {
-            plan: None,
-            current_index: 0,
-            started_at: None,
-            ends_at: None,
-            duration_ms: 0,
-            paused_at: None,
-            paused_remaining_ms: None,
-            is_paused: false,
-            is_running: false,
-            awaiting_advance: false,
-        }
-    }
 }
 
 impl TimerState {
@@ -127,10 +110,7 @@ impl TimerState {
         if !self.is_running || self.is_paused || self.awaiting_advance {
             return completed;
         }
-        loop {
-            let Some(ends_at) = self.ends_at else {
-                break;
-            };
+        while let Some(ends_at) = self.ends_at {
             if now < ends_at {
                 break;
             }

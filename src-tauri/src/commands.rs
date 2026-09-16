@@ -95,6 +95,7 @@ pub fn get_boot_data(app: AppHandle, state: State<AppState>) -> BootPayload {
 }
 
 #[tauri::command]
+#[allow(clippy::too_many_arguments)]
 pub fn start_session(
     app: AppHandle,
     state: State<AppState>,
