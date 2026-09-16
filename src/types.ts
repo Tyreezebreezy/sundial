@@ -47,6 +47,7 @@ export interface Settings {
   lastStudyPresetId: string | null;
   lastStudyTotalMinutes: number | null;
   lastTimerMinutes: number | null;
+  quitOnMainClose: boolean;
 }
 
 export interface Preset {

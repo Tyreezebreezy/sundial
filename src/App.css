@@ -232,6 +232,21 @@ select:focus-visible {
   color: var(--danger);
 }
 
+.quit-button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--danger);
+  border-radius: 0.4rem;
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+}
+
+.quit-button:hover {
+  background: var(--danger);
+  color: var(--canvas);
+}
+
 .quick-picks {
   display: flex;
   flex-wrap: wrap;
@@ -513,6 +528,11 @@ label.row input:not([type]) {
   font-size: 0.75rem;
   line-height: 1.4;
   cursor: pointer;
+}
+
+.widget-quit:hover {
+  color: var(--danger);
+  border-color: var(--danger);
 }
 
 .widget-small {

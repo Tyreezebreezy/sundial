@@ -233,6 +233,13 @@ pub struct Settings {
     pub last_study_preset_id: Option<String>,
     pub last_study_total_minutes: Option<u32>,
     pub last_timer_minutes: Option<u32>,
+    /// Whether closing the main window quits SUNDIAL entirely, rather than
+    /// hiding it to the tray. `#[serde(default)]` so a settings file saved by
+    /// an older SUNDIAL version (without this field) still loads instead of
+    /// falling back to `PersistedData::default()` and losing everything else
+    /// in it - see `persistence::load`.
+    #[serde(default)]
+    pub quit_on_main_close: bool,
 }
 
 impl Default for Settings {
@@ -252,6 +259,7 @@ impl Default for Settings {
             last_study_preset_id: None,
             last_study_total_minutes: None,
             last_timer_minutes: None,
+            quit_on_main_close: false,
         }
     }
 }
@@ -453,5 +461,36 @@ mod tests {
         s.reset();
         assert!(!s.is_running);
         assert!(s.plan.is_none());
+    }
+
+    #[test]
+    fn settings_json_missing_quit_on_main_close_defaults_to_false() {
+        // A real settings file written by SUNDIAL 1.0.0 (before this field
+        // existed) must still load - `persistence::load` falls back to
+        // `PersistedData::default()` on any deserialize error, so a missing
+        // field here would silently discard the user's whole settings file,
+        // not just default one field.
+        let json = r#"{
+            "soundEnabled": false,
+            "volume": 0.3,
+            "soundStudyComplete": "bell",
+            "soundBreakComplete": "chime",
+            "soundTimerComplete": "alarm",
+            "autoAdvance": true,
+            "defaultVisual": "hourglass",
+            "widgetVisible": false,
+            "widgetAlwaysOnTop": false,
+            "widgetSize": "small",
+            "widgetPosition": null,
+            "lastStudyPresetId": null,
+            "lastStudyTotalMinutes": null,
+            "lastTimerMinutes": null
+        }"#;
+        let restored: Settings = serde_json::from_str(json).expect("deserialize");
+        assert!(!restored.quit_on_main_close);
+        assert!(
+            !restored.sound_enabled,
+            "existing fields still load correctly"
+        );
     }
 }

@@ -145,6 +145,15 @@ export function Widget() {
         >
           ⤢
         </button>
+        <button
+          type="button"
+          className="widget-quit"
+          onClick={() => void api.quit()}
+          title="Quit SUNDIAL"
+          aria-label="Quit SUNDIAL"
+        >
+          ⏻
+        </button>
       </div>
     </div>
   );

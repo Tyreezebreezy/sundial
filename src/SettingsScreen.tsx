@@ -193,6 +193,37 @@ export function SettingsScreen({ settings }: { settings: Settings }) {
           </select>
         </label>
       </section>
+
+      <section>
+        <h3>App</h3>
+        <div role="radiogroup" aria-label="When the main window closes">
+          <label className="row">
+            <input
+              type="radio"
+              name="close-behavior"
+              checked={!settings.quitOnMainClose}
+              onChange={() => update({ quitOnMainClose: false })}
+            />
+            Keep SUNDIAL running when main window closes
+          </label>
+          <label className="row">
+            <input
+              type="radio"
+              name="close-behavior"
+              checked={settings.quitOnMainClose}
+              onChange={() => update({ quitOnMainClose: true })}
+            />
+            Quit SUNDIAL when main window closes
+          </label>
+        </div>
+        <button
+          type="button"
+          className="quit-button"
+          onClick={() => void api.quit()}
+        >
+          Quit SUNDIAL
+        </button>
+      </section>
     </div>
   );
 }

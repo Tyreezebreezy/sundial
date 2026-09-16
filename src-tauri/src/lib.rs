@@ -42,7 +42,7 @@ pub fn run() {
             widget::create(&handle, &settings_snapshot)?;
 
             let open_item = MenuItem::with_id(app, "open", "Open SUNDIAL", true, None::<&str>)?;
-            let quit_item = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
+            let quit_item = MenuItem::with_id(app, "quit", "Quit SUNDIAL", true, None::<&str>)?;
             let tray_menu = Menu::with_items(app, &[&open_item, &quit_item])?;
             TrayIconBuilder::new()
                 .icon(app.default_window_icon().cloned().unwrap())
@@ -50,7 +50,7 @@ pub fn run() {
                 .tooltip("SUNDIAL")
                 .on_menu_event(|app, event| match event.id.as_ref() {
                     "open" => commands::open_main_window(app.clone()),
-                    "quit" => app.exit(0),
+                    "quit" => commands::quit_app(app.clone()),
                     _ => {}
                 })
                 .on_tray_icon_event(|tray, event| {
@@ -80,8 +80,19 @@ pub fn run() {
         .on_window_event(|window, event| {
             if window.label() == "main" {
                 if let WindowEvent::CloseRequested { api, .. } = event {
-                    let _ = window.hide();
                     api.prevent_close();
+                    let quit_on_close = window
+                        .state::<AppState>()
+                        .0
+                        .lock()
+                        .unwrap()
+                        .settings
+                        .quit_on_main_close;
+                    if quit_on_close {
+                        commands::quit_app(window.app_handle().clone());
+                    } else {
+                        let _ = window.hide();
+                    }
                 }
             }
         })

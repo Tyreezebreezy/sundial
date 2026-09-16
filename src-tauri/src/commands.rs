@@ -241,7 +241,17 @@ pub fn set_widget_size(app: AppHandle, state: State<AppState>, size: String) {
     persistence::save(&app, &data);
 }
 
+/// Full quit, from any entry point (tray, Settings, widget, or main window
+/// close with `quit_on_main_close` set): closes the widget window explicitly
+/// so it disappears immediately, then exits the process. `app.exit` tears
+/// down every remaining window, the tray icon, and the background
+/// reconciliation task as part of process termination - there is no
+/// separate "stop the tick loop" step because nothing survives the process
+/// exiting.
 #[tauri::command]
 pub fn quit_app(app: AppHandle) {
+    if let Some(w) = app.get_webview_window("widget") {
+        let _ = w.close();
+    }
     app.exit(0);
 }
