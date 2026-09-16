@@ -1,6 +1,6 @@
 [package]
 name = "sundial"
-version = "1.0.0"
+version = "1.0.1"
 description = "SUNDIAL desktop app - visual study timer"
 authors = ["Tyree"]
 edition = "2021"
