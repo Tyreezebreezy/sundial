@@ -55,6 +55,10 @@ export interface Preset {
   name: string;
   studyMinutes: number;
   breakMinutes: number;
+  /** Saved custom presets may remember these; built-in presets never do. */
+  defaultTotalMinutes?: number | null;
+  autoAdvance?: boolean | null;
+  visual?: VisualKind | null;
 }
 
 export interface RestoreSummary {

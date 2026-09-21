@@ -32,8 +32,22 @@ export const api = {
     invoke<TimerState>("add_minutes", { minutes }),
   advancePhase: () => invoke<TimerState>("advance_phase"),
   reset: () => invoke<TimerState>("reset_timer"),
-  savePreset: (name: string, studyMinutes: number, breakMinutes: number) =>
-    invoke<Preset[]>("save_preset", { name, studyMinutes, breakMinutes }),
+  savePreset: (
+    name: string,
+    studyMinutes: number,
+    breakMinutes: number,
+    defaults?: {
+      defaultTotalMinutes: number | null;
+      autoAdvance: boolean;
+      visual: VisualKind;
+    },
+  ) =>
+    invoke<Preset[]>("save_preset", {
+      name,
+      studyMinutes,
+      breakMinutes,
+      ...defaults,
+    }),
   deletePreset: (id: string) => invoke<Preset[]>("delete_preset", { id }),
   updateSettings: (settings: Settings) =>
     invoke<Settings>("update_settings", { settings }),
