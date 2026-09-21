@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Generated QA harness output (intentional evidence is committed under docs/design/<version>/)
+docs/design/qa-harness/.output/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

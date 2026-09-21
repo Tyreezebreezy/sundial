@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "MYAPP",
+    "identifier": "com.example.myapp",
+    "isolatedIdentifier": "com.example.myapp.uidev",
+    "processName": "myapp.exe",
+    "debugExe": "src-tauri/target/debug/myapp.exe",
+    "releaseExe": "src-tauri/target/release/myapp.exe",
+    "devCommand": ["npm", "run", "tauri", "dev"],
+    "stateFile": "${APPDATA}/${identifier}/state.json"
+  },
+  "cdp": { "port": 9333 },
+  "windows": {
+    "main": {
+      "label": "main",
+      "defaultSize": [1000, 700],
+      "minSize": [640, 480]
+    }
+  },
+  "output": { "dir": "docs/design/qa-harness/.output" },
+  "viewports": [
+    { "name": "640x480", "w": 640, "h": 480, "dpr": 1 },
+    { "name": "1000x700", "w": 1000, "h": 700, "dpr": 1 },
+    { "name": "1920x1080", "w": 1920, "h": 1080, "dpr": 1 },
+    { "name": "1000x700@150", "w": 1000, "h": 700, "dpr": 1.5 }
+  ],
+  "probes": {
+    "interactiveSelector": "button, input:not([type=hidden]), select, textarea, a[href], summary, [role=button], [role=tab], [role=menuitem], [role=switch], [role=radio], [role=checkbox]",
+    "textSelector": "",
+    "truncationSelectors": [],
+    "heroSelector": null,
+    "minTargetPx": 24,
+    "autoClip": true,
+    "focusFaceSelectors": []
+  },
+  "backdrops": {
+    "dark": { "r": 27, "g": 27, "b": 27, "a": 1 },
+    "light": { "r": 222, "g": 222, "b": 222, "a": 1 }
+  },
+  "performance": { "seconds": 15, "settleMs": 2500 },
+  "specFile": "template.spec.mjs"
+}

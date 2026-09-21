@@ -1,0 +1,64 @@
+{
+  "app": {
+    "name": "SUNDIAL",
+    "identifier": "com.sundial.app",
+    "isolatedIdentifier": "com.sundial.app.uidev",
+    "processName": "sundial.exe",
+    "debugExe": "src-tauri/target/debug/sundial.exe",
+    "releaseExe": "src-tauri/target/release/sundial.exe",
+    "devCommand": ["npm", "run", "tauri", "dev"],
+    "stateFile": "${APPDATA}/${identifier}/sundial-state.json"
+  },
+  "cdp": { "port": 9333 },
+  "windows": {
+    "main": {
+      "label": "main",
+      "defaultSize": [900, 760],
+      "minSize": [640, 560]
+    },
+    "widget": {
+      "label": "widget",
+      "sizes": {
+        "small": [272, 56],
+        "medium": [232, 172],
+        "large": [272, 244]
+      }
+    }
+  },
+  "output": { "dir": "docs/design/qa-harness/.output" },
+  "viewports": [
+    { "name": "640x560", "w": 640, "h": 560, "dpr": 1 },
+    { "name": "900x760", "w": 900, "h": 760, "dpr": 1 },
+    { "name": "1200x900", "w": 1200, "h": 900, "dpr": 1 },
+    { "name": "1920x1080", "w": 1920, "h": 1080, "dpr": 1 },
+    { "name": "900x760@125", "w": 900, "h": 760, "dpr": 1.25 },
+    { "name": "900x760@150", "w": 900, "h": 760, "dpr": 1.5 },
+    { "name": "zoom200-of-900x760", "w": 450, "h": 380, "dpr": 2 },
+    { "name": "zoom200-of-640x560", "w": 320, "h": 280, "dpr": 2 }
+  ],
+  "probes": {
+    "interactiveSelector": "button, input:not([type=hidden]), select, textarea, a[href], summary, [role=button], [role=tab], [role=menuitem], [role=switch], [role=radio], [role=checkbox]",
+    "textSelector": ".readout, .eyebrow, .widget",
+    "truncationSelectors": [
+      ".start-cta-label",
+      ".timeline-label",
+      ".preset-option-name"
+    ],
+    "heroSelector": ".visual-frame--hero, .visual-frame--preview",
+    "minTargetPx": 24,
+    "autoClip": true,
+    "focusFaceSelectors": [
+      ".segment-face",
+      ".visual-option-body",
+      ".preset-option-face",
+      ".switch-track",
+      ".choice-face"
+    ]
+  },
+  "backdrops": {
+    "dark": { "r": 27, "g": 27, "b": 27, "a": 1 },
+    "light": { "r": 222, "g": 222, "b": 222, "a": 1 }
+  },
+  "performance": { "seconds": 15, "settleMs": 2500 },
+  "specFile": "sundial.spec.mjs"
+}
