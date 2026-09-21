@@ -1,0 +1,256 @@
+/*
+ * Desktop widget: time floating on the desktop, not a miniature app.
+ * One opaque graphite surface (readable over any wallpaper), the visual and
+ * the time first, controls only on hover / keyboard focus.
+ */
+
+.widget {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  background: var(--color-surface-1);
+  border: var(--stroke-hair) solid var(--color-divider);
+  border-radius: var(--radius-float);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The whole surface is the drag handle; only the buttons opt out. */
+.widget-drag {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+}
+
+.widget-drag:active {
+  cursor: grabbing;
+}
+
+.widget-content {
+  position: relative;
+  display: grid;
+  height: 100%;
+  pointer-events: none;
+}
+
+.widget-content button {
+  pointer-events: auto;
+}
+
+/* ---- Sizes ------------------------------------------------------------ */
+
+.widget--small .widget-content {
+  grid-template-columns: var(--visual-widget-s) minmax(0, 1fr) 100px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-3);
+}
+
+.widget--medium .widget-content,
+.widget--large .widget-content {
+  grid-template-rows: auto 1fr auto 32px;
+  justify-items: center;
+  text-align: center;
+}
+
+.widget--medium .widget-content {
+  gap: var(--space-1);
+  padding: var(--space-3);
+}
+
+.widget--large .widget-content {
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+}
+
+.widget--small .widget-visual {
+  --visual-size: var(--visual-widget-s);
+}
+
+.widget--medium .widget-visual {
+  --visual-size: var(--visual-widget-m);
+  align-self: center;
+}
+
+.widget--large .widget-visual {
+  --visual-size: var(--visual-widget-l);
+  align-self: center;
+}
+
+/* ---- Type ------------------------------------------------------------- */
+
+.widget-readout {
+  font: var(--font-timer-widget);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.widget--small .widget-readout {
+  font: var(--font-timer-widget-compact);
+  text-align: left;
+}
+
+.widget--large .widget-readout {
+  font: var(--font-timer-widget-large);
+}
+
+.widget-label,
+.widget-title {
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.widget-title {
+  color: var(--color-text-primary);
+}
+
+.widget-sub {
+  font: var(--font-meta);
+  color: var(--color-text-secondary);
+}
+
+.widget--study .widget-label,
+.widget--timer .widget-label {
+  color: var(--color-accent);
+}
+
+.widget--paused .widget-label {
+  color: var(--color-text-muted);
+}
+
+.widget--paused .widget-readout,
+.widget--awaiting .widget-readout,
+.widget--complete .widget-readout,
+.widget--idle .widget-readout {
+  color: var(--color-text-secondary);
+}
+
+/* ---- Info <-> controls ------------------------------------------------ */
+/* The same slot shows the quiet fact (position / next / state) at rest and
+   the controls on hover or keyboard focus. Nothing depends on hover alone:
+   the buttons are always in the tab order and focus reveals them. */
+
+.widget-slot {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  min-height: var(--control-height-compact);
+}
+
+.widget--small .widget-slot {
+  justify-items: end;
+  min-height: 28px;
+}
+
+.widget-info,
+.widget-controls {
+  grid-area: 1 / 1;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+
+.widget-info {
+  max-width: 100%;
+  overflow: hidden;
+  font: var(--font-meta);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.widget--small .widget-info {
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.widget-controls {
+  display: flex;
+  gap: var(--space-1);
+  opacity: 0;
+}
+
+.widget:hover .widget-controls,
+.widget:focus-within .widget-controls {
+  opacity: 1;
+}
+
+.widget:hover .widget-info,
+.widget:focus-within .widget-info {
+  opacity: 0;
+}
+
+.wbtn {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font: var(--font-control);
+  color: var(--color-text-secondary);
+  background: transparent;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.widget--medium .wbtn,
+.widget--large .wbtn {
+  min-width: var(--control-height-compact);
+  height: var(--control-height-compact);
+}
+
+.widget--small .wbtn {
+  padding: 0 var(--space-1);
+}
+
+.widget--small .widget-controls {
+  justify-self: end;
+}
+
+.wbtn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.wbtn:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface-2);
+}
+
+.wbtn--primary {
+  color: var(--color-text-primary);
+  background: var(--color-surface-2);
+}
+
+/* "more" page on the small widget: the buttons take the full width. */
+.widget--small.widget--more .widget-slot {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  justify-items: center;
+}
+
+.widget--small.widget--more .widget-visual,
+.widget--small.widget--more .widget-readout {
+  visibility: hidden;
+}
+
+.wbtn--text {
+  white-space: nowrap;
+  padding: 0 var(--space-3);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.wbtn--quit:hover,
+.wbtn--quit:focus-visible {
+  color: var(--color-danger);
+}

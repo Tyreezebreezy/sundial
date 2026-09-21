@@ -3,9 +3,9 @@ use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
 pub fn size_for(size: &str) -> (f64, f64) {
     match size {
-        "small" => (150.0, 74.0),
-        "large" => (260.0, 210.0),
-        _ => (220.0, 148.0),
+        "small" => (272.0, 56.0),
+        "large" => (272.0, 244.0),
+        _ => (232.0, 172.0),
     }
 }
 
