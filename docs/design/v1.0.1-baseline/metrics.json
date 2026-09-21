@@ -1,0 +1,98 @@
+{
+  "01-study-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 22,
+    "dpr": 1
+  },
+  "02-timer-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 17,
+    "dpr": 1
+  },
+  "03-settings": {
+    "scrollW": 885,
+    "innerW": 900,
+    "scrollH": 891,
+    "innerH": 760,
+    "interactive": 19,
+    "dpr": 1
+  },
+  "04-study-active-disk": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4,
+    "dpr": 1
+  },
+  "05-study-active-hourglass": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4,
+    "dpr": 1
+  },
+  "06-study-active-sundial": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4,
+    "dpr": 1
+  },
+  "07-study-paused": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4,
+    "dpr": 1
+  },
+  "08-break": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4,
+    "dpr": 1
+  },
+  "09-focus-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 1,
+    "dpr": 1
+  },
+  "10-session-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 22,
+    "dpr": 1
+  },
+  "11-timer-active": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4,
+    "dpr": 1
+  },
+  "12-timer-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 22,
+    "dpr": 1
+  }
+}
