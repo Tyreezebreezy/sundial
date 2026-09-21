@@ -1,0 +1,88 @@
+/*
+ * SUNDIAL design tokens - the only file that may contain raw color values.
+ * Everything else consumes these roles (enforced by tests/design-system.test.mjs).
+ *
+ * Idea: sun -> shadow -> circular movement -> the passage of time.
+ * Warm graphite neutrals; gold is scarce and always means "live time",
+ * "selected" or "the one action to take".
+ */
+:root {
+  color-scheme: dark;
+
+  /* ---- Color roles ---------------------------------------------------- */
+  --color-canvas: #10100f; /* window background */
+  --color-surface-1: #171715; /* raised interactive regions */
+  --color-surface-2: #1f1e1b; /* hover / selected neutral surfaces */
+  --color-text-primary: #f1ede4;
+  --color-text-secondary: #a9a49a;
+  --color-text-muted: #8a857b; /* >= 4.5:1 on canvas and both surfaces */
+  --color-accent: #d5a84c; /* gold: live time, selection, primary action */
+  --color-accent-bright: #e3b85d; /* amber: illumination, highlights */
+  --color-accent-deep: #8b6a2d; /* supporting detail, never text */
+  --color-divider: #292824; /* hairlines between regions */
+  --color-border-control: #706c62; /* boundary of an input control (>= 3:1 on every surface, incl. hover) */
+  --color-danger: #c96c62; /* destructive actions only */
+  --color-on-accent: #10100f; /* text on gold fills */
+  --color-focus: var(--color-accent);
+
+  /* ---- Typography roles ----------------------------------------------- */
+  --font-family-ui: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-family-display:
+    "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+
+  --font-size-timer-xl: clamp(3.25rem, 11vmin, 6.5rem);
+  --font-timer-xl: 300 var(--font-size-timer-xl) / 1 var(--font-family-display);
+  --font-timer-widget-compact: 300 1.375rem/1 var(--font-family-display);
+  --font-timer-widget: 300 1.875rem/1 var(--font-family-display);
+  --font-timer-widget-large: 300 2.25rem/1 var(--font-family-display);
+  --font-display: 600 1.375rem/1.15 var(--font-family-display);
+  --font-heading: 600 0.75rem/1.3 var(--font-family-ui);
+  --font-body: 400 0.9375rem/1.45 var(--font-family-ui);
+  --font-meta: 400 0.8125rem/1.4 var(--font-family-ui);
+  --font-control: 600 0.8125rem/1 var(--font-family-ui);
+  --font-control-lg: 600 0.9375rem/1 var(--font-family-ui);
+  --tracking-caps: 0.12em;
+  --tracking-wide: 0.18em;
+
+  /* ---- Spacing rhythm (4 8 12 16 24 32 48 64) -------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ---- Radius roles ---------------------------------------------------- */
+  --radius-sm: 8px; /* small controls */
+  --radius-md: 10px; /* standard controls */
+  --radius-lg: 12px; /* preset / choice controls */
+  --radius-float: 16px; /* floating surfaces, widget */
+  --radius-full: 999px; /* timer circles */
+
+  /* ---- Elevation ------------------------------------------------------- */
+  /* 0 canvas | 1 raised region (surface-1 + hairline) | 2 transient (preset menu).
+     The widget window is exactly its own size, so it has a hairline, not a shadow. */
+  --shadow-float: 0 12px 32px rgb(0 0 0 / 0.5);
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --motion-fast: 150ms;
+  --motion-standard: 210ms;
+  --motion-state: 300ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ---- Layout ---------------------------------------------------------- */
+  --content-width: 46rem; /* ~736px: constrained, centered reading width */
+  --control-height: 44px; /* Forge default hit area */
+  --control-height-compact: 32px;
+  --visual-hero: clamp(152px, 31vmin, 352px); /* active timer visual */
+  --visual-preview: clamp(96px, 20vmin, 176px); /* setup preview */
+  --visual-choice: 64px; /* picker previews */
+  --visual-widget-s: 36px;
+  --visual-widget-m: 60px;
+  --visual-widget-l: 96px;
+  --stroke-hair: 1px;
+  --stroke-focus: 2px;
+}
