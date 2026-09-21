@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTimer } from "./useTimer";
-import { StudyPlanner } from "./StudyPlanner";
-import { TimerPlanner } from "./TimerPlanner";
-import { ActiveSession } from "./ActiveSession";
-import { SettingsScreen } from "./SettingsScreen";
+import { AppShell, type Section } from "./shell/AppShell";
+import { StudySetup } from "./study/StudySetup";
+import { TimerSetup } from "./timer/TimerSetup";
+import { ActiveSession } from "./session/ActiveSession";
+import { SettingsScreen } from "./settings/SettingsScreen";
 import { playSound } from "./audio";
 import type { PhaseKind } from "./types";
 
-type Tab = "study" | "timer" | "settings";
-
+/**
+ * Chooses the surface from the engine's state:
+ *   no plan            -> setup (Study / Timer)
+ *   plan, running      -> active (running, paused, or waiting for the owner)
+ *   plan, not running  -> finished (Session complete / Time's up)
+ * Settings is a view over any of them, never a mode of its own.
+ */
 export function MainApp() {
-  const [tab, setTab] = useState<Tab>("study");
-  const [dismissedRestore, setDismissedRestore] = useState(false);
+  const [section, setSection] = useState<Section>("study");
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [noticeDismissed, setNoticeDismissed] = useState(false);
+  const bootRestored = useRef<boolean | null>(null);
+  const bootFinished = useRef<boolean | null>(null);
 
   const { state, settings, customPresets, restore, remainingMs } = useTimer(
     (kind: PhaseKind) => {
@@ -26,62 +35,79 @@ export function MainApp() {
     },
   );
 
+  useEffect(() => {
+    if (!settingsOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSettingsOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [settingsOpen]);
+
   if (!state || !settings) {
-    return <div className="app-shell" />;
+    return <div className="app" />;
   }
 
-  const restoreCount = restore?.phasesCompletedWhileAway.length ?? 0;
-  const showRestoreBanner = !dismissedRestore && restoreCount > 0;
-
-  if (state.isRunning) {
-    return (
-      <div className="app-shell">
-        {showRestoreBanner && (
-          <div className="restore-banner">
-            <span>
-              Welcome back - {restoreCount} phase{restoreCount === 1 ? "" : "s"}{" "}
-              finished while SUNDIAL was closed.
-            </span>
-            <button type="button" onClick={() => setDismissedRestore(true)}>
-              Dismiss
-            </button>
-          </div>
-        )}
-        <ActiveSession state={state} remainingMs={remainingMs} />
-      </div>
+  // What SUNDIAL opened onto - decided once, at first render, and forgotten
+  // as soon as that session is over. (The engine reconciles wall-clock time
+  // before the UI exists, so all we can truthfully say is what state we
+  // launched into: running/paused/waiting = restored, finished = finished.)
+  if (bootRestored.current === null) {
+    bootRestored.current = Boolean(
+      state.isRunning && restore?.hadActiveSession,
     );
+    bootFinished.current = Boolean(state.plan && !state.isRunning);
+  }
+  if (!state.plan) bootFinished.current = false;
+  if (!state.isRunning) bootRestored.current = false;
+
+  const restoredCount = restore?.phasesCompletedWhileAway.length ?? 0;
+  const notice =
+    bootRestored.current && !noticeDismissed ? (
+      <div className="notice" role="status">
+        <span>
+          {restoredCount > 0
+            ? `Welcome back · ${restoredCount} phase${restoredCount === 1 ? "" : "s"} finished while SUNDIAL was closed.`
+            : "Session restored."}
+        </span>
+        <button
+          type="button"
+          className="btn btn--tertiary btn--compact"
+          onClick={() => setNoticeDismissed(true)}
+        >
+          Dismiss
+        </button>
+      </div>
+    ) : null;
+
+  const plan = state.plan;
+  let content;
+  if (settingsOpen) {
+    content = <SettingsScreen settings={settings} />;
+  } else if (plan) {
+    content = (
+      <ActiveSession
+        state={state}
+        remainingMs={remainingMs}
+        finishedOnLaunch={bootFinished.current === true}
+      />
+    );
+  } else if (section === "study") {
+    content = <StudySetup settings={settings} customPresets={customPresets} />;
+  } else {
+    content = <TimerSetup settings={settings} />;
   }
 
   return (
-    <div className="app-shell">
-      <nav className="tabs">
-        <button
-          type="button"
-          className={tab === "study" ? "selected" : ""}
-          onClick={() => setTab("study")}
-        >
-          Study
-        </button>
-        <button
-          type="button"
-          className={tab === "timer" ? "selected" : ""}
-          onClick={() => setTab("timer")}
-        >
-          Timer
-        </button>
-        <button
-          type="button"
-          className={tab === "settings" ? "selected" : ""}
-          onClick={() => setTab("settings")}
-        >
-          Settings
-        </button>
-      </nav>
-      {tab === "study" && (
-        <StudyPlanner settings={settings} customPresets={customPresets} />
-      )}
-      {tab === "timer" && <TimerPlanner settings={settings} />}
-      {tab === "settings" && <SettingsScreen settings={settings} />}
-    </div>
+    <AppShell
+      showNav={!plan && !settingsOpen}
+      section={section}
+      onSection={setSection}
+      settingsOpen={settingsOpen}
+      onToggleSettings={() => setSettingsOpen((open) => !open)}
+      notice={notice}
+    >
+      {content}
+    </AppShell>
   );
 }

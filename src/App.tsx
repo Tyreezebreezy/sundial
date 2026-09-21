@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./styles/tokens.css";
+import "./styles/base.css";
+import "./styles/visuals.css";
+import "./styles/app.css";
+import "./styles/widget.css";
 import { currentWindowLabel } from "./tauri";
 import { MainApp } from "./MainApp";
-import { Widget } from "./Widget";
+import { Widget } from "./widget/Widget";
 
 function App() {
   const [label, setLabel] = useState<string | null>(null);

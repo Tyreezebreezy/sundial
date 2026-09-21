@@ -1,0 +1,926 @@
+/* Main window: shell, setup (Study/Timer), active session, settings. */
+
+/* ---- Shell ------------------------------------------------------------ */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-canvas);
+}
+
+.app-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 64px;
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
+}
+
+.wordmark {
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);
+}
+
+.app-settings {
+  justify-self: end;
+}
+
+.header-title {
+  justify-self: center;
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.nav-tab {
+  position: relative;
+  min-height: var(--control-height);
+  padding: 0 var(--space-1);
+  border: 0;
+  font: var(--font-control-lg);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: transparent;
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+
+.nav-tab:hover {
+  color: var(--color-text-primary);
+}
+
+.nav-tab[aria-current="page"] {
+  color: var(--color-text-primary);
+}
+
+.nav-tab[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  right: var(--space-1);
+  bottom: var(--space-1);
+  left: var(--space-1);
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.stage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-6);
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  align-self: center;
+  width: min(calc(100% - var(--space-6)), var(--content-width));
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font: var(--font-meta);
+  color: var(--color-text-secondary);
+  background: var(--color-surface-1);
+}
+
+/* ---- Setup surfaces --------------------------------------------------- */
+
+.setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+  padding-top: var(--space-2);
+}
+
+.visual-frame--preview {
+  --visual-size: var(--visual-preview);
+}
+
+.visual-frame--hero {
+  --visual-size: var(--visual-hero);
+}
+
+.setup-preview {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+}
+
+.readout--idle {
+  color: var(--color-text-secondary);
+}
+
+/* preset selector */
+
+.preset-selector {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.preset-trigger {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  color: var(--color-text-primary);
+  background: transparent;
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+.preset-trigger:hover {
+  background: var(--color-surface-1);
+}
+
+.preset-trigger-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-secondary);
+}
+
+.preset-trigger .icon,
+.disclosure .icon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--motion-fast) var(--ease-standard);
+}
+
+.preset-trigger[aria-expanded="true"] .icon,
+.disclosure[aria-expanded="true"] .icon {
+  transform: rotate(180deg);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+.preset-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 10;
+  width: min(22rem, calc(100vw - var(--space-6)));
+  max-height: calc(100dvh - 8rem);
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+  overflow-y: auto;
+  border: var(--stroke-hair) solid var(--color-divider);
+  border-radius: var(--radius-float);
+  background: var(--color-surface-2);
+  box-shadow: var(--shadow-float);
+  animation: menu-in var(--motion-fast) var(--ease-enter) both;
+  transform: translateX(-50%);
+}
+
+.preset-list {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.preset-list--divided {
+  padding-top: var(--space-2);
+  border-top: var(--stroke-hair) solid var(--color-divider);
+}
+
+.preset-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.preset-option {
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+}
+
+.preset-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.preset-option-face {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border: var(--stroke-hair) solid transparent;
+  border-radius: var(--radius-md);
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+.preset-option:hover .preset-option-face {
+  background: var(--color-surface-1);
+}
+
+.preset-option-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.preset-option-name::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid var(--color-border-control);
+  border-radius: var(--radius-full);
+}
+
+.preset-option input:checked + .preset-option-face {
+  border-color: var(--color-accent);
+  color: var(--color-accent-bright);
+}
+
+.preset-option input:checked + .preset-option-face .preset-option-name::before {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
+.preset-option input:focus-visible + .preset-option-face {
+  outline: var(--stroke-focus) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.icon-btn--small {
+  width: var(--control-height-compact);
+  height: var(--control-height-compact);
+}
+
+.icon-btn--small .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.preset-add {
+  width: 100%;
+  justify-content: flex-start;
+  margin-top: var(--space-2);
+}
+
+/* segmented single-choice controls */
+
+.segmented {
+  width: 100%;
+}
+
+.segmented-label {
+  display: block;
+  margin-bottom: var(--space-3);
+  text-align: center;
+}
+
+.prompt {
+  font: var(--font-body);
+  color: var(--color-text-secondary);
+}
+
+.segmented-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.segment {
+  position: relative;
+}
+
+.segment input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.segment-face {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.5rem;
+  min-height: var(--control-height);
+  padding: 0 var(--space-4);
+  border: var(--stroke-hair) solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  font: var(--font-control);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-1);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.segment-face:hover {
+  background: var(--color-surface-2);
+}
+
+.segment input:checked + .segment-face {
+  border-color: var(--color-accent);
+  color: var(--color-accent-bright);
+  background: var(--color-surface-2);
+  box-shadow: inset 0 -2px 0 var(--color-accent);
+}
+
+.segment input:focus-visible + .segment-face {
+  outline: var(--stroke-focus) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Ten choices in two rows of five: the whole timer setup stays on one screen
+   even when the Custom fields are open. Narrow layouts fall back to 3 columns. */
+.segmented--grid .segmented-options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+.segmented--grid .segment-face {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 var(--space-2);
+  font: var(--font-display);
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.segmented--grid .segment:last-child .segment-face {
+  font: var(--font-control);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+@media (max-width: 34rem) {
+  .segmented--grid .segmented-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 24rem;
+  }
+
+  .segmented--grid .segment:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* duration entry */
+
+.session-duration,
+.timer-choice {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.duration-fields {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+  width: 100%;
+}
+
+.duration-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 9rem));
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+/* summary + plan */
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-6);
+  text-align: center;
+}
+
+.summary-item {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.summary dt {
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.summary dd {
+  font: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+}
+
+.summary-item--lead dd {
+  font: var(--font-display);
+  color: var(--color-text-primary);
+}
+
+.disclosures {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--control-height-compact);
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font: var(--font-meta);
+  color: var(--color-text-secondary);
+  background: transparent;
+}
+
+.disclosure:hover {
+  color: var(--color-text-primary);
+}
+
+.disclosure:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.panel {
+  width: 100%;
+  padding: var(--space-4) 0;
+  border-top: var(--stroke-hair) solid var(--color-divider);
+}
+
+.panel--options {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+}
+
+.panel--options .field {
+  width: min(100%, 22rem);
+}
+
+.timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  width: 100%;
+}
+
+.timeline-seg {
+  display: grid;
+  grid-template-rows: 6px auto;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.timeline-bar {
+  display: block;
+  align-self: center;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+}
+
+.timeline-seg--break .timeline-bar {
+  height: 2px;
+  background: var(--color-text-muted);
+}
+
+.timeline-label {
+  overflow: hidden;
+  font: var(--font-meta);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.timeline-kind {
+  color: var(--color-text-muted);
+}
+
+.setup-actions {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.start-cta {
+  width: min(100%, 26rem);
+}
+
+.start-cta-label {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* custom preset form */
+
+.custom-preset {
+  display: grid;
+  gap: var(--space-5);
+  width: min(100%, 30rem);
+  margin: 0 auto;
+  padding-top: var(--space-2);
+}
+
+.custom-preset-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* visual picker */
+
+.visual-picker {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.visual-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.visual-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.visual-option-body {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  opacity: 0.62;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+
+.visual-option:hover .visual-option-body {
+  opacity: 0.88;
+}
+
+.visual-option .visual-frame {
+  --visual-size: var(--visual-choice);
+}
+
+.visual-option-label {
+  position: relative;
+  padding-bottom: var(--space-1);
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.visual-option input:checked + .visual-option-body {
+  opacity: 1;
+}
+
+.visual-option input:checked + .visual-option-body .visual-option-label {
+  color: var(--color-accent-bright);
+}
+
+.visual-option input:checked + .visual-option-body .visual-option-label::after {
+  content: "";
+  position: absolute;
+  right: 25%;
+  bottom: 0;
+  left: 25%;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.visual-option input:focus-visible + .visual-option-body {
+  outline: var(--stroke-focus) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---- Active session --------------------------------------------------- */
+
+.stage-active {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding-bottom: var(--space-5);
+  text-align: center;
+}
+
+.eyebrow {
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.stage-active--study .eyebrow,
+.stage-active--timer .eyebrow {
+  color: var(--color-accent);
+}
+
+.stage-active--paused .eyebrow {
+  color: var(--color-text-muted);
+}
+
+.stage-active--paused .readout {
+  color: var(--color-text-secondary);
+}
+
+.controls {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.controls-primary,
+.controls-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.controls-secondary {
+  gap: var(--space-4);
+}
+
+.controls-primary .btn {
+  min-width: 6rem;
+}
+
+.controls-primary .btn:first-child {
+  min-width: 9rem;
+}
+
+/* ---- Settings --------------------------------------------------------- */
+
+.settings {
+  display: grid;
+  width: 100%;
+  padding-bottom: var(--space-6);
+}
+
+.settings-section {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4) 0;
+  border-top: var(--stroke-hair) solid var(--color-divider);
+}
+
+.settings-section:first-child {
+  border-top: 0;
+}
+
+.settings .segmented {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--control-height);
+}
+
+.settings .segmented-label {
+  margin: 0;
+  font: var(--font-body);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-text-primary);
+}
+
+.settings .segmented-options {
+  justify-content: flex-end;
+}
+
+.settings .segment-face {
+  min-width: 5.5rem;
+}
+
+.settings .visual-picker {
+  justify-content: flex-start;
+}
+
+.setting-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--control-height);
+}
+
+.setting-label {
+  font: var(--font-body);
+  color: var(--color-text-primary);
+}
+
+.setting-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.setting-value {
+  min-width: 4ch;
+  text-align: right;
+}
+
+.range {
+  width: 11rem;
+}
+
+.close-behavior {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.close-behavior legend {
+  margin-bottom: var(--space-1);
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--control-height);
+  cursor: pointer;
+}
+
+.choice input {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+.choice-face {
+  font: var(--font-body);
+}
+
+.btn--quit:hover,
+.btn--quit:focus-visible {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* ---- Compact windows -------------------------------------------------- */
+
+@media (max-width: 40rem) {
+  .app-header {
+    padding-left: var(--space-4);
+  }
+
+  .stage {
+    padding-right: var(--space-4);
+    padding-left: var(--space-4);
+  }
+
+  .visual-picker {
+    gap: var(--space-4);
+  }
+
+  .setting-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .segment-face {
+    min-width: 5.5rem;
+  }
+}
+
+/* Timer setup is one screen: tighter rhythm, smaller preview. */
+.setup--timer {
+  gap: var(--space-4);
+}
+
+.setup--timer .visual-frame--preview {
+  --visual-size: clamp(96px, 16vmin, 140px);
+}
+
+.setup--timer .segmented--grid .segment-face {
+  min-height: 48px;
+}
+
+/* A form is one left-aligned column. */
+.custom-preset .segmented-label {
+  text-align: left;
+}
+
+.custom-preset .segmented-options,
+.custom-preset .visual-picker {
+  justify-content: flex-start;
+}
+
+.custom-preset .duration-inputs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.custom-preset .duration-fields {
+  justify-items: start;
+}
+
+/* ---- Short windows (minimum 640x560) ----------------------------------- */
+/* Tighter rhythm so the primary surfaces still fit without scrolling. The
+   Timer setup drops its preview disk: the readout already shows the length. */
+
+@media (max-height: 40rem) {
+  .app-header {
+    min-height: 52px;
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+
+  .setup {
+    gap: var(--space-3);
+  }
+
+  .setup--timer {
+    gap: var(--space-2);
+  }
+
+  .setup--timer .visual-frame--preview {
+    display: none;
+  }
+
+  .segmented--grid .segment-face {
+    min-height: 40px;
+  }
+
+  .setup--timer .segmented--grid .segment-face {
+    min-height: 40px;
+  }
+
+  .stage-active {
+    gap: var(--space-2);
+    padding-bottom: var(--space-3);
+  }
+
+  .controls {
+    margin-top: var(--space-1);
+  }
+}
+
+/* ---- Very narrow layouts (browser zoom at the minimum window) ---------- */
+
+.visual-picker,
+.settings .segmented {
+  flex-wrap: wrap;
+}
+
+.range {
+  min-height: var(--control-height-compact);
+}
