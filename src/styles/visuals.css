@@ -1,0 +1,244 @@
+/*
+ * Timer visuals: one state grammar shared by Disk, Hourglass and Sundial.
+ * Intensity is set once per state (--tv-*) and every visual reads it, so no
+ * visual invents its own palette.
+ *   idle     quiet, low illumination
+ *   study    warm and active (highest intentional gold)
+ *   break    calmer, reduced illumination
+ *   paused   muted, lower contrast (never red: pause is not an error)
+ *   complete brief brighten, then settle
+ */
+
+.tv {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  --tv-lit-1: var(--color-accent-bright);
+  --tv-lit-2: var(--color-accent);
+  --tv-lit-3: color-mix(
+    in srgb,
+    var(--color-accent) 58%,
+    var(--color-accent-deep)
+  );
+  --tv-fill: 1;
+  --tv-glow: 1;
+}
+
+.tv--idle {
+  --tv-fill: 0.72;
+  --tv-glow: 0.75;
+}
+
+.tv--break {
+  --tv-lit-1: color-mix(
+    in srgb,
+    var(--color-accent-bright) 72%,
+    var(--color-text-secondary)
+  );
+  --tv-lit-2: color-mix(
+    in srgb,
+    var(--color-accent) 64%,
+    var(--color-text-muted)
+  );
+  --tv-lit-3: color-mix(
+    in srgb,
+    var(--color-accent-deep) 84%,
+    var(--color-text-muted)
+  );
+  --tv-fill: 0.82;
+  --tv-glow: 0.55;
+}
+
+.tv--paused {
+  --tv-lit-1: color-mix(
+    in srgb,
+    var(--color-accent-bright) 38%,
+    var(--color-text-muted)
+  );
+  --tv-lit-2: color-mix(
+    in srgb,
+    var(--color-accent) 36%,
+    var(--color-text-muted)
+  );
+  --tv-lit-3: color-mix(
+    in srgb,
+    var(--color-accent-deep) 55%,
+    var(--color-text-muted)
+  );
+  --tv-fill: 0.7;
+  --tv-glow: 0.2;
+}
+
+@keyframes tv-settle {
+  from {
+    filter: brightness(1.7);
+  }
+
+  to {
+    filter: none;
+  }
+}
+
+.tv--complete {
+  --tv-fill: 0.72;
+  --tv-glow: 0.55;
+  animation: tv-settle var(--motion-state) var(--ease-standard) 1;
+}
+
+.tv--small .tv-detail {
+  display: none;
+}
+
+/* gradient stops (CSS so state changes can transition) */
+.tv-stop-1 {
+  stop-color: var(--tv-lit-1);
+  transition: stop-color var(--motion-state) var(--ease-standard);
+}
+
+.tv-stop-2 {
+  stop-color: var(--tv-lit-2);
+  transition: stop-color var(--motion-state) var(--ease-standard);
+}
+
+.tv-stop-3 {
+  stop-color: var(--tv-lit-3);
+  transition: stop-color var(--motion-state) var(--ease-standard);
+}
+
+.tv-light-1 {
+  stop-color: var(--tv-lit-1);
+  stop-opacity: calc(var(--tv-glow) * 0.85);
+}
+
+.tv-light-2 {
+  stop-color: var(--tv-lit-1);
+  stop-opacity: 0;
+}
+
+.tv-shadow-1 {
+  stop-color: var(--color-canvas);
+  stop-opacity: 0.8;
+}
+
+.tv-shadow-2 {
+  stop-color: var(--color-canvas);
+  stop-opacity: 0.1;
+}
+
+.tv-lit {
+  opacity: var(--tv-fill);
+  transition: opacity var(--motion-state) var(--ease-standard);
+}
+
+/* inactive, full-shape track */
+.tv-track {
+  fill: var(--color-surface-2);
+  stroke: var(--color-divider);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.tv-ticks line {
+  stroke: var(--color-border-control);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+/* disk */
+.tv-edge {
+  stroke: var(--tv-lit-1);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.tv-hub {
+  fill: var(--color-canvas);
+  stroke: var(--color-divider);
+  stroke-width: 1;
+}
+
+/* hourglass */
+.tv-glass {
+  fill: none;
+  stroke: var(--color-border-control);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.tv-cap {
+  fill: var(--color-accent-deep);
+}
+
+/* A falling stream while an hourglass runs ("time is passing"). It exists
+   only while running and not under reduced motion, and it is driven by the
+   timer's own 200 ms update tick (--tv-phase), not by an animation loop. */
+.tv-hourglass {
+  position: relative;
+  --tv-unit: calc(var(--visual-size, 240px) / 240);
+  --tv-period: max(4px, calc(var(--tv-unit) * 8));
+}
+
+.tv-hourglass svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.tv-stream {
+  position: absolute;
+  left: 50%;
+  width: max(1px, calc(var(--tv-unit) * 1.5));
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.tv-stream::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--tv-period) * -1) 0 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--tv-lit-1) 0,
+    var(--tv-lit-1) calc(var(--tv-period) * 0.375),
+    transparent calc(var(--tv-period) * 0.375),
+    transparent var(--tv-period)
+  );
+  transform: translateY(calc(var(--tv-period) * var(--tv-phase, 0) / 4));
+}
+
+/* sundial */
+.tv-shadow {
+  stroke: none;
+}
+
+.tv-sweep {
+  fill: none;
+  stroke: var(--color-divider);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.tv-sweep-lit {
+  fill: none;
+  stroke: var(--tv-lit-2);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.tv-gnomon-a {
+  fill: var(--tv-lit-1);
+}
+
+.tv-gnomon-b {
+  fill: var(--color-accent-deep);
+}
+
+/* Fixed-size frame the visuals scale into. */
+.visual-frame {
+  width: var(--visual-size, 240px);
+  aspect-ratio: 1;
+  flex: none;
+}
