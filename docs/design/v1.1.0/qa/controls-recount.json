@@ -1,0 +1,127 @@
+{
+  "01-study-setup": {
+    "controls": 11,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Stu",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "View plan",
+      "Options",
+      "START 2H DEEP STUDY"
+    ]
+  },
+  "02-timer-setup": {
+    "controls": 17,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "5 minutes",
+      "10 minutes",
+      "15 minutes",
+      "25 minutes",
+      "30 minutes",
+      "45 minutes",
+      "60 minutes",
+      "90 minutes",
+      "120 minutes",
+      "custom",
+      "disk",
+      "hourglass",
+      "sundial",
+      "START 25 MIN TIMER"
+    ]
+  },
+  "03-settings": {
+    "controls": 21,
+    "names": [
+      "Close settings",
+      "disk",
+      "hourglass",
+      "sundial",
+      "on",
+      "on",
+      "on",
+      "small",
+      "medium",
+      "large",
+      "on",
+      "Bell Chime Double Chim",
+      "Test study complete so",
+      "Bell Chime Double Chim",
+      "Test break complete so",
+      "Bell Chime Double Chim",
+      "Test timer complete so",
+      "0.8",
+      "on",
+      "on",
+      "QUIT SUNDIAL"
+    ]
+  },
+  "04-study-active": {
+    "controls": 5,
+    "names": ["Settings", "PAUSE", "Add 5 minutes", "SKIP PHASE", "RESET"]
+  },
+  "07-study-paused": {
+    "controls": 5,
+    "names": ["Settings", "RESUME", "Add 5 minutes", "SKIP PHASE", "RESET"]
+  },
+  "09-focus-complete": {
+    "controls": 3,
+    "names": ["Settings", "START BREAK", "END SESSION"]
+  },
+  "10-session-complete": {
+    "controls": 2,
+    "names": ["Settings", "DONE"]
+  },
+  "11-timer-active": {
+    "controls": 4,
+    "names": ["Settings", "PAUSE", "Add 5 minutes", "RESET"]
+  },
+  "12-timer-complete": {
+    "controls": 3,
+    "names": ["Settings", "DONE", "+5 MINUTES"]
+  },
+  "13-study-setup-plan": {
+    "controls": 11,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Stu",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "View plan",
+      "Options",
+      "START 2H DEEP STUDY"
+    ]
+  },
+  "14-study-setup-options": {
+    "controls": 16,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Stu",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "View plan",
+      "Options",
+      "disk",
+      "hourglass",
+      "sundial",
+      "on",
+      "text",
+      "START 2H DEEP STUDY"
+    ]
+  }
+}

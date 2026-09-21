@@ -1,0 +1,114 @@
+{
+  "01-study-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 7
+  },
+  "02-timer-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4
+  },
+  "03-settings": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 1100,
+    "innerH": 1100,
+    "interactive": 11
+  },
+  "04-study-active-disk": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 5
+  },
+  "05-study-active-hourglass": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 5
+  },
+  "06-study-active-sundial": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 5
+  },
+  "07-study-paused": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 5
+  },
+  "08-break": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 5
+  },
+  "09-focus-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 3
+  },
+  "10-session-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 2
+  },
+  "11-timer-active": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 4
+  },
+  "12-timer-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 3
+  },
+  "13-study-setup-plan": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 7
+  },
+  "14-study-setup-options": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 1000,
+    "innerH": 1000,
+    "interactive": 8
+  },
+  "15-preset-selector": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 8
+  },
+  "16-custom-preset": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "interactive": 9
+  }
+}

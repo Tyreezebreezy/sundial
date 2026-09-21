@@ -1,0 +1,26 @@
+PASS  boots with both windows (main + widget)
+PASS  restores persisted settings (Deep Study, 180 min remembered)
+PASS  no session restored (idle state)
+PASS  Study setup shows the duration question and the contextual CTA
+PASS  CTA pointer click
+PASS  engine is running a study phase
+PASS  active surface labels the block
+PASS  readout is ticking (role=timer, spoken label)
+PASS  widget mirrors the session (study mode)
+PASS  Pause reaches the engine and the surface says PAUSED
+PASS  Resume runs again
+PASS  disk: renders real geometry (no NaN)
+PASS  sundial: renders real geometry (no NaN)
+PASS  hourglass: renders real geometry (no NaN)
+PASS  2560x1440: active surface is a centred column (<= 800px wide), hero visual scales, no overflow
+PASS  3840x2160: active surface is a centred column (<= 800px wide), hero visual scales, no overflow
+PASS  2560x1440: Study setup stays a centred column (<= 800px)
+
+17 passed, 0 failed
+
+CPU (release binary; sum of the app + its WebView2 processes; % of one core; one 10-15 s sample each):
+  idle (no session)           1.25% of one core (0.08% of 16 logical cores) across 8 processes over 10.0s
+  disk running (both windows) 4.58% of one core (0.29% of 16 logical cores) across 8 processes over 15.0s
+  sundial running (both windows)4.16% of one core (0.26% of 16 logical cores) across 8 processes over 15.0s
+  hourglass running (both windows)8.64% of one core (0.54% of 16 logical cores) across 8 processes over 15.0s
+  hourglass paused            0.62% of one core (0.04% of 16 logical cores) across 8 processes over 10.0s

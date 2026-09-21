@@ -1,0 +1,147 @@
+{
+  "axNames": {
+    "study-setup": {
+      "interactiveNodes": 11,
+      "unnamed": []
+    },
+    "timer-setup": {
+      "interactiveNodes": 19,
+      "unnamed": []
+    },
+    "settings": {
+      "interactiveNodes": 21,
+      "unnamed": []
+    },
+    "custom-preset": {
+      "interactiveNodes": 17,
+      "unnamed": []
+    },
+    "active": {
+      "interactiveNodes": 5,
+      "unnamed": []
+    },
+    "widget": {
+      "interactiveNodes": 3,
+      "unnamed": []
+    }
+  },
+  "tabOrder": {
+    "study-setup": [
+      "button:button \"View plan\"",
+      "button:button \"Options\"",
+      "button:button \"Start 2h Deep Study\"",
+      "button:button \"Study\"",
+      "button:button \"Timer\"",
+      "button:button \"Settings\"",
+      "button:button \"Study rhythm: Deep Study, 45 minut\"",
+      "input:radio \"2 hours\""
+    ],
+    "timer-setup": [
+      "input:radio \"Custom\"",
+      "input:number \"Hours\"",
+      "input:number \"Minutes\"",
+      "input:radio \"Disk\"",
+      "button:button \"Start 1h 15m timer\"",
+      "button:button \"Study\"",
+      "button:button \"Timer\"",
+      "button:button \"Settings\""
+    ],
+    "settings": [
+      "input:radio \"Disk\"",
+      "input:checkbox \"OnAdvance to the next phase automa\"",
+      "input:checkbox \"OnShow widget\"",
+      "input:checkbox \"OnAlways on top\"",
+      "input:radio \"Medium\"",
+      "input:checkbox \"OnSound\"",
+      "select:select-one \"Study complete\"",
+      "button:button \"Test study complete sound\"",
+      "select:select-one \"Break complete\"",
+      "button:button \"Test break complete sound\"",
+      "select:select-one \"Timer complete\"",
+      "button:button \"Test timer complete sound\"",
+      "input:range \"Volume\"",
+      "input:radio \"Keep SUNDIAL running\"",
+      "button:button \"Quit SUNDIAL\"",
+      "button:button \"Close settings\""
+    ],
+    "custom-preset": [
+      "input:number \"Focus (minutes)\"",
+      "input:number \"Break (minutes)\"",
+      "input:radio \"1 hour\"",
+      "input:checkbox \"OnAdvance to the next phase automa\"",
+      "input:radio \"Disk\"",
+      "button:submit \"Save preset\"",
+      "button:button \"Cancel\"",
+      "button:button \"Study\"",
+      "button:button \"Timer\"",
+      "button:button \"Settings\"",
+      "button:button \"Back to study setup\"",
+      "input:text \"Name\""
+    ],
+    "active": [
+      "button:button \"Pause\"",
+      "button:button \"Add 5 minutes\"",
+      "button:button \"Skip phase\"",
+      "button:button \"Reset\"",
+      "button:button \"Settings\""
+    ]
+  },
+  "focusRing": {
+    "study-setup": {
+      "stops": 8,
+      "withoutVisibleRing": []
+    },
+    "timer-setup": {
+      "stops": 8,
+      "withoutVisibleRing": []
+    },
+    "settings": {
+      "stops": 16,
+      "withoutVisibleRing": []
+    },
+    "custom-preset": {
+      "stops": 12,
+      "withoutVisibleRing": []
+    },
+    "active": {
+      "stops": 5,
+      "withoutVisibleRing": []
+    }
+  },
+  "presetMenu": {
+    "opensOnEnter": true,
+    "focusMovesIn": true,
+    "arrowSelectsNext": "Classic",
+    "escapeCloses": true,
+    "focusReturnsToTrigger": true
+  },
+  "reducedMotion": {
+    "normal, running": {
+      "animations": 0,
+      "stream": true,
+      "infinite": 0
+    },
+    "normal, paused": {
+      "animations": 0,
+      "stream": false,
+      "infinite": 0
+    },
+    "reduced, running": {
+      "animations": 0,
+      "stream": false,
+      "infinite": 0
+    }
+  },
+  "widgetKeyboard": {
+    "controlsOpacityBeforeFocus": "0",
+    "controlsOpacityAfterTab": "1",
+    "firstFocused": "Pause"
+  },
+  "segmentedArrow": "180",
+  "readout": {
+    "role": "timer",
+    "label": "44 minutes 59 seconds remaining",
+    "live": "polite",
+    "tabular": "tabular-nums"
+  }
+}

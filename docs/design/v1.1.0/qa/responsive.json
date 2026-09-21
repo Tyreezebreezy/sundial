@@ -1,0 +1,562 @@
+{
+  "study-setup @ 640x560": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 560,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 112
+  },
+  "study-setup @ 900x760": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "study-setup @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 900,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 176
+  },
+  "study-setup @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 1080,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 176
+  },
+  "study-setup @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "study-setup @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "study-setup @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 631,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 96
+  },
+  "study-setup @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 631,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 96
+  },
+  "study-setup-options @ 640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 838,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 112
+  },
+  "study-setup-options @ 900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 958,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "study-setup-options @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 982,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 176
+  },
+  "study-setup-options @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 1080,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 176
+  },
+  "study-setup-options @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 958,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "study-setup-options @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 958,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "study-setup-options @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 928,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 96
+  },
+  "study-setup-options @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1051,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 96
+  },
+  "timer-setup @ 640x560": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 560,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 0
+  },
+  "timer-setup @ 900x760": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 122
+  },
+  "timer-setup @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 900,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 140
+  },
+  "timer-setup @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 1080,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 140
+  },
+  "timer-setup @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 122
+  },
+  "timer-setup @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 122
+  },
+  "timer-setup @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 599,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 0
+  },
+  "timer-setup @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 723,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 0
+  },
+  "active-sundial @ 640x560": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 560,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 174
+  },
+  "active-sundial @ 900x760": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "active-sundial @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 900,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 279
+  },
+  "active-sundial @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 1080,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 335
+  },
+  "active-sundial @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "active-sundial @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "active-sundial @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 500,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "active-sundial @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 500,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "active-hourglass @ 640x560": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 560,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 174
+  },
+  "active-hourglass @ 900x760": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "active-hourglass @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 900,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 279
+  },
+  "active-hourglass @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 1080,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 335
+  },
+  "active-hourglass @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "active-hourglass @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "active-hourglass @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 500,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "active-hourglass @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 500,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "paused @ 640x560": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 560,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 174
+  },
+  "paused @ 900x760": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "paused @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 900,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 279
+  },
+  "paused @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 1080,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 335
+  },
+  "paused @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "paused @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": false,
+    "scrollH": 760,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 236
+  },
+  "paused @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 508,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "paused @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 508,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": 152
+  },
+  "settings @ 640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1190,
+    "vh": 560,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ 900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1087,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ 1200x900": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1087,
+    "vh": 900,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ 1920x1080": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1087,
+    "vh": 1080,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ 900x760@125": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1087,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ 900x760@150": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1087,
+    "vh": 760,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ zoom200-of-900x760": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1190,
+    "vh": 380,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  },
+  "settings @ zoom200-of-640x560": {
+    "hOverflow": false,
+    "vScroll": true,
+    "scrollH": 1404,
+    "vh": 280,
+    "offRight": [],
+    "truncated": [],
+    "smallTargets": [],
+    "hero": null
+  }
+}

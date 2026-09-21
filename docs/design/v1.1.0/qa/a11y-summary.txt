@@ -1,0 +1,18 @@
+AX study-setup              11 interactive, 0 unnamed 
+TAB study-setup          8 stops; no ring: none
+MENU {"opensOnEnter":true,"focusMovesIn":true,"arrowSelectsNext":"Classic","escapeCloses":true,"focusReturnsToTrigger":true}
+SEGMENT arrow-right from 2h -> 180 (expect 180)
+AX timer-setup              19 interactive, 0 unnamed 
+TAB timer-setup          8 stops; no ring: none
+AX settings                 21 interactive, 0 unnamed 
+TAB settings             16 stops; no ring: none
+AX custom-preset            17 interactive, 0 unnamed 
+TAB custom-preset        12 stops; no ring: none
+AX active                   5 interactive, 0 unnamed 
+TAB active               5 stops; no ring: none
+READOUT {"role":"timer","label":"44 minutes 59 seconds remaining","live":"polite","tabular":"tabular-nums"}
+MOTION normal, running    {"animations":0,"stream":true,"infinite":0}
+MOTION normal, paused     {"animations":0,"stream":false,"infinite":0}
+MOTION reduced, running   {"animations":0,"stream":false,"infinite":0}
+AX widget                   3 interactive, 0 unnamed 
+WIDGET {"controlsOpacityBeforeFocus":"0","controlsOpacityAfterTab":"1","firstFocused":"Pause"}
