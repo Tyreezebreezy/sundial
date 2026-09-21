@@ -40,13 +40,3 @@ export function sectorPath(
   const large = toDeg - fromDeg > 180 ? 1 : 0;
   return `M ${cx} ${cy} L ${n2(a.x)} ${n2(a.y)} A ${r} ${r} 0 ${large} 1 ${n2(b.x)} ${n2(b.y)} Z`;
 }
-
-export function polarToCartesian(
-  cx: number,
-  cy: number,
-  r: number,
-  angleDeg: number,
-) {
-  const rad = (angleDeg * Math.PI) / 180;
-  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
-}
