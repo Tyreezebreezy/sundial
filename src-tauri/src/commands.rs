@@ -40,14 +40,73 @@ fn persist_and_broadcast(app: &AppHandle, data: &PersistedData) {
     let _ = app.emit("state-changed", data.state.clone());
 }
 
-pub fn fire_completions(app: &AppHandle, kinds: &[PhaseKind]) {
-    for kind in kinds {
-        let (title, body, tag) = match kind {
-            PhaseKind::Study => ("Study complete", "Time for a break.", "study"),
-            PhaseKind::Break => ("Break complete", "Back to it.", "break"),
-            PhaseKind::Timer => ("Timer complete", "Time's up.", "timer"),
+/// The phase that follows a finished one, if the session continues.
+type Following = Option<(PhaseKind, u64)>;
+
+/// Toast wording for a finished phase, concise and free of evaluation.
+/// `next` is the phase after it in the plan (None when the session is over).
+fn completion_copy(kind: PhaseKind, next: Following) -> (&'static str, Option<String>) {
+    match kind {
+        PhaseKind::Study => (
+            "Study complete",
+            Some(match next {
+                Some((PhaseKind::Break, ms)) => {
+                    format!("Your {}-minute break is ready.", ms / 60_000)
+                }
+                Some(_) => "Your next block is ready.".to_string(),
+                None => "Your session is complete.".to_string(),
+            }),
+        ),
+        PhaseKind::Break => (
+            "Break complete",
+            Some(match next {
+                Some((PhaseKind::Study, _)) => "Time to return to your study session.".to_string(),
+                Some(_) => "Your next block is ready.".to_string(),
+                None => "Your session is complete.".to_string(),
+            }),
+        ),
+        PhaseKind::Timer => ("Timer complete", None),
+    }
+}
+
+/// For each phase `catch_up` just completed (oldest first), the phase that
+/// follows it. Derived from the plan and the post-catch-up position, so a
+/// notification can say how long the coming break is without the engine
+/// having to report more than the kinds it already returns.
+fn following_phases(state: &TimerState, completed: &[PhaseKind]) -> Vec<Following> {
+    let Some(plan) = &state.plan else {
+        return vec![None; completed.len()];
+    };
+    // index of the last phase that just finished: still-running/awaiting
+    // sessions sit one past it, finished sessions stay on it
+    let last = if state.is_running {
+        state.current_index.saturating_sub(1)
+    } else {
+        state.current_index
+    };
+    let first = (last + 1).saturating_sub(completed.len());
+    (0..completed.len())
+        .map(|i| {
+            plan.phases
+                .get(first + i + 1)
+                .map(|p| (p.kind, p.duration_ms))
+        })
+        .collect()
+}
+
+pub fn fire_completions(app: &AppHandle, kinds: &[PhaseKind], following: &[Following]) {
+    for (i, kind) in kinds.iter().enumerate() {
+        let tag = match kind {
+            PhaseKind::Study => "study",
+            PhaseKind::Break => "break",
+            PhaseKind::Timer => "timer",
         };
-        if let Err(e) = app.notification().builder().title(title).body(body).show() {
+        let (title, body) = completion_copy(*kind, following.get(i).copied().flatten());
+        let mut toast = app.notification().builder().title(title);
+        if let Some(body) = body {
+            toast = toast.body(body);
+        }
+        if let Err(e) = toast.show() {
             eprintln!("[sundial] notification failed: {e}");
         }
         let _ = app.emit("phase-complete", tag);
@@ -60,12 +119,13 @@ pub fn fire_completions(app: &AppHandle, kinds: &[PhaseKind]) {
 pub fn reconcile(app: &AppHandle, state: &Mutex<PersistedData>) -> Vec<PhaseKind> {
     let mut data = state.lock().unwrap();
     let completed = data.state.catch_up(now_ms());
+    let following = following_phases(&data.state, &completed);
     if !completed.is_empty() {
         persist_and_broadcast(app, &data);
     }
     drop(data);
     if !completed.is_empty() {
-        fire_completions(app, &completed);
+        fire_completions(app, &completed, &following);
     }
     completed
 }
@@ -161,12 +221,16 @@ pub fn reset_timer(app: AppHandle, state: State<AppState>) -> TimerState {
 }
 
 #[tauri::command]
+#[allow(clippy::too_many_arguments)]
 pub fn save_preset(
     app: AppHandle,
     state: State<AppState>,
     name: String,
     study_minutes: u32,
     break_minutes: u32,
+    default_total_minutes: Option<u32>,
+    auto_advance: Option<bool>,
+    visual: Option<String>,
 ) -> Vec<Preset> {
     let mut data = state.0.lock().unwrap();
     data.custom_presets.push(Preset {
@@ -174,6 +238,9 @@ pub fn save_preset(
         name,
         study_minutes,
         break_minutes,
+        default_total_minutes,
+        auto_advance,
+        visual,
     });
     persistence::save(&app, &data);
     let _ = app.emit("presets-changed", data.custom_presets.clone());
@@ -255,4 +322,123 @@ pub fn quit_app(app: AppHandle) {
         let _ = w.close();
     }
     app.exit(0);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::state::SessionPlan;
+
+    fn plan(kinds: &[(PhaseKind, u64)]) -> SessionPlan {
+        SessionPlan {
+            mode: AppMode::Study,
+            label: None,
+            visual: "disk".into(),
+            auto_advance: false,
+            preset_name: None,
+            phases: kinds
+                .iter()
+                .map(|&(kind, minutes)| Phase {
+                    kind,
+                    duration_ms: minutes * 60_000,
+                })
+                .collect(),
+        }
+    }
+
+    #[test]
+    fn study_complete_names_the_length_of_the_break_that_follows() {
+        let (title, body) =
+            completion_copy(PhaseKind::Study, Some((PhaseKind::Break, 15 * 60_000)));
+        assert_eq!(title, "Study complete");
+        assert_eq!(body.as_deref(), Some("Your 15-minute break is ready."));
+    }
+
+    #[test]
+    fn break_complete_points_back_to_the_session() {
+        let (title, body) =
+            completion_copy(PhaseKind::Break, Some((PhaseKind::Study, 45 * 60_000)));
+        assert_eq!(title, "Break complete");
+        assert_eq!(
+            body.as_deref(),
+            Some("Time to return to your study session.")
+        );
+    }
+
+    #[test]
+    fn timer_complete_is_just_a_title() {
+        assert_eq!(
+            completion_copy(PhaseKind::Timer, None),
+            ("Timer complete", None)
+        );
+    }
+
+    #[test]
+    fn the_last_phase_reports_the_session_is_complete() {
+        assert_eq!(
+            completion_copy(PhaseKind::Study, None).1.as_deref(),
+            Some("Your session is complete.")
+        );
+        assert_eq!(
+            completion_copy(PhaseKind::Break, None).1.as_deref(),
+            Some("Your session is complete.")
+        );
+    }
+
+    #[test]
+    fn following_phases_for_a_manual_advance_pause() {
+        // S45 B15 S45, study just finished and the break is queued
+        let state = TimerState {
+            plan: Some(plan(&[
+                (PhaseKind::Study, 45),
+                (PhaseKind::Break, 15),
+                (PhaseKind::Study, 45),
+            ])),
+            current_index: 1,
+            is_running: true,
+            awaiting_advance: true,
+            ..Default::default()
+        };
+        assert_eq!(
+            following_phases(&state, &[PhaseKind::Study]),
+            vec![Some((PhaseKind::Break, 15 * 60_000))]
+        );
+    }
+
+    #[test]
+    fn following_phases_after_sleeping_through_several_phases() {
+        // S45 B15 S45 B15, woke up mid third phase having missed S and B
+        let state = TimerState {
+            plan: Some(plan(&[
+                (PhaseKind::Study, 45),
+                (PhaseKind::Break, 15),
+                (PhaseKind::Study, 45),
+                (PhaseKind::Break, 15),
+            ])),
+            current_index: 2,
+            is_running: true,
+            ..Default::default()
+        };
+        assert_eq!(
+            following_phases(&state, &[PhaseKind::Study, PhaseKind::Break]),
+            vec![
+                Some((PhaseKind::Break, 15 * 60_000)),
+                Some((PhaseKind::Study, 45 * 60_000)),
+            ]
+        );
+    }
+
+    #[test]
+    fn following_phases_when_the_session_just_finished() {
+        let state = TimerState {
+            plan: Some(plan(&[(PhaseKind::Study, 45), (PhaseKind::Break, 15)])),
+            current_index: 1,
+            is_running: false,
+            ..Default::default()
+        };
+        assert_eq!(
+            following_phases(&state, &[PhaseKind::Study, PhaseKind::Break]),
+            vec![Some((PhaseKind::Break, 15 * 60_000)), None]
+        );
+    }
 }

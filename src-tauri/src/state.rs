@@ -194,6 +194,14 @@ pub struct Preset {
     pub name: String,
     pub study_minutes: u32,
     pub break_minutes: u32,
+    /// What a saved custom preset remembers besides its rhythm (v1.1). All
+    /// `#[serde(default)]` so presets saved by 1.0.x still load unchanged.
+    #[serde(default)]
+    pub default_total_minutes: Option<u32>,
+    #[serde(default)]
+    pub auto_advance: Option<bool>,
+    #[serde(default)]
+    pub visual: Option<String>,
 }
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
@@ -472,5 +480,38 @@ mod tests {
             !restored.sound_enabled,
             "existing fields still load correctly"
         );
+    }
+
+    #[test]
+    fn presets_saved_by_1_0_x_still_load_with_no_defaults() {
+        // A custom preset written before v1.1 has no default_total_minutes /
+        // autoAdvance / visual. `persistence::load` falls back to full defaults
+        // on ANY deserialize error, so a missing field here would silently
+        // discard every saved preset and setting.
+        let json = r#"{"id":"custom-1","name":"CCNA","studyMinutes":40,"breakMinutes":10}"#;
+        let preset: Preset = serde_json::from_str(json).expect("deserialize");
+        assert_eq!(preset.study_minutes, 40);
+        assert_eq!(preset.default_total_minutes, None);
+        assert_eq!(preset.auto_advance, None);
+        assert_eq!(preset.visual, None);
+    }
+
+    #[test]
+    fn preset_defaults_round_trip() {
+        let preset = Preset {
+            id: "custom-2".into(),
+            name: "Deep".into(),
+            study_minutes: 50,
+            break_minutes: 10,
+            default_total_minutes: Some(120),
+            auto_advance: Some(true),
+            visual: Some("sundial".into()),
+        };
+        let json = serde_json::to_string(&preset).expect("serialize");
+        assert!(json.contains("\"defaultTotalMinutes\":120"));
+        let back: Preset = serde_json::from_str(&json).expect("deserialize");
+        assert_eq!(back.default_total_minutes, Some(120));
+        assert_eq!(back.auto_advance, Some(true));
+        assert_eq!(back.visual.as_deref(), Some("sundial"));
     }
 }
