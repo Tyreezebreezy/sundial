@@ -135,7 +135,7 @@ duration is preselected. No timing study was done.
 
 | Metric                                   | v1.0.1          | v1.1.0                                  |
 | ---------------------------------------- | --------------- | --------------------------------------- |
-| CSS lines (non-blank)                    | 465             | 1,494 (includes the 88-line token file) |
+| CSS lines (non-blank)                    | 465             | 1,522 (includes the 88-line token file) |
 | Raw color literals outside a token file  | 10              | 0                                       |
 | Distinct color values                    | 10              | 13, all in `tokens.css`                 |
 | Distinct font sizes                      | 11 (raw)        | 7, all from 10 named roles              |
@@ -145,7 +145,8 @@ duration is preselected. No timing study was done.
 | `box-shadow` declarations                | 1               | 2 (preset menu; selected-choice marker) |
 | Infinite animations                      | 1               | 0                                       |
 
-The stylesheet is about three times larger. Part of that is new surfaces and states that did not exist (completion
+The stylesheet is about three times larger (1,494 lines when first measured; 1,522 after Prettier reformatted it, which is
+the figure `qa-harness/evidence/static-audit.mjs drift` reproduces). Part of that is new surfaces and states that did not exist (completion
 surfaces, plan timeline, options panel, custom-preset form, widget states at three sizes, three redrawn visuals);
 the rest is the cost of explicit roles and states. This is a real cost of the refactor, not a reduction.
 
