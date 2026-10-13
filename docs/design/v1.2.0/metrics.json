@@ -1,0 +1,338 @@
+{
+  "01-study-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 13,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Study",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "disk",
+      "hourglass",
+      "sundial",
+      "Options",
+      "START 2H DEEP STUDY"
+    ]
+  },
+  "02-timer-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 17,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "5 minutes",
+      "10 minutes",
+      "15 minutes",
+      "25 minutes",
+      "30 minutes",
+      "45 minutes",
+      "60 minutes",
+      "90 minutes",
+      "120 minutes",
+      "custom",
+      "disk",
+      "hourglass",
+      "sundial",
+      "START 25 MIN TIMER"
+    ]
+  },
+  "03-settings": {
+    "scrollW": 885,
+    "innerW": 900,
+    "scrollH": 1311,
+    "innerH": 1100,
+    "dpr": 1,
+    "controls": 21,
+    "names": [
+      "Close settings",
+      "disk",
+      "hourglass",
+      "sundial",
+      "on",
+      "on",
+      "on",
+      "small",
+      "medium",
+      "large",
+      "on",
+      "Bell Chime Double Chime ",
+      "Test study complete soun",
+      "Bell Chime Double Chime ",
+      "Test break complete soun",
+      "Bell Chime Double Chime ",
+      "Test timer complete soun",
+      "0.8",
+      "on",
+      "on",
+      "QUIT SUNDIAL"
+    ]
+  },
+  "04-study-active-disk": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "05-study-active-hourglass": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "06-study-active-sundial": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "07-study-paused": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "RESUME",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "08-break": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP BREAK",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "09-focus-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 3,
+    "names": [
+      "Settings",
+      "START BREAK",
+      "END SESSION"
+    ]
+  },
+  "10-session-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 2,
+    "names": [
+      "Settings",
+      "DONE"
+    ]
+  },
+  "11-timer-active": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 5,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "12-timer-complete": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 3,
+    "names": [
+      "Settings",
+      "DONE",
+      "+5 MINUTES"
+    ]
+  },
+  "13-study-setup-plan": {
+    "scrollW": 885,
+    "innerW": 900,
+    "scrollH": 840,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 15,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Study",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "2",
+      "30",
+      "disk",
+      "hourglass",
+      "sundial",
+      "Options",
+      "START 2H 30M DEEP STUDY"
+    ]
+  },
+  "14-study-setup-options": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 1000,
+    "innerH": 1000,
+    "dpr": 1,
+    "controls": 15,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Study",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "disk",
+      "hourglass",
+      "sundial",
+      "Options",
+      "on",
+      "text",
+      "START 2H DEEP STUDY"
+    ]
+  },
+  "15-preset-selector": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 20,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Study",
+      "deep-study",
+      "classic-pomodoro",
+      "quick",
+      "standard",
+      "extended",
+      "long",
+      "CUSTOM PRESET",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "disk",
+      "hourglass",
+      "sundial",
+      "Options",
+      "START 2H DEEP STUDY"
+    ]
+  },
+  "16-custom-preset": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 17,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Back to study setup",
+      "text",
+      "45",
+      "15",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "on",
+      "disk",
+      "hourglass",
+      "sundial",
+      "SAVE PRESET",
+      "CANCEL"
+    ]
+  },
+  "17-focus-display": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 5,
+    "names": [
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "RESET",
+      "EXIT FOCUS DISPLAY"
+    ]
+  }
+}
