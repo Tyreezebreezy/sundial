@@ -34,7 +34,7 @@ _show state_, _identify the current place_, or _make an action reachable_. Ornam
 does none of these is removed. There are no gradients on chrome, no glows on
 controls, no nested cards and no decorative icons (the few icons that exist are
 controls with accessible names). The one exception, by design, is the timer
-visuals themselves (section 8): light and shadow *are* the interface there.
+visuals themselves (section 8): light and shadow _are_ the interface there.
 
 ## 3. Color roles
 
@@ -74,11 +74,11 @@ change use `font-variant-numeric: tabular-nums` so the readout never jitters.
 Unchanged from v1.1.0.
 
 | Role         | Token                        | Use                                            |
-| ------------ | ----------------------------- | ---------------------------------------------- |
+| ------------ | ---------------------------- | ---------------------------------------------- |
 | Timer XL     | `--font-timer-xl`            | main readout, `clamp(3.25rem, 11vmin, 6.5rem)` |
 | Widget timer | `--font-timer-widget*`       | 22 / 30 / 36 px by widget size                 |
 | Display      | `--font-display`             | block identity, preset name                    |
-| Heading      | `--font-heading`              | uppercase tracked eyebrow labels               |
+| Heading      | `--font-heading`             | uppercase tracked eyebrow labels               |
 | Body / Meta  | `--font-body`, `--font-meta` | copy, secondary lines                          |
 | Control      | `--font-control(-lg)`        | button labels                                  |
 
@@ -114,18 +114,18 @@ the same token, a bigger value, in one place.
 
 ## 6. Components
 
-| Component                   | Rule                                                                                                                                                                                                                                                                                                                  |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Button                      | `primary` (gold fill, one per surface) / `secondary` (surface + border) / `tertiary` (text only) / `danger` (text, red on confirm). Hover changes surface or border, never size.                                                                                                                                      |
-| Destructive action          | Two-step inline confirm (`ConfirmButton`): first press arms it ("Confirm reset"), second commits; it disarms on blur or after a timeout. No modal dialogs.                                                                                                                                                            |
-| Segmented / choice controls | Native radios in a `radiogroup` (one tab stop, arrow keys). Selected = border + brighter text + bottom marker (not color alone).                                                                                                                                                                                      |
-| Switch                      | Native checkbox with `role="switch"`.                                                                                                                                                                                                                                                                                 |
-| Preset selector             | Progressive disclosure: a trigger showing the current rhythm opens a grouped list - the two primary rhythms (Deep Study 45/15, Classic 25/5), the other built-ins under a divider, then saved presets (each with a delete control) - and "+ Custom preset" opens the form. The row's radio input is the click target. |
-| Duration entry              | Study: labeled "Total session", 1h / 2h / 3h / Custom. Timer: five-column two-row grid of 5-120 min plus Custom.                                                                                                                                                                                                     |
-| **Sunline**                  | **New, signature.** The session plan to scale: gold bars for study, thin muted bars for break, proportional to actual duration. Three contexts share one component (`Sunline`): the setup preview (labeled, always visible once a plan exists - no "View plan" disclosure), a compact unlabeled strip under the active controls with a leading position marker, and the same compact strip in the Large widget. Each segment carries its length in a native `title` (hover) and the list has one accessible name (`aria-label="Session plan"`); nothing about it is the only way to learn the plan - the eyebrow and readout already say the position in words. |
-| **Focus Display**            | **New.** A second, bigger, full-bleed presentation of the exact same `ActiveSession` - not a second timer, not a second window. Entered with `F` or a quiet icon button next to Skip/Reset; exits on `Esc` or a corner button that stays at opacity 0 until hover or keyboard focus reveals it (same pattern as the widget's controls).                                                                      |
-| Validation                  | Inline, next to the field, in text (never toast or modal).                                                                                                                                                                                                                                                            |
-| Focus                       | 2px gold ring, 2px offset, on every keyboard-focusable control.                                                                                                                                                                                                                                                       |
+| Component                   | Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Button                      | `primary` (gold fill, one per surface) / `secondary` (surface + border) / `tertiary` (text only) / `danger` (text, red on confirm). Hover changes surface or border, never size.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Destructive action          | Two-step inline confirm (`ConfirmButton`): first press arms it ("Confirm reset"), second commits; it disarms on blur or after a timeout. No modal dialogs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Segmented / choice controls | Native radios in a `radiogroup` (one tab stop, arrow keys). Selected = border + brighter text + bottom marker (not color alone).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Switch                      | Native checkbox with `role="switch"`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Preset selector             | Progressive disclosure: a trigger showing the current rhythm opens a grouped list - the two primary rhythms (Deep Study 45/15, Classic 25/5), the other built-ins under a divider, then saved presets (each with a delete control) - and "+ Custom preset" opens the form. The row's radio input is the click target.                                                                                                                                                                                                                                                                                                                                           |
+| Duration entry              | Study: labeled "Total session", 1h / 2h / 3h / Custom. Timer: five-column two-row grid of 5-120 min plus Custom.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Sunline**                 | **New, signature.** The session plan to scale: gold bars for study, thin muted bars for break, proportional to actual duration. Three contexts share one component (`Sunline`): the setup preview (labeled, always visible once a plan exists - no "View plan" disclosure), a compact unlabeled strip under the active controls with a leading position marker, and the same compact strip in the Large widget. Each segment carries its length in a native `title` (hover) and the list has one accessible name (`aria-label="Session plan"`); nothing about it is the only way to learn the plan - the eyebrow and readout already say the position in words. |
+| **Focus Display**           | **New.** A second, bigger, full-bleed presentation of the exact same `ActiveSession` - not a second timer, not a second window. Entered with `F` or a quiet icon button next to Skip/Reset; exits on `Esc` or a corner button that stays at opacity 0 until hover or keyboard focus reveals it (same pattern as the widget's controls).                                                                                                                                                                                                                                                                                                                         |
+| Validation                  | Inline, next to the field, in text (never toast or modal).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Focus                       | 2px gold ring, 2px offset, on every keyboard-focusable control.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## 7. Surfaces
 
@@ -180,7 +180,7 @@ illumination for all three through CSS custom properties (`--tv-lit-*`,
 `--tv-fill`, `--tv-glow`):
 
 | State             | Look                                 |
-| ------------------ | ------------------------------------- |
+| ----------------- | ------------------------------------ |
 | `idle`            | quiet, reduced illumination          |
 | `study` / `timer` | warm, the brightest intentional gold |
 | `break`           | calmer, less illumination            |
@@ -252,7 +252,7 @@ Sentence case, plain, no exclamation marks, no motivational text. Unchanged
 from v1.1.0.
 
 | Event                | Notification title | Body                                                                                         |
-| --------------------- | -------------------- | ----------------------------------------------------------------------------------------------- |
+| -------------------- | ------------------ | -------------------------------------------------------------------------------------------- |
 | Study block complete | Study complete     | "Your 15-minute break is ready." / "Your next block is ready." / "Your session is complete." |
 | Break complete       | Break complete     | "Time to return to your study session." / "Your session is complete."                        |
 | Timer complete       | Timer complete     | -                                                                                            |
@@ -282,13 +282,13 @@ engine reconciles elapsed time before the UI first asks.
 field, select, range or other form control has focus, or a modifier key is
 held:
 
-| Key       | Action                                                      |
-| --------- | ------------------------------------------------------------ |
-| `Space`   | Pause / Resume - only while a session is running, not awaiting |
-| `+` / `=` | Add 5 minutes - same guard                                   |
-| `S`       | Skip phase - study sessions only                              |
+| Key       | Action                                                             |
+| --------- | ------------------------------------------------------------------ |
+| `Space`   | Pause / Resume - only while a session is running, not awaiting     |
+| `+` / `=` | Add 5 minutes - same guard                                         |
+| `S`       | Skip phase - study sessions only                                   |
 | `F`       | Enter Focus Display - any time a session exists, any of its states |
-| `Esc`     | Close whichever overlay is open (Settings or Focus Display)  |
+| `Esc`     | Close whichever overlay is open (Settings or Focus Display)        |
 
 Reachable from Settings → App, listed next to the close-behaviour control, not
 printed permanently on every surface (section 58 of the handoff).
