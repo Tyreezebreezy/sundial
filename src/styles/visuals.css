@@ -153,6 +153,13 @@
   stroke-linecap: round;
 }
 
+.tv-edge-glow {
+  stroke: var(--tv-lit-1);
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0.22;
+}
+
 .tv-hub {
   fill: var(--color-canvas);
   stroke: var(--color-divider);
@@ -226,6 +233,11 @@
   stroke: var(--tv-lit-2);
   stroke-width: 3;
   stroke-linecap: round;
+}
+
+.tv-gnomon-base {
+  fill: var(--color-accent-deep);
+  opacity: 0.6;
 }
 
 .tv-gnomon-a {

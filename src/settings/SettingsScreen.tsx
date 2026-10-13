@@ -167,6 +167,21 @@ export function SettingsScreen({ settings }: { settings: Settings }) {
       </Section>
 
       <Section id="set-app" title="App">
+        <p className="field-label">Keyboard shortcuts</p>
+        <div className="shortcut-list" aria-label="Keyboard shortcuts">
+          {[
+            ["Space", "Pause or resume"],
+            ["+", "Add 5 minutes"],
+            ["S", "Skip phase"],
+            ["F", "Focus Display"],
+            ["Esc", "Close overlay"],
+          ].map(([key, label]) => (
+            <div className="shortcut-row" key={key}>
+              <span className="setting-label">{label}</span>
+              <kbd className="key">{key}</kbd>
+            </div>
+          ))}
+        </div>
         <fieldset className="close-behavior">
           <legend className="setting-label">When the main window closes</legend>
           <label className="choice">

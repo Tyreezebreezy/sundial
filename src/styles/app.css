@@ -97,27 +97,89 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-5);
+  gap: var(--space-3);
   width: 100%;
   padding-top: var(--space-2);
-}
-
-.visual-frame--preview {
-  --visual-size: var(--visual-preview);
 }
 
 .visual-frame--hero {
   --visual-size: var(--visual-hero);
 }
 
-.setup-preview {
+.readout--idle {
+  color: var(--color-text-secondary);
+}
+
+/* ---- Instrument Stage + Session Composer (v1.2 composition) ----------- */
+/* An asymmetric pair rather than one centered column: the visual gets a
+   stage of its own and the setup controls become a compact composer next
+   to it. Below 900px the pair stops working as two columns and collapses
+   back to the single centered column every other surface uses. */
+
+.composer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-7);
+  width: 100%;
+}
+
+.instrument-stage {
   display: grid;
   justify-items: center;
+  align-content: center;
   gap: var(--space-3);
 }
 
-.readout--idle {
-  color: var(--color-text-secondary);
+.visual-frame--instrument {
+  --visual-size: var(--visual-instrument);
+}
+
+.session-composer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.session-composer .visual-picker .visual-frame {
+  --visual-size: var(--visual-choice-compact);
+}
+
+.session-composer .summary {
+  gap: var(--space-2) var(--space-4);
+}
+
+.session-composer .segmented-label {
+  text-align: left;
+}
+
+.session-composer .segmented-options {
+  justify-content: flex-start;
+}
+
+/* Below this, two columns stop working; collapse to the single centered
+   column every other surface already uses. The default window (900x760)
+   and every configured DPI/zoom variant of it stay two-column - only the
+   640px minimum width and 200% zoom fall under this. */
+@media (max-width: 50rem) {
+  .composer {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .session-composer {
+    align-items: center;
+  }
+
+  .session-composer .segmented-label {
+    text-align: center;
+  }
+
+  .session-composer .segmented-options {
+    justify-content: center;
+  }
 }
 
 /* preset selector */
@@ -298,11 +360,6 @@
   text-align: center;
 }
 
-.prompt {
-  font: var(--font-body);
-  color: var(--color-text-secondary);
-}
-
 .segmented-options {
   display: flex;
   flex-wrap: wrap;
@@ -452,12 +509,6 @@
   color: var(--color-text-primary);
 }
 
-.disclosures {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-5);
-}
-
 .disclosure {
   display: inline-flex;
   align-items: center;
@@ -496,34 +547,76 @@
   width: min(100%, 22rem);
 }
 
-.timeline {
+.sunline-panel {
+  width: 100%;
+  padding-top: var(--space-3);
+  border-top: var(--stroke-hair) solid var(--color-divider);
+}
+
+.sunline-panel-label {
+  margin-bottom: var(--space-2);
+}
+
+.sunline {
   display: flex;
   align-items: flex-start;
   gap: var(--space-1);
   width: 100%;
 }
 
-.timeline-seg {
+.sunline-seg {
   display: grid;
   grid-template-rows: 6px auto;
   gap: var(--space-2);
   min-width: 0;
 }
 
-.timeline-bar {
+.sunline-bar {
+  position: relative;
   display: block;
   align-self: center;
   height: 6px;
   border-radius: var(--radius-full);
   background: var(--color-accent);
+  transition: background-color var(--motion-standard) var(--ease-standard);
 }
 
-.timeline-seg--break .timeline-bar {
+.sunline-seg--break .sunline-bar {
   height: 2px;
   background: var(--color-text-muted);
 }
 
-.timeline-label {
+.sunline-seg--done .sunline-bar {
+  background: var(--color-accent-deep);
+}
+
+.sunline-seg--done.sunline-seg--break .sunline-bar {
+  background: var(--color-divider);
+}
+
+.sunline-seg--upcoming .sunline-bar {
+  background: var(--color-surface-2);
+}
+
+.sunline-seg--upcoming.sunline-seg--break .sunline-bar {
+  background: var(--color-divider);
+}
+
+.sunline-marker {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  margin-left: -5px;
+  border: 2px solid var(--color-canvas);
+  border-radius: var(--radius-full);
+  background: var(--color-accent-bright);
+  transition: left var(--motion-fast) var(--ease-standard);
+}
+
+.sunline-label {
   overflow: hidden;
   font: var(--font-meta);
   font-variant-numeric: tabular-nums;
@@ -532,8 +625,28 @@
   text-overflow: ellipsis;
 }
 
-.timeline-kind {
+.sunline-kind {
   color: var(--color-text-muted);
+}
+
+/* Active session / widget: no per-segment minute labels, just the shape. */
+.sunline--compact .sunline-seg {
+  grid-template-rows: 4px;
+}
+
+.sunline--compact .sunline-bar {
+  height: 4px;
+}
+
+.sunline--compact .sunline-seg--break .sunline-bar {
+  height: 2px;
+}
+
+.sunline--compact .sunline-marker {
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  margin-left: -4px;
 }
 
 .setup-actions {
@@ -647,6 +760,38 @@
   outline-offset: 2px;
 }
 
+/* ---- Focus Display ------------------------------------------------------
+   A second, bigger presentation of the same ActiveSession - a dedicated,
+   full-bleed state rather than an OS fullscreen or a second window, so
+   dragging, resizing and the system menu are never touched. */
+
+.focus-display {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  background: var(--color-canvas);
+  --visual-hero: clamp(220px, 42vmin, 480px);
+  --font-size-timer-xl: clamp(4rem, 16vmin, 9rem);
+}
+
+.focus-display .stage-active {
+  flex: 1;
+}
+
+.focus-display-exit {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+
+.focus-display:hover .focus-display-exit,
+.focus-display:focus-within .focus-display-exit {
+  opacity: 1;
+}
+
 /* ---- Active session --------------------------------------------------- */
 
 .stage-active {
@@ -657,7 +802,7 @@
   justify-content: center;
   gap: var(--space-4);
   width: 100%;
-  padding-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
   text-align: center;
 }
 
@@ -706,6 +851,11 @@
 
 .controls-primary .btn:first-child {
   min-width: 9rem;
+}
+
+.active-sunline {
+  width: min(100%, 28rem);
+  margin-top: var(--space-3);
 }
 
 /* ---- Settings --------------------------------------------------------- */
@@ -783,6 +933,34 @@
   width: 11rem;
 }
 
+.shortcut-list {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--control-height-compact);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  padding: 0 var(--space-2);
+  border: var(--stroke-hair) solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+  font: var(--font-meta);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-1);
+}
+
 .close-behavior {
   display: grid;
   gap: var(--space-1);
@@ -847,7 +1025,7 @@
   gap: var(--space-4);
 }
 
-.setup--timer .visual-frame--preview {
+.setup--timer .visual-frame--instrument {
   --visual-size: clamp(96px, 16vmin, 140px);
 }
 
@@ -886,13 +1064,17 @@
 
   .setup {
     gap: var(--space-3);
+    padding-top: 0;
   }
 
   .setup--timer {
     gap: var(--space-2);
   }
 
-  .setup--timer .visual-frame--preview {
+  /* The Instrument Stage visual is decorative here (VisualPicker's own small
+     previews are still right below it); drop it first when height is tight,
+     on Study as well as Timer, rather than scroll to reach Start. */
+  .instrument-stage .visual-frame--instrument {
     display: none;
   }
 
@@ -911,6 +1093,28 @@
 
   .controls {
     margin-top: var(--space-1);
+  }
+
+  .active-sunline {
+    margin-top: var(--space-2);
+  }
+
+  /* Same idea as .sunline--compact, applied by height rather than a prop:
+     the bars still read at a glance without the per-segment minute labels. */
+  .sunline-panel {
+    padding-top: var(--space-2);
+  }
+
+  .sunline-panel-label {
+    margin-bottom: var(--space-1);
+  }
+
+  .sunline-seg {
+    grid-template-rows: 4px;
+  }
+
+  .sunline-label {
+    display: none;
   }
 }
 

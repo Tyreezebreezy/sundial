@@ -11,8 +11,12 @@ const BOTTOM = 210;
 const BULB_H = NECK_TOP - TOP; // 84, same for both bulbs
 const NECK_HALF = 4;
 
-const TOP_BULB = `M ${LEFT} ${TOP} L ${RIGHT} ${TOP} L ${CX + NECK_HALF} ${NECK_TOP} L ${CX - NECK_HALF} ${NECK_TOP} Z`;
-const BOTTOM_BULB = `M ${CX - NECK_HALF} ${NECK_BOTTOM} L ${CX + NECK_HALF} ${NECK_BOTTOM} L ${RIGHT} ${BOTTOM} L ${LEFT} ${BOTTOM} Z`;
+// A rounded shoulder rather than a straight-sided funnel: each side leaves
+// the rim vertical and arrives at the neck horizontal (a quadratic curve
+// whose control point sits at the corner between those two directions),
+// the way a blown-glass vessel actually narrows into its waist.
+const TOP_BULB = `M ${LEFT} ${TOP} L ${RIGHT} ${TOP} Q ${RIGHT} ${NECK_TOP} ${CX + NECK_HALF} ${NECK_TOP} L ${CX - NECK_HALF} ${NECK_TOP} Q ${LEFT} ${NECK_TOP} ${LEFT} ${TOP} Z`;
+const BOTTOM_BULB = `M ${CX - NECK_HALF} ${NECK_BOTTOM} Q ${LEFT} ${NECK_BOTTOM} ${LEFT} ${BOTTOM} L ${RIGHT} ${BOTTOM} Q ${RIGHT} ${NECK_BOTTOM} ${CX + NECK_HALF} ${NECK_BOTTOM} Z`;
 
 /**
  * Top bulb = remaining, bottom bulb = elapsed. Sand levels follow the real

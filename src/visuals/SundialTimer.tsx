@@ -112,6 +112,7 @@ export function SundialTimer(props: TimerVisualProps) {
         />
       )}
 
+      <ellipse className="tv-gnomon-base" cx={C} cy={C + 6} rx={9} ry={2.5} />
       <polygon
         className="tv-gnomon-a"
         points={`${C},${C - 30} ${C},${C + 6} ${C - 6},${C + 6}`}

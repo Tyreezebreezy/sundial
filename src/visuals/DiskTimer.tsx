@@ -62,13 +62,24 @@ export function DiskTimer(props: TimerVisualProps) {
       </g>
 
       {!full && !empty && (
-        <line
-          className="tv-edge tv-detail"
-          x1={C}
-          y1={C}
-          x2={n2(edge.x)}
-          y2={n2(edge.y)}
-        />
+        <>
+          {/* A soft, wide, low-opacity duplicate under the crisp edge: light
+              receding at the terminator, not a glowing progress ring. */}
+          <line
+            className="tv-edge-glow"
+            x1={C}
+            y1={C}
+            x2={n2(edge.x)}
+            y2={n2(edge.y)}
+          />
+          <line
+            className="tv-edge tv-detail"
+            x1={C}
+            y1={C}
+            x2={n2(edge.x)}
+            y2={n2(edge.y)}
+          />
+        </>
       )}
       <circle className="tv-hub tv-detail" cx={C} cy={C} r={3.5} />
     </svg>

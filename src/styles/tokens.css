@@ -79,7 +79,13 @@
   --control-height-compact: 32px;
   --visual-hero: clamp(152px, 31vmin, 352px); /* active timer visual */
   --visual-preview: clamp(96px, 20vmin, 176px); /* setup preview */
+  --visual-instrument: clamp(
+    140px,
+    30vmin,
+    256px
+  ); /* Instrument Stage preview */
   --visual-choice: 64px; /* picker previews */
+  --visual-choice-compact: 48px; /* picker previews inside the Session Composer */
   --visual-widget-s: 36px;
   --visual-widget-m: 60px;
   --visual-widget-l: 96px;

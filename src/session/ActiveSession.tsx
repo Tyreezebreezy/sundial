@@ -5,22 +5,27 @@ import { ConfirmButton } from "../ui/ConfirmButton";
 import { Icon } from "../ui/Icon";
 import { useReducedMotion } from "../useReducedMotion";
 import { TimerVisual, type TimerVisualState } from "../visuals/TimerVisual";
+import { Sunline } from "../study/Sunline";
 import type { TimerState } from "../types";
 
 /**
  * Every state of a session that exists: running, paused, waiting for the
  * next phase, and finished. The visual leads, the exact time follows, the
  * one useful next fact sits below, and controls stay quiet and ranked:
- * Pause/Resume and +5, then Skip, then Reset (destructive, two-step).
+ * Pause/Resume and +5, then Skip, Focus Display, then Reset (destructive,
+ * two-step). `onFocusDisplay` is omitted when this is already the view
+ * Focus Display is showing, so it never offers to open itself.
  */
 export function ActiveSession({
   state,
   remainingMs,
   finishedOnLaunch,
+  onFocusDisplay,
 }: {
   state: TimerState;
   remainingMs: number;
   finishedOnLaunch: boolean;
+  onFocusDisplay?: () => void;
 }) {
   const reducedMotion = useReducedMotion();
   const plan = state.plan;
@@ -218,6 +223,17 @@ export function ActiveSession({
               {current.kind === "break" ? "Skip break" : "Skip phase"}
             </button>
           )}
+          {onFocusDisplay && (
+            <button
+              type="button"
+              className="icon-btn"
+              aria-label="Focus Display"
+              title="Focus Display (F)"
+              onClick={onFocusDisplay}
+            >
+              <Icon name="expand" />
+            </button>
+          )}
           <ConfirmButton
             label="Reset"
             confirmLabel="Confirm reset"
@@ -225,6 +241,16 @@ export function ActiveSession({
           />
         </div>
       </div>
+
+      {isStudy && (
+        <div className="active-sunline">
+          <Sunline
+            phases={phases}
+            live={{ currentIndex: index, elapsedFraction: 1 - progress }}
+            compact
+          />
+        </div>
+      )}
     </section>
   );
 }

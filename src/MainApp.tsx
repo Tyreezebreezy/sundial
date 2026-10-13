@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useTimer } from "./useTimer";
+import { useShortcuts } from "./useShortcuts";
 import { AppShell, type Section } from "./shell/AppShell";
 import { StudySetup } from "./study/StudySetup";
 import { TimerSetup } from "./timer/TimerSetup";
 import { ActiveSession } from "./session/ActiveSession";
+import { FocusDisplay } from "./session/FocusDisplay";
 import { SettingsScreen } from "./settings/SettingsScreen";
 import { playSound } from "./audio";
 import type { PhaseKind } from "./types";
@@ -18,6 +20,7 @@ import type { PhaseKind } from "./types";
 export function MainApp() {
   const [section, setSection] = useState<Section>("study");
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [focusDisplay, setFocusDisplay] = useState(false);
   const [noticeDismissed, setNoticeDismissed] = useState(false);
   const bootRestored = useRef<boolean | null>(null);
   const bootFinished = useRef<boolean | null>(null);
@@ -35,14 +38,18 @@ export function MainApp() {
     },
   );
 
+  useShortcuts({
+    state,
+    onEnterFocusDisplay: () => setFocusDisplay(true),
+    onExitOverlay: () => {
+      setSettingsOpen(false);
+      setFocusDisplay(false);
+    },
+  });
+
   useEffect(() => {
-    if (!settingsOpen) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSettingsOpen(false);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [settingsOpen]);
+    if (!state?.plan) setFocusDisplay(false);
+  }, [state?.plan]);
 
   if (!state || !settings) {
     return <div className="app" />;
@@ -81,6 +88,17 @@ export function MainApp() {
     ) : null;
 
   const plan = state.plan;
+
+  if (focusDisplay && plan) {
+    return (
+      <FocusDisplay
+        state={state}
+        remainingMs={remainingMs}
+        onExit={() => setFocusDisplay(false)}
+      />
+    );
+  }
+
   let content;
   if (settingsOpen) {
     content = <SettingsScreen settings={settings} />;
@@ -90,6 +108,7 @@ export function MainApp() {
         state={state}
         remainingMs={remainingMs}
         finishedOnLaunch={bootFinished.current === true}
+        onFocusDisplay={() => setFocusDisplay(true)}
       />
     );
   } else if (section === "study") {

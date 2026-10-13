@@ -3,6 +3,7 @@ import { api } from "../tauri";
 import { Icon, type IconName } from "../ui/Icon";
 import { useReducedMotion } from "../useReducedMotion";
 import { useTimer } from "../useTimer";
+import { Sunline } from "../study/Sunline";
 import { TimerVisual } from "../visuals/TimerVisual";
 import type { PhaseKind } from "../types";
 import { widgetView, type WidgetView } from "./widgetView";
@@ -193,6 +194,24 @@ export function Widget() {
         >
           {view.readout}
         </p>
+
+        {size === "large" &&
+          view.block !== null &&
+          (view.mode === "study" ||
+            view.mode === "break" ||
+            view.mode === "paused") &&
+          state.plan && (
+            <div className="widget-sunline" aria-hidden="true">
+              <Sunline
+                phases={state.plan.phases}
+                live={{
+                  currentIndex: state.currentIndex,
+                  elapsedFraction: 1 - view.progress,
+                }}
+                compact
+              />
+            </div>
+          )}
 
         <div className="widget-slot">
           <p className="widget-info">{info}</p>

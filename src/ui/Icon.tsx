@@ -29,6 +29,7 @@ const PATHS = {
   back: <path d="M12 4L6 10l6 6" />,
   plus: <path d="M10 4v12M4 10h12" />,
   reset: <path d="M4.5 10a5.5 5.5 0 1 0 1.8-4.1M4 3.5v3h3" />,
+  expand: <path d="M4 8V4h4M16 8V4h-4M4 12v4h4M16 12v4h-4" />,
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof PATHS;

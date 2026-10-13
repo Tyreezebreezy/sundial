@@ -50,69 +50,73 @@ export function TimerSetup({ settings }: { settings: Settings }) {
 
   return (
     <section className="setup setup--timer surface-in" aria-label="Timer setup">
-      <div className="setup-preview" aria-hidden="true">
-        <div className="visual-frame visual-frame--preview">
-          <TimerVisual
-            kind={visual}
-            remainingMs={0}
-            durationMs={0}
-            progress={0.75}
-            state="idle"
-            size="large"
-            reducedMotion
-          />
+      <div className="composer">
+        <div className="instrument-stage" aria-hidden="true">
+          <div className="visual-frame visual-frame--instrument">
+            <TimerVisual
+              kind={visual}
+              remainingMs={0}
+              durationMs={0}
+              progress={0.75}
+              state="idle"
+              size="large"
+              reducedMotion
+            />
+          </div>
+          <p className="readout readout--idle">
+            {formatTimer((minutes ?? 0) * 60_000)}
+          </p>
         </div>
-        <p className="readout readout--idle">
-          {formatTimer((minutes ?? 0) * 60_000)}
-        </p>
-      </div>
 
-      <div className="timer-choice">
-        <Segmented
-          legend="Minutes"
-          legendClassName="sr-only"
-          name="timer-minutes"
-          variant="grid"
-          value={selected}
-          options={OPTIONS}
-          onChange={(choice) => {
-            if (choice === "custom") {
-              setCustomMode(true);
-            } else {
-              setCustomMode(false);
-              setMinutes(Number(choice));
-            }
-          }}
-        />
-        {customMode && (
-          <DurationFields
-            idPrefix="timer-custom"
-            initialMinutes={minutes}
-            onChange={setMinutes}
+        <div className="session-composer">
+          <div className="timer-choice">
+            <Segmented
+              legend="Minutes"
+              legendClassName="sr-only"
+              name="timer-minutes"
+              variant="grid"
+              value={selected}
+              options={OPTIONS}
+              onChange={(choice) => {
+                if (choice === "custom") {
+                  setCustomMode(true);
+                } else {
+                  setCustomMode(false);
+                  setMinutes(Number(choice));
+                }
+              }}
+            />
+            {customMode && (
+              <DurationFields
+                idPrefix="timer-custom"
+                initialMinutes={minutes}
+                onChange={setMinutes}
+              />
+            )}
+          </div>
+
+          <VisualPicker
+            name="timer-visual"
+            legend="Visual"
+            value={visual}
+            onChange={setVisual}
           />
-        )}
-      </div>
 
-      <VisualPicker
-        name="timer-visual"
-        legend="Visual"
-        value={visual}
-        onChange={setVisual}
-      />
-
-      <div className="setup-actions">
-        <button
-          type="button"
-          className="btn btn--primary start-cta"
-          disabled={!ready}
-          onClick={() => void handleStart()}
-        >
-          <span className="start-cta-label">
-            {ready && minutes !== null
-              ? `Start ${formatMinutesLabel(minutes)} timer`
-              : "Choose a duration"}
-          </span>
-        </button>
+          <div className="setup-actions">
+            <button
+              type="button"
+              className="btn btn--primary start-cta"
+              disabled={!ready}
+              onClick={() => void handleStart()}
+            >
+              <span className="start-cta-label">
+                {ready && minutes !== null
+                  ? `Start ${formatMinutesLabel(minutes)} timer`
+                  : "Choose a duration"}
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

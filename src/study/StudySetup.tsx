@@ -12,14 +12,15 @@ import { CustomPreset } from "./CustomPreset";
 import { PresetSelector } from "./PresetSelector";
 import { SessionDuration } from "./SessionDuration";
 import { SessionSummary } from "./SessionSummary";
-import { SessionTimeline } from "./SessionTimeline";
+import { Sunline } from "./Sunline";
 
-type Panel = "plan" | "options" | null;
+type Panel = "options" | null;
 
 /**
- * The primary setup surface: one rhythm, one question ("how long?"), one
- * action. Everything else (the exact plan, visual, advance mode, label) is
- * disclosed on demand so the first screen stays a decision, not a form.
+ * The primary setup surface, as an Instrument Stage (the visual, at rest)
+ * beside a Session Composer: rhythm, total session, visual, the numbers,
+ * one action. The Sunline below is the plan at a glance, always visible
+ * once there is one - nothing about it is hidden behind a disclosure.
  */
 export function StudySetup({
   settings,
@@ -119,130 +120,123 @@ export function StudySetup({
     );
   }
 
-  const togglePanel = (next: Exclude<Panel, null>) =>
-    setPanel((current) => (current === next ? null : next));
-
   return (
     <section className="setup surface-in" aria-label="Study setup">
-      <PresetSelector
-        presets={allPresets}
-        value={preset}
-        onSelect={choosePreset}
-        onDelete={(p) => void api.deletePreset(p.id)}
-        onCreate={() => setCreating(true)}
-      />
-
-      <div className="visual-frame visual-frame--preview" aria-hidden="true">
-        <TimerVisual
-          kind={visual}
-          remainingMs={0}
-          durationMs={0}
-          progress={0.75}
-          state="idle"
-          size="large"
-          reducedMotion
-        />
-      </div>
-
-      <SessionDuration
-        key={durationKey}
-        name="study-total"
-        legend="How long are you studying?"
-        legendClassName="prompt"
-        value={total}
-        onChange={setTotal}
-      />
-
-      {ready && <SessionSummary summary={summary} />}
-
-      <div className="disclosures">
-        <button
-          type="button"
-          className="disclosure"
-          aria-expanded={panel === "plan"}
-          aria-controls="panel-plan"
-          disabled={!ready}
-          onClick={() => togglePanel("plan")}
-        >
-          View plan
-          <Icon name="chevron" />
-        </button>
-        <button
-          type="button"
-          className="disclosure"
-          aria-expanded={panel === "options"}
-          aria-controls="panel-options"
-          onClick={() => togglePanel("options")}
-        >
-          Options
-          <Icon name="chevron" />
-        </button>
-      </div>
-
-      {panel === "plan" && ready && (
-        <div id="panel-plan" className="panel">
-          <SessionTimeline phases={schedule} />
+      <div className="composer">
+        <div className="instrument-stage" aria-hidden="true">
+          <div className="visual-frame visual-frame--instrument">
+            <TimerVisual
+              kind={visual}
+              remainingMs={0}
+              durationMs={0}
+              progress={0.75}
+              state="idle"
+              size="large"
+              reducedMotion
+            />
+          </div>
         </div>
-      )}
-      {panel === "options" && (
-        <div id="panel-options" className="panel panel--options">
+
+        <div className="session-composer">
+          <PresetSelector
+            presets={allPresets}
+            value={preset}
+            onSelect={choosePreset}
+            onDelete={(p) => void api.deletePreset(p.id)}
+            onCreate={() => setCreating(true)}
+          />
+
+          <SessionDuration
+            key={durationKey}
+            name="study-total"
+            legend="Total session"
+            value={total}
+            onChange={setTotal}
+          />
+
           <VisualPicker
             name="study-visual"
             legend="Visual"
             value={visual}
             onChange={setVisual}
           />
-          <Switch checked={autoAdvance} onChange={setAutoAdvance}>
-            Advance to the next phase automatically
-          </Switch>
-          <div className="field">
-            <label className="field-label" htmlFor="session-label">
-              Label (optional)
-            </label>
-            <input
-              id="session-label"
-              className="input"
-              value={label}
-              maxLength={60}
-              onChange={(e) => setLabel(e.target.value)}
-            />
-          </div>
-        </div>
-      )}
 
-      <div className="setup-actions">
-        <button
-          type="button"
-          className="btn btn--primary start-cta"
-          disabled={!ready}
-          onClick={() =>
-            void start(preset, summary.totalMinutes, visual, autoAdvance)
-          }
-        >
-          <span className="start-cta-label">
-            {ready
-              ? `Start ${formatMinutesLabel(summary.totalMinutes)} ${preset.name}`
-              : "Choose a duration"}
-          </span>
-        </button>
-        {showRepeat && last && (
+          {ready && <SessionSummary summary={summary} />}
+
           <button
             type="button"
-            className="btn btn--tertiary"
+            className="disclosure"
+            aria-expanded={panel === "options"}
+            aria-controls="panel-options"
             onClick={() =>
-              void start(
-                last.preset,
-                last.totalMinutes,
-                last.preset.visual ?? settings.defaultVisual,
-                last.preset.autoAdvance ?? settings.autoAdvance,
-              )
+              setPanel((p) => (p === "options" ? null : "options"))
             }
           >
-            Repeat last · {last.preset.name} ·{" "}
-            {formatMinutesLabel(last.totalMinutes)}
+            Options
+            <Icon name="chevron" />
           </button>
-        )}
+          {panel === "options" && (
+            <div id="panel-options" className="panel panel--options">
+              <Switch checked={autoAdvance} onChange={setAutoAdvance}>
+                Advance to the next phase automatically
+              </Switch>
+              <div className="field">
+                <label className="field-label" htmlFor="session-label">
+                  Label (optional)
+                </label>
+                <input
+                  id="session-label"
+                  className="input"
+                  value={label}
+                  maxLength={60}
+                  onChange={(e) => setLabel(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="setup-actions">
+            <button
+              type="button"
+              className="btn btn--primary start-cta"
+              disabled={!ready}
+              onClick={() =>
+                void start(preset, summary.totalMinutes, visual, autoAdvance)
+              }
+            >
+              <span className="start-cta-label">
+                {ready
+                  ? `Start ${formatMinutesLabel(summary.totalMinutes)} ${preset.name}`
+                  : "Choose a duration"}
+              </span>
+            </button>
+            {showRepeat && last && (
+              <button
+                type="button"
+                className="btn btn--tertiary"
+                onClick={() =>
+                  void start(
+                    last.preset,
+                    last.totalMinutes,
+                    last.preset.visual ?? settings.defaultVisual,
+                    last.preset.autoAdvance ?? settings.autoAdvance,
+                  )
+                }
+              >
+                Repeat last · {last.preset.name} ·{" "}
+                {formatMinutesLabel(last.totalMinutes)}
+              </button>
+            )}
+          </div>
+        </div>
       </div>
+
+      {ready && (
+        <div className="sunline-panel">
+          <p className="type-heading sunline-panel-label">Session plan</p>
+          <Sunline phases={schedule} />
+        </div>
+      )}
     </section>
   );
 }
