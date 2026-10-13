@@ -26,6 +26,15 @@ const KEYS = {
   ArrowUp: { key: "ArrowUp", code: "ArrowUp", vk: 38 },
   ArrowRight: { key: "ArrowRight", code: "ArrowRight", vk: 39 },
   ArrowDown: { key: "ArrowDown", code: "ArrowDown", vk: 40 },
+  // Character keys for app keyboard-shortcut layers (e.g. single-letter
+  // commands). `text` is set so a focused text field still receives the
+  // character normally - a shortcut layer that only suppresses itself
+  // while a form control has focus needs the keystroke to behave exactly
+  // like real typing there.
+  f: { key: "f", code: "KeyF", vk: 70, text: "f" },
+  s: { key: "s", code: "KeyS", vk: 83, text: "s" },
+  "+": { key: "+", code: "Equal", vk: 187, text: "+" },
+  "=": { key: "=", code: "Equal", vk: 187, text: "=" },
 };
 
 export class Win {

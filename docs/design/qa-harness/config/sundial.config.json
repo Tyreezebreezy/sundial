@@ -41,10 +41,10 @@
     "textSelector": ".readout, .eyebrow, .widget",
     "truncationSelectors": [
       ".start-cta-label",
-      ".timeline-label",
+      ".sunline-label",
       ".preset-option-name"
     ],
-    "heroSelector": ".visual-frame--hero, .visual-frame--preview",
+    "heroSelector": ".visual-frame--hero, .visual-frame--instrument",
     "minTargetPx": 24,
     "autoClip": true,
     "focusFaceSelectors": [

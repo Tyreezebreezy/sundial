@@ -61,11 +61,18 @@ const surfaces = {
       await ctx.sleep(200);
     },
   },
+  // The Sunline is always visible once there's a plan; this is the custom
+  // 2h30m duration so it shows all 5 segments, including the shortened
+  // final study block, rather than the plain 4-segment 2h default.
   "study-plan": {
     window: "main",
     enter: async (ctx) => {
       await surfaces["study-setup"].enter(ctx);
-      await ctx.main.click("view plan");
+      await ctx.main.click("custom");
+      await ctx.sleep(200);
+      await ctx.main.setValue("#study-total-custom-h", "2");
+      await ctx.main.setValue("#study-total-custom-m", "30");
+      await ctx.sleep(250);
     },
   },
   "study-options": {
@@ -205,6 +212,15 @@ const surfaces = {
       await ctx.sleep(3200);
     },
   },
+  "focus-display": {
+    window: "main",
+    enter: async (ctx) => {
+      await surfaces["active-hourglass"].enter(ctx);
+      await ctx.sleep(400);
+      await ctx.main.key("f");
+      await ctx.sleep(350);
+    },
+  },
 };
 
 // ---- the widget ---------------------------------------------------------------------------------
@@ -302,6 +318,7 @@ export default {
       },
       { name: "15-preset-selector", surface: "preset-selector" },
       { name: "16-custom-preset", surface: "custom-preset" },
+      { name: "17-focus-display", surface: "focus-display", wait: 400 },
     ],
   },
 
@@ -406,13 +423,10 @@ export default {
               summary.includes("breaks 30m"),
             summary,
           );
-          await click("view plan");
-          await sleep(200);
           ok(
-            "View plan shows 4 to-scale segments (S45 B15 S45 B15)",
-            (await main.$(".timeline", "e.children.length")) === 4,
+            "Sunline shows 4 to-scale segments (S45 B15 S45 B15)",
+            (await main.$(".sunline", "e.children.length")) === 4,
           );
-          await click("view plan");
           await click("start 2h deep study");
           await sleep(600);
           const b = await boot(ctx);
@@ -507,8 +521,7 @@ export default {
           b = await boot(ctx);
           ok(
             "Confirm reset -> session cleared, back to setup",
-            b.state.plan === null &&
-              (await main.text(".setup .prompt, .prompt")) !== null,
+            b.state.plan === null && (await main.$(".setup", "1")) !== null,
           );
         },
       },
@@ -572,24 +585,18 @@ export default {
           await sleep(250);
           const sum = (await main.text(".summary")).toLowerCase();
           ok(
-            "Custom 2h 30m -> summary Total session 2h 30m, Focus 2h, Breaks 30m, 3 blocks",
+            "Custom 2h 30m -> summary Total session 2h 30m, Focus 2h, Breaks 30m",
             sum.includes("total session 2h 30m") &&
               sum.includes("focus 2h") &&
-              sum.includes("breaks 30m") &&
-              sum.includes("study blocks 3"),
+              sum.includes("breaks 30m"),
             sum,
           );
-          await click("view plan");
-          await sleep(200);
           ok(
-            "Plan shows S45 B15 S45 B15 S30 (shortened final block, no trailing break)",
-            (await main.text(".timeline"))
-              .toLowerCase()
-              .includes("study 30m") &&
-              (await main.$(".timeline", "e.children.length")) === 5,
-            await main.text(".timeline"),
+            "Sunline shows S45 B15 S45 B15 S30: 3 study blocks, shortened final one, no trailing break",
+            (await main.text(".sunline")).toLowerCase().includes("study 30m") &&
+              (await main.$(".sunline", "e.children.length")) === 5,
+            await main.text(".sunline"),
           );
-          await click("view plan");
           await main.setValue("#study-total-custom-h", "0");
           await main.setValue("#study-total-custom-m", "0");
           await sleep(250);
@@ -1080,6 +1087,118 @@ export default {
           await sleep(350);
         },
       },
+      {
+        id: "composition",
+        title:
+          "v1.2 composition: Instrument Stage, promoted Visual, always-visible Sunline",
+        async run(ctx) {
+          const { main, ok, sleep } = ctx;
+          await home(ctx);
+          ok(
+            "Study setup: the Visual picker is visible without opening Options",
+            (await main.$(".session-composer .visual-picker", "1")) !== null,
+          );
+          await main.click("2 hours");
+          await sleep(200);
+          ok(
+            "Study setup: the Sunline is visible with no click (4 segments for 2h Deep Study)",
+            (await main.$(".sunline-panel .sunline", "e.children.length")) ===
+              4,
+          );
+          await main.click("options");
+          await sleep(200);
+          const optionsText = (await main.text("#panel-options")).toLowerCase();
+          ok(
+            "Options now holds only auto-advance + label, not the Visual picker",
+            optionsText.includes("advance to the next phase") &&
+              optionsText.includes("label") &&
+              (await main.$("#panel-options .visual-picker", "1")) === null,
+            optionsText,
+          );
+          await main.click("options");
+          await sleep(150);
+          await main.click("timer");
+          await sleep(250);
+          ok(
+            "Timer setup uses the same Instrument Stage + composer layout",
+            (await main.$(".composer .instrument-stage", "1")) !== null &&
+              (await main.$(".composer .session-composer", "1")) !== null,
+          );
+          await main.invoke("reset_timer");
+          await sleep(300);
+        },
+      },
+      {
+        id: "keyboard-focus-display",
+        title:
+          "Keyboard layer (Space/+/S/F/Esc), suppressed while typing, and Focus Display",
+        async run(ctx) {
+          const { main, ok, sleep } = ctx;
+          await main.invoke("reset_timer");
+          await main.invoke("start_session", study("disk"));
+          await sleep(400);
+
+          await main.key("f");
+          await sleep(350);
+          const fdPresent = (await main.$(".focus-display", "1")) !== null;
+          const fdEyebrow = fdPresent
+            ? (await main.text(".focus-display .eyebrow")).toLowerCase()
+            : null;
+          ok(
+            "F enters Focus Display: a full-bleed overlay over the same running session",
+            fdPresent && (fdEyebrow ?? "").includes("study"),
+            `present=${fdPresent} eyebrow=${JSON.stringify(fdEyebrow)}`,
+          );
+          await main.key("Escape");
+          await sleep(300);
+          ok(
+            "Escape exits Focus Display back to the normal shell",
+            (await main.$(".focus-display", "1")) === null &&
+              (await main.$(".app-header", "1")) !== null,
+          );
+
+          await main.key("Space");
+          await sleep(300);
+          let b = await boot(ctx);
+          ok("Space pauses the running session", b.state.isPaused === true);
+          await main.key("Space");
+          await sleep(300);
+          b = await boot(ctx);
+          ok("Space again resumes it", b.state.isPaused === false);
+
+          const before = b.state.durationMs;
+          await main.key("+");
+          await sleep(300);
+          b = await boot(ctx);
+          ok(
+            "+ adds exactly 5 minutes",
+            b.state.durationMs === before + 300_000,
+            `${before} -> ${b.state.durationMs}`,
+          );
+          await main.key("s");
+          await sleep(350);
+          b = await boot(ctx);
+          ok("S skips to the next phase", b.state.currentIndex === 1);
+
+          await main.invoke("reset_timer");
+          await sleep(300);
+          await main.click("study");
+          await main.click("options");
+          await sleep(200);
+          await main.eval(
+            `document.querySelector('#session-label').focus(); 'f'`,
+          );
+          await main.key("s");
+          await sleep(150);
+          ok(
+            "shortcuts are suppressed while a text field has focus: 's' is typed, not Skip",
+            (await main.$("#session-label", "e.value")) === "s",
+          );
+          await main.eval(
+            `document.querySelector('#session-label').blur(); 'b'`,
+          );
+        },
+      },
     ],
   },
 
@@ -1096,6 +1215,7 @@ export default {
         maxStops: 12,
         describe: readoutProbe,
       },
+      { surface: "focus-display", label: "focus-display", maxStops: 10 },
     ],
     // App-specific keyboard behaviour, run after entering the named surface.
     keyboard: [
