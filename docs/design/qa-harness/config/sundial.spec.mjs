@@ -1025,6 +1025,8 @@ export default {
               )
             ).toLowerCase() === "study",
           );
+          if (await widget.count('[aria-label="Back"]'))
+            await widget.click("Back");
           await widget.hover(80, 24);
           await sleep(250);
           await widget.eval(
@@ -1056,10 +1058,11 @@ export default {
           );
           await sleep(250);
           ok(
-            "widget ⋯ page offers Skip, Reset, Open, Quit (+Back)",
+            "widget ⋯ page offers Skip, Reset, Open, Focus, Quit (+Back)",
             (await widget.eval(
               `[...document.querySelectorAll('.widget-controls button')].map(b=>b.getAttribute('aria-label')).join(',')`,
-            )) === "Back,Skip phase,Reset,Open SUNDIAL,Quit SUNDIAL",
+            )) ===
+              "Back,Skip phase,Reset,Open SUNDIAL,Focus Display,Quit SUNDIAL",
           );
           await widget.eval(
             `document.querySelector('[aria-label="Skip phase"]').click(); 's'`,
@@ -1379,6 +1382,28 @@ export default {
         id: "hourglass paused",
         enter: (ctx) => ctx.main.invoke("pause_timer"),
         budget: 10,
+      },
+      {
+        id: "break running",
+        enter: (ctx) =>
+          ctx.main.invoke(
+            "start_session",
+            study("sundial", { phases: [phase("break", 15)] }),
+          ),
+        budget: 30,
+      },
+      ...["small", "medium", "large"].map((size) => ({
+        id: "widget " + size,
+        async enter(ctx) {
+          await ctx.spec.widget.setSize(ctx, size);
+          await ctx.main.invoke("start_session", study("sundial"));
+        },
+        budget: 30,
+      })),
+      {
+        id: "Focus Display",
+        enter: (ctx) => surfaces["focus-display"].enter(ctx),
+        budget: 30,
       },
     ],
   },

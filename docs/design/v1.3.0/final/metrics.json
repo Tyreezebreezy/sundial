@@ -167,11 +167,7 @@
     "innerH": 760,
     "dpr": 1,
     "controls": 3,
-    "names": [
-      "Settings",
-      "START BREAK",
-      "END SESSION"
-    ]
+    "names": ["Settings", "START BREAK", "END SESSION"]
   },
   "10-session-complete": {
     "scrollW": 900,
@@ -180,10 +176,7 @@
     "innerH": 760,
     "dpr": 1,
     "controls": 2,
-    "names": [
-      "Settings",
-      "DONE"
-    ]
+    "names": ["Settings", "DONE"]
   },
   "11-timer-active": {
     "scrollW": 900,
@@ -192,13 +185,7 @@
     "innerH": 760,
     "dpr": 1,
     "controls": 5,
-    "names": [
-      "Settings",
-      "PAUSE",
-      "Add 5 minutes",
-      "Focus Display",
-      "RESET"
-    ]
+    "names": ["Settings", "PAUSE", "Add 5 minutes", "Focus Display", "RESET"]
   },
   "12-timer-complete": {
     "scrollW": 900,
@@ -207,11 +194,7 @@
     "innerH": 760,
     "dpr": 1,
     "controls": 3,
-    "names": [
-      "Settings",
-      "DONE",
-      "+5 MINUTES"
-    ]
+    "names": ["Settings", "DONE", "+5 MINUTES"]
   },
   "13-study-setup-plan": {
     "scrollW": 900,

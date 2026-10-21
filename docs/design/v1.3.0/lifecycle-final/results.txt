@@ -1,0 +1,48 @@
+
+## Settings -> Quit SUNDIAL ends the process, the widget and the tray
+PASS  settings-quit: the app process is gone
+PASS  settings-quit: its WebView2 processes are gone
+
+## Widget -> More actions -> Quit SUNDIAL
+PASS  widget-quit: the app process is gone
+PASS  widget-quit: its WebView2 processes are gone
+
+## 'Quit on close' + native window close ends the process
+PASS  choose 'Quit SUNDIAL when the main window closes'
+PASS  close-main-quit-on-close: OS accepted the close-main request
+PASS  close-main-quit-on-close: the app process is gone
+PASS  close-main-quit-on-close: its WebView2 processes are gone
+
+## 'Keep running' + native window close hides to the tray; the widget stays
+PASS  choose 'Keep SUNDIAL running'
+PASS  close-main-keep-running: OS accepted the close-main request
+PASS  close-main-keep-running: the app keeps running
+PASS  close-main-keep-running: 1 window(s) remain visible
+PASS  close-main-keep-running: then quits cleanly (process and WebView2 processes gone)
+
+## restore: running
+PASS  restore-running: shows the right thing
+      {"engine":{"isRunning":true,"isPaused":false,"awaiting":false,"index":0,"hasPlan":true},"main":{"eyebrow":"STUDY · 1 OF 2","notice":"Session restored. DISMISS","readout":"34:46","primary":"PAUSE","setup":false}}
+
+## restore: paused
+PASS  restore-paused: shows the right thing
+      {"engine":{"isRunning":true,"isPaused":true,"awaiting":false,"index":2,"hasPlan":true},"main":{"eyebrow":"PAUSED","notice":"Session restored. DISMISS","readout":"18:42","primary":"RESUME","setup":false}}
+
+## restore: finished-study
+PASS  restore-finished-study: shows the right thing
+      {"engine":{"isRunning":false,"isPaused":false,"awaiting":false,"index":1,"hasPlan":true},"main":{"eyebrow":"YOUR SESSION FINISHED","notice":null,"readout":"1h","primary":"DONE","setup":false}}
+
+## restore: finished-timer
+PASS  restore-finished-timer: shows the right thing
+      {"engine":{"isRunning":false,"isPaused":false,"awaiting":false,"index":0,"hasPlan":true},"main":{"eyebrow":"YOUR TIMER FINISHED","notice":null,"readout":"00:00","primary":"DONE","setup":false}}
+
+## restore: awaiting
+PASS  restore-awaiting: shows the right thing
+      {"engine":{"isRunning":true,"isPaused":false,"awaiting":true,"index":1,"hasPlan":true},"main":{"eyebrow":"FOCUS COMPLETE","notice":"Session restored. DISMISS","readout":"45:00","primary":"START BREAK","setup":false}}
+
+## restore: slept-through
+PASS  restore-slept-through: shows the right thing
+      {"engine":{"isRunning":true,"isPaused":false,"awaiting":false,"index":2,"hasPlan":true},"main":{"eyebrow":"STUDY · 2 OF 2","notice":"Session restored. DISMISS","readout":"34:46","primary":"PAUSE","setup":false}}
+
+19 passed, 0 failed
+target: dev, settle 4000 ms

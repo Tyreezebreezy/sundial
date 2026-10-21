@@ -1,0 +1,22 @@
+PASS  Sunline labelled 45:15 measures 3:1
+PASS  Mutation: original auto basis distorts the measured duration ratio
+PASS  Mutation removed: duration ratio recovers
+PASS  2h37m retains exact total and shortened final Study
+PASS  Rapid +5 clicks add exactly 25 minutes
+PASS  Rapid pause/resume settles paused
+PASS  Space activates focused +5 once without resuming
+PASS  Focus Display fits 640x560
+PASS  Focus Display fits 1920x1080
+PASS  Focus Display fits 2560x1440
+PASS  Focus Display fits 3840x2160
+PASS  Focus Display 200% narrow view scrolls without horizontal clipping
+PASS  24h / 1440-phase Sunline stays within minimum window
+PASS  Long Unicode session identity wraps in Active Study
+PASS  small widget preserves readout/control space for long identity
+PASS  medium widget preserves readout/control space for long identity
+PASS  large widget preserves readout/control space for long identity
+PASS  Widget Focus Display opens the same authoritative session
+PASS  Reduced-motion Focus entry has no active animations
+      uncaught page exceptions: 0
+
+19 passed, 0 failed

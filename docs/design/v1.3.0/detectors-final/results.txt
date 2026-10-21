@@ -1,0 +1,24 @@
+PASS  baseline: no flags before any defect is injected
+PASS  detects horizontal overflow
+PASS  overflow: page is clean again after removing the defect
+PASS  a real button is available for targeted defects
+PASS  detects a control pushed off the window edge
+PASS  off-edge: page is clean again after removing the defect
+PASS  detects text clipped by its own box
+PASS  clipping: page is clean again after removing the defect
+PASS  detects an undersized target
+PASS  small target: page is clean again after removing the defect
+PASS  detects an infinite animation
+PASS  animation: page is clean again after removing the defect
+PASS  detects a control with no accessible name
+PASS  unnamed control: page is clean again after removing the defect
+PASS  baseline: keyboard focus shows a ring
+PASS  detects a hidden focus ring
+PASS  widget baseline: nothing clipped
+PASS  detects clipped widget content
+PASS  widget: clean again after removing the defect
+      CPU in "hourglass running": 10.15% baseline, 112.24% with the injected animation (budget 30%)
+PASS  a CPU-hungry animation exceeds the performance budget
+      uncaught page exceptions: 0
+
+20 passed, 0 failed

@@ -1,0 +1,44 @@
+      idle: 0.19% of one core (0.01% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":0,"stylePerSec":0,"scriptMsPerSec":0.09,"taskMsPerSec":0.33,"nodes":562,"heapMB":5.3}
+         main: {"layoutPerSec":0,"stylePerSec":0,"scriptMsPerSec":0.19,"taskMsPerSec":0.49,"nodes":1225,"heapMB":8.4}
+PASS  idle: 0.19% of one core is within the 10% budget
+      disk running: 8.39% of one core (0.52% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":5.88,"stylePerSec":5.88,"scriptMsPerSec":15.93,"taskMsPerSec":22.11,"nodes":92,"heapMB":4.5}
+         main: {"layoutPerSec":5.88,"stylePerSec":6,"scriptMsPerSec":19.26,"taskMsPerSec":26.78,"nodes":114,"heapMB":6.1}
+PASS  disk running: 8.39% of one core is within the 30% budget
+      sundial running: 10.34% of one core (0.65% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":5.88,"stylePerSec":5.88,"scriptMsPerSec":17.94,"taskMsPerSec":23.84,"nodes":125,"heapMB":4.7}
+         main: {"layoutPerSec":5.88,"stylePerSec":5.88,"scriptMsPerSec":21.77,"taskMsPerSec":29.73,"nodes":122,"heapMB":5.7}
+PASS  sundial running: 10.34% of one core is within the 30% budget
+      hourglass running: 12.48% of one core (0.78% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":15.45,"taskMsPerSec":23.92,"nodes":147,"heapMB":5.4}
+         main: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":19.14,"taskMsPerSec":28.56,"nodes":111,"heapMB":5.3}
+PASS  hourglass running: 12.48% of one core is within the 30% budget
+      hourglass paused: 0% of one core (0% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":0,"stylePerSec":0,"scriptMsPerSec":0.12,"taskMsPerSec":0.44,"nodes":147,"heapMB":5.8}
+         main: {"layoutPerSec":0,"stylePerSec":0,"scriptMsPerSec":0.19,"taskMsPerSec":0.6,"nodes":111,"heapMB":5.7}
+PASS  hourglass paused: 0% of one core is within the 10% budget
+      break running: 13.26% of one core (0.83% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":5.88,"stylePerSec":5.88,"scriptMsPerSec":16.52,"taskMsPerSec":23.01,"nodes":180,"heapMB":6}
+         main: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":21.89,"taskMsPerSec":29.49,"nodes":176,"heapMB":6}
+PASS  break running: 13.26% of one core is within the 30% budget
+      widget small: 12.67% of one core (0.79% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":15.38,"taskMsPerSec":22.06,"nodes":90,"heapMB":5.3}
+         main: {"layoutPerSec":5.88,"stylePerSec":5.88,"scriptMsPerSec":20.13,"taskMsPerSec":27.95,"nodes":122,"heapMB":6.5}
+PASS  widget small: 12.67% of one core is within the 30% budget
+      widget medium: 12.1% of one core (0.76% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":14.98,"taskMsPerSec":20.98,"nodes":92,"heapMB":6}
+         main: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":20.92,"taskMsPerSec":28.52,"nodes":122,"heapMB":5.8}
+PASS  widget medium: 12.1% of one core is within the 30% budget
+      widget large: 13.07% of one core (0.82% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":16.94,"taskMsPerSec":23.42,"nodes":109,"heapMB":7.2}
+         main: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":20.18,"taskMsPerSec":27.84,"nodes":122,"heapMB":5.4}
+PASS  widget large: 13.07% of one core is within the 30% budget
+      Focus Display: 10.72% of one core (0.67% of 16 logical cores), 9 processes, 8s
+         widget: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":14.71,"taskMsPerSec":23.18,"nodes":185,"heapMB":8}
+         main: {"layoutPerSec":6,"stylePerSec":6,"scriptMsPerSec":17.86,"taskMsPerSec":27.82,"nodes":100,"heapMB":11}
+PASS  Focus Display: 10.72% of one core is within the 30% budget
+      uncaught page exceptions: 0
+
+10 passed, 0 failed
+sample length: 8s per state (single sample each)

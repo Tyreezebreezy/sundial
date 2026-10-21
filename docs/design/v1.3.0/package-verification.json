@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "installerBytes": 2093177,
+  "installerSha256": "cfca526839c1dd7bfda9e8b9916a8f1bc08f00cf4863b0329e7a943a3513e9e4",
+  "standaloneSha256": "c510a90346263e04aa898114124e9d68051613775b2ffa93e68d38b2938b50d8",
+  "payloadSha256": "dd58d772b7b57e5a0f0c22c26f2b88470d672fdbad75e001a4da4b549db3af7e",
+  "payloadBytes": 9420800,
+  "comparison": "Only three bytes differ: TAURI_BUNDLE_TYPE_VAR_UNK becomes TAURI_BUNDLE_TYPE_VAR_NSS. Exact payload smoke tested separately."
+}

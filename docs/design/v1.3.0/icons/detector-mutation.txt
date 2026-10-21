@@ -1,0 +1,3 @@
+PASS original ICO
+PASS wrong ICO resource type fails assertion
+PASS restored ICO

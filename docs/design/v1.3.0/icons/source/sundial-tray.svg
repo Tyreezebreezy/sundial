@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>SUNDIAL tray — a gnomon and shadow</title>
+  <defs><clipPath id="plate"><circle cx="32" cy="32" r="28"/></clipPath></defs>
+  <circle cx="32" cy="32" r="28" fill="#d5a84c" stroke="#10100f" stroke-width="2"/>
+  <path d="M34 35 1 57 1 33 30 33Z" fill="#292824" clip-path="url(#plate)"/>
+  <path d="M34 16 34 36 29 36Z" fill="#706044"/>
+  <path d="M34 16 40 36 34 36Z" fill="#f1ede4"/>
+</svg>
