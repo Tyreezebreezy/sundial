@@ -58,7 +58,9 @@ for (const size of w.sizes) {
     );
     if (args.native) {
       const os = ctx.native.win32("windows").data?.windows ?? [];
+      // A minimized main window reports a thumbnail rectangle, not its client size.
       const smallest = os
+        .filter((window) => !window.minimized)
         .slice()
         .sort((a, b) => a.width * a.height - b.width * b.height)[0];
       // The OS rectangle includes the frame, so it can only be at least as large as the client area.

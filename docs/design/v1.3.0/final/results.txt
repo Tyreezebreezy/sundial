@@ -1,0 +1,61 @@
+
+## main window
+PASS  captured 01-study-setup
+PASS  captured 02-timer-setup
+PASS  captured 03-settings
+PASS  captured 04-study-active-disk
+PASS  captured 05-study-active-hourglass
+PASS  captured 06-study-active-sundial
+PASS  captured 07-study-paused
+PASS  captured 08-break
+PASS  captured 09-focus-complete
+PASS  captured 10-session-complete
+PASS  captured 11-timer-active
+PASS  captured 12-timer-complete
+PASS  captured 13-study-setup-plan
+PASS  captured 14-study-setup-options
+PASS  captured 15-preset-selector
+PASS  captured 16-custom-preset
+PASS  captured 17-focus-display
+
+## widget
+PASS  captured widget-small-idle
+PASS  captured widget-small-study
+PASS  captured widget-small-study-hover
+PASS  captured widget-small-study-more
+PASS  captured widget-small-study-lightbg
+PASS  captured widget-small-break
+PASS  captured widget-small-paused
+PASS  captured widget-small-paused-hover
+PASS  captured widget-small-awaiting
+PASS  captured widget-small-awaiting-hover
+PASS  captured widget-small-complete
+PASS  captured widget-small-timer
+PASS  captured widget-medium-idle
+PASS  captured widget-medium-study
+PASS  captured widget-medium-study-hover
+PASS  captured widget-medium-study-more
+PASS  captured widget-medium-study-lightbg
+PASS  captured widget-medium-break
+PASS  captured widget-medium-paused
+PASS  captured widget-medium-paused-hover
+PASS  captured widget-medium-awaiting
+PASS  captured widget-medium-awaiting-hover
+PASS  captured widget-medium-complete
+PASS  captured widget-medium-timer
+PASS  captured widget-large-idle
+PASS  captured widget-large-study
+PASS  captured widget-large-study-hover
+PASS  captured widget-large-study-more
+PASS  captured widget-large-study-lightbg
+PASS  captured widget-large-break
+PASS  captured widget-large-paused
+PASS  captured widget-large-paused-hover
+PASS  captured widget-large-awaiting
+PASS  captured widget-large-awaiting-hover
+PASS  captured widget-large-complete
+PASS  captured widget-large-timer
+      uncaught page exceptions: 0
+
+53 passed, 0 failed
+output: C:\Dev\sundial\docs\design\v1.3.0\final

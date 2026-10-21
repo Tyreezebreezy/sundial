@@ -1,0 +1,25 @@
+{
+  "axNames": {
+    "focus-display": {
+      "interactiveNodes": 5,
+      "unnamed": []
+    }
+  },
+  "tabOrder": {
+    "focus-display": [
+      "button:button \"Pause\"",
+      "button:button \"Add 5 minutes\"",
+      "button:button \"Skip phase\"",
+      "button:button \"Reset\"",
+      "button:button \"Exit Focus Display\""
+    ]
+  },
+  "focusRing": {
+    "focus-display": {
+      "stops": 5,
+      "withoutVisibleRing": []
+    }
+  },
+  "reducedMotion": {},
+  "widgetKeyboard": {}
+}

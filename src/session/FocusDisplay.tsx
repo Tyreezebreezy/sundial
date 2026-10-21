@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ActiveSession } from "./ActiveSession";
 import type { TimerState } from "../types";
 
@@ -18,8 +19,12 @@ export function FocusDisplay({
   remainingMs: number;
   onExit: () => void;
 }) {
+  const display = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    display.current?.focus({ preventScroll: true });
+  }, []);
   return (
-    <div className="focus-display">
+    <div className="focus-display" ref={display} tabIndex={-1}>
       <ActiveSession
         state={state}
         remainingMs={remainingMs}

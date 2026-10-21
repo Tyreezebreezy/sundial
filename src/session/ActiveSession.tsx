@@ -63,11 +63,7 @@ export function ActiveSession({
         ? "Session complete"
         : "Time's up";
     return (
-      <section
-        key="complete"
-        className="stage-active surface-in"
-        aria-label={heading}
-      >
+      <section key="complete" className="stage-active" aria-label={heading}>
         <p className="eyebrow" aria-live="polite">
           {heading}
         </p>
@@ -76,6 +72,15 @@ export function ActiveSession({
           {isStudy ? formatDuration(totalMinutes) : "00:00"}
         </p>
         <p className="type-meta">{isStudy ? "Total session" : identity}</p>
+        {isStudy && (
+          <div className="active-sunline">
+            <Sunline
+              phases={phases}
+              live={{ currentIndex: phases.length, elapsedFraction: 1 }}
+              compact
+            />
+          </div>
+        )}
         <div className="controls">
           <div className="controls-primary">
             <button
@@ -117,7 +122,7 @@ export function ActiveSession({
     return (
       <section
         key="awaiting"
-        className="stage-active surface-in"
+        className="stage-active"
         aria-label={focusDone ? "Focus complete" : "Break complete"}
       >
         <p className="eyebrow" aria-live="polite">
@@ -175,7 +180,7 @@ export function ActiveSession({
   return (
     <section
       key={current.kind + index}
-      className={`stage-active stage-active--${visualState} surface-in`}
+      className={`stage-active stage-active--${visualState}`}
       aria-label={position}
     >
       <p className="eyebrow" aria-live="polite">

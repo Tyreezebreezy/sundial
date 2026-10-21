@@ -32,6 +32,11 @@ function actionsFor(
     icon: "open",
     run: () => void api.openMainWindow(),
   };
+  const focus: Action = {
+    label: "Focus Display",
+    icon: "expand",
+    run: () => void api.openFocusDisplay(),
+  };
   const quit: Action = {
     label: "Quit SUNDIAL",
     icon: "power",
@@ -115,7 +120,7 @@ function actionsFor(
         run: () => void api.reset(),
       };
       return more
-        ? [back, ...(isStudy ? [skip] : []), reset, open, quit]
+        ? [back, ...(isStudy ? [skip] : []), reset, open, focus, quit]
         : [toggle, plus, moreBtn];
     }
   }
@@ -159,7 +164,9 @@ export function Widget() {
       className={`widget widget--${size} widget--${view.mode}${more ? " widget--more" : ""}`}
       role="group"
       aria-label="SUNDIAL timer"
-      onPointerLeave={() => setMore(false)}
+      onPointerLeave={(e) => {
+        if (!e.currentTarget.contains(document.activeElement)) setMore(false);
+      }}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null))
           setMore(false);
@@ -169,7 +176,9 @@ export function Widget() {
       <div className="widget-content">
         {size === "large" && (
           <header className="widget-head">
-            <p className="widget-title">{view.title}</p>
+            <p className="widget-title" title={view.title ?? undefined}>
+              {view.title}
+            </p>
             <p className="widget-sub">{view.line2}</p>
           </header>
         )}

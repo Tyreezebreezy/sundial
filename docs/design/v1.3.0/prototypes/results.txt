@@ -1,0 +1,9 @@
+PASS  study-setup Instrument rendered
+PASS  study-setup Horizon rendered
+PASS  active-disk Instrument rendered
+PASS  active-disk Horizon rendered
+PASS  focus-display Instrument rendered
+PASS  focus-display Horizon rendered
+      uncaught page exceptions: 0
+
+6 passed, 0 failed

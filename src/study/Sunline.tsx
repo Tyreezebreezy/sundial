@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { planTotalMs } from "../session";
 import type { Phase } from "../types";
 
@@ -26,6 +27,7 @@ export function Sunline({
     <ol
       className={`sunline${compact ? " sunline--compact" : ""}`}
       aria-label="Session plan"
+      style={{ "--phase-count": phases.length } as CSSProperties}
     >
       {phases.map((phase, i) => {
         const minutes = Math.round(phase.durationMs / 60_000);
@@ -42,16 +44,20 @@ export function Sunline({
             key={i}
             className={`sunline-seg sunline-seg--${phase.kind}${status ? ` sunline-seg--${status}` : ""}`}
             style={{ flexGrow: phase.durationMs }}
+            aria-current={status === "current" ? "step" : undefined}
+            aria-label={`${phase.kind === "study" ? "Study" : "Break"} ${minutes} minutes${status ? `, ${status}` : ""}`}
             title={`${phase.kind === "study" ? "Study" : "Break"} ${minutes} minutes`}
           >
             <span className="sunline-bar" aria-hidden="true">
               {status === "current" && (
                 <span
-                  className="sunline-marker"
+                  className="sunline-position"
                   style={{
-                    left: `${Math.round(Math.min(1, Math.max(0, live!.elapsedFraction)) * 100)}%`,
+                    transform: `translateX(${Math.min(1, Math.max(0, live!.elapsedFraction)) * 100}%)`,
                   }}
-                />
+                >
+                  <span className="sunline-marker" />
+                </span>
               )}
             </span>
             {roomy && (

@@ -45,7 +45,7 @@ pub fn run() {
             let quit_item = MenuItem::with_id(app, "quit", "Quit SUNDIAL", true, None::<&str>)?;
             let tray_menu = Menu::with_items(app, &[&open_item, &quit_item])?;
             TrayIconBuilder::new()
-                .icon(app.default_window_icon().cloned().unwrap())
+                .icon(tauri::include_image!("icons/tray.png"))
                 .menu(&tray_menu)
                 .tooltip("SUNDIAL")
                 .on_menu_event(|app, event| match event.id.as_ref() {

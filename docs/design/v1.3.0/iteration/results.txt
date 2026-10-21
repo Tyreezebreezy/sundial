@@ -1,0 +1,13 @@
+
+## main window
+PASS  captured 01-study-setup
+PASS  captured 04-study-active-disk
+PASS  captured 06-study-active-sundial
+PASS  captured 17-focus-display
+
+## widget
+PASS  captured widget-large-study-hover
+      uncaught page exceptions: 0
+
+5 passed, 0 failed
+output: C:\Dev\sundial\docs\design\v1.3.0\iteration

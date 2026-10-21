@@ -1,0 +1,53 @@
+
+## surface: study-setup
+PASS  study-setup: every interactive element has an accessible name (13 checked)
+PASS  study-setup: Tab reaches 3 stops and every one shows a focus ring
+      tab order: input:radio "Disk"  ->  button:button "Options"  ->  button:button "Start 2h Deep Study"
+
+## surface: timer-setup
+PASS  timer-setup: every interactive element has an accessible name (17 checked)
+PASS  timer-setup: Tab reaches 2 stops and every one shows a focus ring
+      tab order: input:radio "Disk"  ->  button:button "Start 25 min timer"
+
+## surface: settings
+PASS  settings: every interactive element has an accessible name (21 checked)
+PASS  settings: Tab reaches 16 stops and every one shows a focus ring
+      tab order: button:button "Close settings"  ->  input:radio "Disk"  ->  input:checkbox "OnAdvance to the next phase automa"  ->  input:checkbox "OnShow widget"  ->  input:checkbox "OnAlways on top"  ->  input:radio "Medium"  ->  input:checkbox "OnSound"  ->  select:select-one "Study complete"  ->  button:button "Test study complete sound"  ->  select:select-one "Break complete"  ->  button:button "Test break complete sound"  ->  select:select-one "Timer complete"  ->  button:button "Test timer complete sound"  ->  input:range "Volume"  ->  input:radio "Keep SUNDIAL running"  ->  button:button "Quit SUNDIAL"
+
+## surface: custom-preset
+PASS  custom-preset: every interactive element has an accessible name (17 checked)
+PASS  custom-preset: Tab reaches 7 stops and every one shows a focus ring
+      tab order: input:number "Focus (minutes)"  ->  input:number "Break (minutes)"  ->  input:radio "1 hour"  ->  input:checkbox "OnAdvance to the next phase automa"  ->  input:radio "Disk"  ->  button:submit "Save preset"  ->  button:button "Cancel"
+
+## surface: active
+PASS  active: every interactive element has an accessible name (6 checked)
+PASS  active: Tab reaches 6 stops and every one shows a focus ring
+      tab order: button:button "Settings"  ->  button:button "Pause"  ->  button:button "Add 5 minutes"  ->  button:button "Skip phase"  ->  button:button "Focus Display"  ->  button:button "Reset"
+PASS  readout is role=timer with a spoken label, polite live eyebrow and tabular numerals
+
+## surface: focus-display
+PASS  focus-display: every interactive element has an accessible name (5 checked)
+FAIL  focus-display: Tab reaches 0 stops and every one shows a focus ring  <-- no focusable element
+      tab order: 
+
+## keyboard: preset-menu
+PASS  preset menu opens on Enter and moves focus inside
+PASS  preset menu: ArrowDown selects the next rhythm
+PASS  preset menu: Escape closes it and focus returns to the trigger
+
+## keyboard: segmented-arrows
+PASS  segmented duration: ArrowRight from 2h selects 3h (180)
+
+## reduced motion (prefers-reduced-motion emulation)
+PASS  motion [normal, running]: {"running":0,"infinite":0,"stream":true}
+PASS  motion [normal, paused]: {"running":0,"infinite":0,"stream":false}
+PASS  motion [reduced, running]: {"running":0,"infinite":0,"stream":false}
+
+## widget keyboard access
+PASS  widget controls are hidden until pointer or keyboard focus
+PASS  Tab reveals the widget controls (no hover-only functionality)
+PASS  the first focused widget control is named
+PASS  widget: every interactive element has an accessible name (3 checked)
+      uncaught page exceptions: 0
+
+23 passed, 1 failed

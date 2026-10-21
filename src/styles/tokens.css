@@ -32,6 +32,10 @@
 
   --font-size-timer-xl: clamp(3.25rem, 11vmin, 6.5rem);
   --font-timer-xl: 300 var(--font-size-timer-xl) / 1 var(--font-family-display);
+  --font-timer-focus: 300 clamp(4rem, 17vmin, 14rem)/1
+    var(--font-family-display);
+  --font-timer-focus-compact: 300 clamp(3.25rem, 12vmin, 6.5rem)/1
+    var(--font-family-display);
   --font-timer-widget-compact: 300 1.375rem/1 var(--font-family-display);
   --font-timer-widget: 300 1.875rem/1 var(--font-family-display);
   --font-timer-widget-large: 300 2.25rem/1 var(--font-family-display);

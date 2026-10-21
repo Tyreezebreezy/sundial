@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTimer } from "./useTimer";
 import { useShortcuts } from "./useShortcuts";
+import { onFocusDisplayRequested } from "./tauri";
 import { AppShell, type Section } from "./shell/AppShell";
 import { StudySetup } from "./study/StudySetup";
 import { TimerSetup } from "./timer/TimerSetup";
@@ -37,6 +38,21 @@ export function MainApp() {
       playSound(key, settings.volume);
     },
   );
+
+  useEffect(() => {
+    let disposed = false;
+    let cleanup: (() => void) | undefined;
+    void onFocusDisplayRequested(() => {
+      if (!disposed) setFocusDisplay(true);
+    }).then((unlisten) => {
+      if (disposed) unlisten();
+      else cleanup = unlisten;
+    });
+    return () => {
+      disposed = true;
+      cleanup?.();
+    };
+  }, []);
 
   useShortcuts({
     state,

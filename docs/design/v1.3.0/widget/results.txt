@@ -1,0 +1,66 @@
+
+## size: small
+PASS  small: widget window is 272x56 in the page
+FAIL  small: the OS window is at least 272x56  <-- {"hwnd":266810,"width":160,"height":28,"title":"SUNDIAL"}
+PASS  small/idle at rest: no overflow, nothing clipped
+PASS  small/study at rest: no overflow, nothing clipped
+PASS  small/study: controls hidden at rest
+PASS  small/study: controls appear on hover
+PASS  small/study hovered: no overflow, nothing clipped
+PASS  small/study secondary page: no overflow, nothing clipped
+PASS  small/break at rest: no overflow, nothing clipped
+PASS  small/paused at rest: no overflow, nothing clipped
+PASS  small/paused: controls hidden at rest
+PASS  small/paused: controls appear on hover
+PASS  small/paused hovered: no overflow, nothing clipped
+PASS  small/awaiting at rest: no overflow, nothing clipped
+PASS  small/awaiting: controls hidden at rest
+PASS  small/awaiting: controls appear on hover
+PASS  small/awaiting hovered: no overflow, nothing clipped
+PASS  small/complete at rest: no overflow, nothing clipped
+PASS  small/timer at rest: no overflow, nothing clipped
+
+## size: medium
+PASS  medium: widget window is 232x172 in the page
+FAIL  medium: the OS window is at least 232x172  <-- {"hwnd":266810,"width":160,"height":28,"title":"SUNDIAL"}
+PASS  medium/idle at rest: no overflow, nothing clipped
+PASS  medium/study at rest: no overflow, nothing clipped
+PASS  medium/study: controls hidden at rest
+PASS  medium/study: controls appear on hover
+PASS  medium/study hovered: no overflow, nothing clipped
+PASS  medium/study secondary page: no overflow, nothing clipped
+PASS  medium/break at rest: no overflow, nothing clipped
+PASS  medium/paused at rest: no overflow, nothing clipped
+PASS  medium/paused: controls hidden at rest
+PASS  medium/paused: controls appear on hover
+PASS  medium/paused hovered: no overflow, nothing clipped
+PASS  medium/awaiting at rest: no overflow, nothing clipped
+PASS  medium/awaiting: controls hidden at rest
+PASS  medium/awaiting: controls appear on hover
+PASS  medium/awaiting hovered: no overflow, nothing clipped
+PASS  medium/complete at rest: no overflow, nothing clipped
+PASS  medium/timer at rest: no overflow, nothing clipped
+
+## size: large
+PASS  large: widget window is 272x244 in the page
+FAIL  large: the OS window is at least 272x244  <-- {"hwnd":266810,"width":160,"height":28,"title":"SUNDIAL"}
+PASS  large/idle at rest: no overflow, nothing clipped
+PASS  large/study at rest: no overflow, nothing clipped
+PASS  large/study: controls hidden at rest
+PASS  large/study: controls appear on hover
+PASS  large/study hovered: no overflow, nothing clipped
+PASS  large/study secondary page: no overflow, nothing clipped
+PASS  large/break at rest: no overflow, nothing clipped
+PASS  large/paused at rest: no overflow, nothing clipped
+PASS  large/paused: controls hidden at rest
+PASS  large/paused: controls appear on hover
+PASS  large/paused hovered: no overflow, nothing clipped
+PASS  large/awaiting at rest: no overflow, nothing clipped
+PASS  large/awaiting: controls hidden at rest
+PASS  large/awaiting: controls appear on hover
+PASS  large/awaiting hovered: no overflow, nothing clipped
+PASS  large/complete at rest: no overflow, nothing clipped
+PASS  large/timer at rest: no overflow, nothing clipped
+      uncaught page exceptions: 0
+
+54 passed, 3 failed

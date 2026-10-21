@@ -1128,3 +1128,232 @@
 .range {
   min-height: var(--control-height-compact);
 }
+
+/* Session preparation: one instrument, one deliberate sequence of choices. */
+.setup:not(.setup--timer) {
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+}
+.composer {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-6);
+}
+.session-composer {
+  gap: var(--space-4);
+  min-width: 0;
+}
+.session-composer .preset-trigger {
+  justify-items: start;
+  padding: var(--space-2) 0;
+  text-align: left;
+}
+.session-composer .session-duration .segmented-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-1);
+}
+.session-composer .segment-face {
+  min-width: 0;
+  width: 100%;
+  padding: 0 var(--space-1);
+  background: transparent;
+  border-color: transparent;
+  border-radius: 0;
+  letter-spacing: 0;
+}
+.session-composer .segment input:checked + .segment-face {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: inset 0 -2px 0 var(--color-accent);
+}
+.session-composer .visual-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  gap: var(--space-2);
+}
+.session-composer .visual-option-body {
+  padding: var(--space-2) 0;
+}
+.session-composer .visual-option-label {
+  letter-spacing: 0;
+}
+.session-composer .summary {
+  justify-content: flex-start;
+  text-align: left;
+}
+.instrument-caption {
+  font: var(--font-timer-widget-large);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+.instrument-note {
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.preset-trigger,
+.preset-option,
+.preset-option-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.preset-option-name::before {
+  flex-shrink: 0;
+}
+.start-cta-label {
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.start-cta {
+  padding: var(--space-3) var(--space-4);
+}
+
+/* The rail encodes duration; labels must never contribute to its width. */
+.sunline {
+  gap: min(var(--space-1), calc(20% / var(--phase-count, 1)));
+}
+.sunline-seg {
+  flex-basis: 0;
+}
+.sunline-seg--upcoming .sunline-bar {
+  background: var(--color-border-control);
+  opacity: 0.65;
+}
+.sunline-seg--done .sunline-bar {
+  background: var(--color-text-muted);
+  opacity: 0.6;
+}
+.sunline-position {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sunline-marker {
+  left: 0;
+  transition: none;
+}
+.sunline-seg[aria-current="step"] .sunline-bar {
+  height: 6px;
+}
+
+/* Context belongs with time; secondary actions form a quiet local shelf. */
+.stage-active > .type-meta {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.stage-active .controls {
+  order: 2;
+}
+.active-sunline {
+  width: min(100%, 36rem);
+}
+.controls-secondary {
+  color: var(--color-text-muted);
+}
+.controls:hover .controls-secondary,
+.controls:focus-within .controls-secondary {
+  opacity: 1;
+}
+.stage-active--paused .controls-secondary {
+  opacity: 1;
+}
+.stage-active .controls-primary .btn--secondary {
+  background: transparent;
+  border-color: var(--color-divider);
+}
+.stage-active--break .eyebrow {
+  color: var(--color-text-secondary);
+}
+.focus-display {
+  overflow: auto;
+  --visual-hero: clamp(160px, 28vmin, 480px);
+  --font-size-timer-xl: clamp(4rem, 17vmin, 14rem);
+}
+.focus-display .stage-active {
+  min-height: 100dvh;
+  padding: var(--space-8) var(--space-5) var(--space-5);
+}
+.focus-display {
+  animation: focus-in var(--motion-state) var(--ease-enter) both;
+}
+@keyframes focus-in {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.focus-display:focus {
+  outline: none;
+}
+.focus-display .readout {
+  font: var(--font-timer-focus);
+}
+.focus-display .active-sunline {
+  width: min(70vw, 64rem);
+}
+.focus-display-exit {
+  opacity: 1;
+  color: var(--color-text-muted);
+  background: transparent;
+  border-color: transparent;
+}
+.focus-display:hover .focus-display-exit {
+  opacity: 1;
+}
+.focus-display-exit:hover,
+.focus-display-exit:focus-visible,
+.focus-display:focus-within .focus-display-exit {
+  opacity: 1;
+}
+@media (hover: none) {
+  .controls-secondary,
+  .focus-display-exit {
+    opacity: 1;
+  }
+}
+@media (max-width: 50rem) {
+  .composer {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  .instrument-stage {
+    display: none;
+  }
+  .session-composer {
+    width: min(100%, 30rem);
+    margin: 0 auto;
+    align-items: center;
+  }
+  .session-composer .preset-trigger {
+    justify-items: center;
+    text-align: center;
+  }
+  .session-composer .summary {
+    justify-content: center;
+    text-align: center;
+  }
+}
+@media (max-height: 40rem) {
+  .setup:not(.setup--timer) {
+    gap: var(--space-3);
+    padding-top: 0;
+  }
+  .session-composer {
+    gap: var(--space-2);
+  }
+  .focus-display {
+    --visual-hero: clamp(96px, 22vmin, 160px);
+    --font-size-timer-xl: clamp(3.25rem, 12vmin, 6.5rem);
+  }
+  .focus-display .stage-active {
+    padding-top: var(--space-8);
+  }
+  .focus-display .readout {
+    font: var(--font-timer-focus-compact);
+  }
+}

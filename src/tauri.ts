@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { listen, type UnlistenFn } from "@tauri-apps/api/event";
+import { emitTo, listen, type UnlistenFn } from "@tauri-apps/api/event";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import type {
   AppMode,
@@ -52,6 +52,10 @@ export const api = {
   updateSettings: (settings: Settings) =>
     invoke<Settings>("update_settings", { settings }),
   openMainWindow: () => invoke<void>("open_main_window"),
+  openFocusDisplay: async () => {
+    await invoke<void>("open_main_window");
+    await emitTo("main", "focus-display-requested");
+  },
   setWidgetVisible: (visible: boolean) =>
     invoke<void>("set_widget_visible", { visible }),
   setWidgetAlwaysOnTop: (alwaysOnTop: boolean) =>
@@ -82,4 +86,8 @@ export function onPresetsChanged(
   cb: (presets: Preset[]) => void,
 ): Promise<UnlistenFn> {
   return listen<Preset[]>("presets-changed", (e) => cb(e.payload));
+}
+
+export function onFocusDisplayRequested(cb: () => void): Promise<UnlistenFn> {
+  return listen("focus-display-requested", cb);
 }

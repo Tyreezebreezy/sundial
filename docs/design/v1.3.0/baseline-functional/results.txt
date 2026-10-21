@@ -1,0 +1,100 @@
+
+## Study preset, duration and plan
+PASS  first view shows no duration selected + disabled CTA
+PASS  real pointer click on the '2 hours' segment selects it
+PASS  2 hours -> Deep Study CTA reads 'Start 2h Deep Study'
+PASS  summary says Total session 2h / Focus 1h 30m / Breaks 30m
+PASS  Sunline shows 4 to-scale segments (S45 B15 S45 B15)
+PASS  Deep Study 45/15 for 2h starts S45 B15 S45 B15
+PASS  engine is running study, index 0, preset name recorded
+PASS  last preset + total remembered in settings
+
+## Pause, resume, +5, skip, reset
+PASS  Pause -> engine paused
+PASS  Paused surface says PAUSED and offers Resume
+PASS  +5 while paused adds exactly 5 minutes
+PASS  Resume -> running again
+PASS  Skip phase -> break (index 1)
+PASS  Break surface is labelled BREAK 1 of 2 with 'Next · Study 2 of 2' and Skip break
+PASS  Skip break -> Study block 2
+PASS  Reset needs a second press (two-step destructive)
+PASS  Confirm reset -> session cleared, back to setup
+
+## Other presets, shortened final block, custom duration
+PASS  Selecting Classic closes the menu and shows CLASSIC 25 / 5
+PASS  Classic 25/5 for 1h -> S25 B5 S25 B5
+PASS  Quick 15/5 for 3h uses 15/5 blocks
+PASS  Custom 2h 30m -> summary Total session 2h 30m, Focus 2h, Breaks 30m
+PASS  Sunline shows S45 B15 S45 B15 S30: 3 study blocks, shortened final one, no trailing break
+PASS  Zero duration -> inline error, CTA disabled
+PASS  25 hours -> inline error 'Enter 24 hours or less.'
+
+## Custom preset: save, apply defaults, repeat last, delete
+PASS  empty name -> inline error, form stays
+PASS  custom preset saved with rhythm + remembered defaults
+PASS  saved preset becomes the selection and applies its default session (2h)
+PASS  saved defaults applied at start (visual sundial, auto-advance on, S40 B10)
+PASS  'Repeat last' is hidden when the selection already IS the last session
+PASS  'Repeat last · CCNA Study · 2h' appears once the selection differs
+PASS  Repeat last starts that exact session immediately
+PASS  custom preset can be deleted from the selector
+
+## Auto-advance, completion, manual advance
+PASS  auto-advance: Study -> Break without a click
+PASS  auto-advance: session runs to completion (plan kept, not running)
+PASS  completion surface says SESSION COMPLETE with total + Done
+PASS  Done returns to setup
+PASS  manual advance: waits at FOCUS COMPLETE with Start break
+PASS  Start break -> running the break
+
+## General Timer
+PASS  Timer defaults to the remembered/25 minutes and shows it as 25:00
+PASS  choosing 45 -> readout 45:00, CTA 'Start 45 min timer'
+PASS  General Timer 45 min, hourglass, single timer phase
+PASS  active timer has no study metadata (no Skip, no 'Next')
+PASS  custom timer 1h 15m -> readout 1:15:00, CTA 'Start 1h 15m timer'
+PASS  custom timer runs 75 minutes
+PASS  timer completion: TIME'S UP + Done + +5 minutes
+PASS  +5 minutes after completion starts a fresh 5-minute timer
+
+## The three visuals render real geometry
+PASS  visual 'disk' renders real geometry (no NaN, has lit shape)
+PASS  visual 'hourglass' renders real geometry (no NaN, has lit shape)
+PASS  visual 'sundial' renders real geometry (no NaN, has lit shape)
+
+## Settings persistence and widget sizing
+PASS  Settings: auto-advance toggle persists to the engine
+PASS  Settings: default visual -> sundial persists
+PASS  Settings: volume persists
+PASS  Settings: all 3 Test-sound buttons run without error
+PASS  Settings: widget size small -> widget window 272x56
+PASS  Settings: widget size large -> widget window 272x244
+PASS  Settings: widget size medium -> widget window 232x172
+PASS  Settings: 'Quit SUNDIAL' on close persists
+PASS  Settings: back to 'Keep SUNDIAL running'
+
+## Widget synchronisation and controls
+PASS  widget mirrors the running session (label Study, 1 of 1 block)
+PASS  widget Pause -> engine paused and main window shows Paused
+PASS  widget Resume + +5 both reach the engine
+PASS  widget ⋯ page offers Skip, Reset, Open, Quit (+Back)
+PASS  widget Skip -> engine on the break
+PASS  widget drag: Tauri accepts a press on the surface (start_dragging), rejects one on a button
+
+## v1.2 composition: Instrument Stage, promoted Visual, always-visible Sunline
+PASS  Study setup: the Visual picker is visible without opening Options
+PASS  Study setup: the Sunline is visible with no click (4 segments for 2h Deep Study)
+PASS  Options now holds only auto-advance + label, not the Visual picker
+PASS  Timer setup uses the same Instrument Stage + composer layout
+
+## Keyboard layer (Space/+/S/F/Esc), suppressed while typing, and Focus Display
+PASS  F enters Focus Display: a full-bleed overlay over the same running session
+PASS  Escape exits Focus Display back to the normal shell
+PASS  Space pauses the running session
+PASS  Space again resumes it
+PASS  + adds exactly 5 minutes
+PASS  S skips to the next phase
+PASS  shortcuts are suppressed while a text field has focus: 's' is typed, not Skip
+      uncaught page exceptions: 0
+
+75 passed, 0 failed

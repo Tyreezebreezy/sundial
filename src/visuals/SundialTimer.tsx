@@ -3,7 +3,7 @@ import { useSvgId, visualClass, type TimerVisualProps } from "./visualTypes";
 
 const C = 120;
 const PLATE = 92;
-const ARC = 106;
+const ARC = 98;
 const SWEEP = 90; // shadow sweeps from -90deg to +90deg across the top of the plate
 /* Sundial hour lines are unevenly spaced (wider toward the horizon). A fixed
    symbolic table - not a solar calculation. */
@@ -32,7 +32,7 @@ export function SundialTimer(props: TimerVisualProps) {
   const len = shadowLength(deg);
   const tip = { x: C + dir.x * len, y: C + dir.y * len };
   const baseHalf = 4;
-  const tipHalf = 8;
+  const tipHalf = 2;
   const shadow = [
     [C + perp.x * baseHalf, C + perp.y * baseHalf],
     [C - perp.x * baseHalf, C - perp.y * baseHalf],
@@ -60,7 +60,7 @@ export function SundialTimer(props: TimerVisualProps) {
           gradientUnits="userSpaceOnUse"
           cx={n2(sun.x)}
           cy={n2(sun.y)}
-          r={PLATE * 1.25}
+          r={PLATE * 0.95}
         >
           <stop offset="0" className="tv-light-1" />
           <stop offset="1" className="tv-light-2" />
@@ -79,6 +79,13 @@ export function SundialTimer(props: TimerVisualProps) {
       </defs>
 
       <circle className="tv-track" cx={C} cy={C} r={PLATE} />
+      <ellipse
+        className="tv-plate-edge"
+        cx={C}
+        cy={C + 2}
+        rx={PLATE - 4}
+        ry={PLATE - 4}
+      />
       <circle
         cx={C}
         cy={C}
@@ -115,11 +122,11 @@ export function SundialTimer(props: TimerVisualProps) {
       <ellipse className="tv-gnomon-base" cx={C} cy={C + 6} rx={9} ry={2.5} />
       <polygon
         className="tv-gnomon-a"
-        points={`${C},${C - 30} ${C},${C + 6} ${C - 6},${C + 6}`}
+        points={`${C},${C - 38} ${C},${C + 8} ${C - 8},${C + 8}`}
       />
       <polygon
         className="tv-gnomon-b"
-        points={`${C},${C - 30} ${C + 6},${C + 6} ${C},${C + 6}`}
+        points={`${C},${C - 38} ${C + 8},${C + 8} ${C},${C + 8}`}
       />
     </svg>
   );

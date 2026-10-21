@@ -1,0 +1,117 @@
+{
+  "result": "PASS",
+  "checks": [
+    "app-16: dimensions, transparency, opaque center, light detail PASS",
+    "app-24: dimensions, transparency, opaque center, light detail PASS",
+    "app-32: dimensions, transparency, opaque center, light detail PASS",
+    "app-48: dimensions, transparency, opaque center, light detail PASS",
+    "app-256: dimensions, transparency, opaque center, light detail PASS",
+    "tray-16: dimensions, transparency, opaque center, light detail PASS",
+    "tray-24: dimensions, transparency, opaque center, light detail PASS",
+    "tray-32: dimensions, transparency, opaque center, light detail PASS",
+    "tray-48: dimensions, transparency, opaque center, light detail PASS",
+    "tray-256: dimensions, transparency, opaque center, light detail PASS",
+    "ICO directory and bounds PASS: 32, 16, 24, 48, 64, 256"
+  ],
+  "controls": [
+    "sliders",
+    "close",
+    "pause",
+    "play",
+    "skip",
+    "more",
+    "power",
+    "open",
+    "chevron",
+    "back",
+    "plus",
+    "reset",
+    "expand"
+  ],
+  "assets": {
+    "icon.png": {
+      "bytes": 25092,
+      "sha256": "d5a4eddb477fc2cb26e9c5a95a045c5b2bdb45004ae756bf3fcef80d1f54c234"
+    },
+    "icon.ico": {
+      "bytes": 19086,
+      "sha256": "622258299e3ab4ef055a27fb6874f3e42627bafd7832276ebd5ceacd0396f71e"
+    },
+    "icon.icns": {
+      "bytes": 140860,
+      "sha256": "f85128b97aa4b81876337bbda740db86b4bfcd19f5d67a29cfe27fb201b1f039"
+    },
+    "32x32.png": {
+      "bytes": 1095,
+      "sha256": "0ade1fd7a3f4c26f08dae469662ec5fc8b5841c64173c577f9e06f65a1e61842"
+    },
+    "128x128.png": {
+      "bytes": 5376,
+      "sha256": "19357cf9acf7f9f00f8021d04e370943a27a59537428b266cfc8fed0d4ca7f03"
+    },
+    "128x128@2x.png": {
+      "bytes": 11158,
+      "sha256": "2e9fdf20bf9fc751a1e73a7f8e45fd7948f47b10f6705f7d075c6c135d8c9c22"
+    },
+    "Square30x30Logo.png": {
+      "bytes": 1073,
+      "sha256": "f27667a565398530dd760c9cd64ba6c02d95e276d52cda1cd0c0c913f9f32356"
+    },
+    "Square44x44Logo.png": {
+      "bytes": 1565,
+      "sha256": "d4062473aca93cf56f4b2ffef23ef401a4d09ad89d9b51009223e565cc55df8d"
+    },
+    "Square71x71Logo.png": {
+      "bytes": 2793,
+      "sha256": "1185b7cf9b0e0e27d674de7aee719c7afbafa67611ad32e60863e08b56ff0e67"
+    },
+    "Square89x89Logo.png": {
+      "bytes": 3545,
+      "sha256": "8bd7a6e31913bdf6c0ccffd1e5e20057e71b6a801a2148b3ab98018a8e42f0f3"
+    },
+    "Square107x107Logo.png": {
+      "bytes": 4311,
+      "sha256": "c97c2eb4505677f0ece42972e0db985bf112106a378f7ff3f2f88f132ed76a3a"
+    },
+    "Square142x142Logo.png": {
+      "bytes": 6151,
+      "sha256": "c032ef330c1ee5694ae58369d754e18e33db7e86429ef22f30b2d73c5b22f2a0"
+    },
+    "Square150x150Logo.png": {
+      "bytes": 6529,
+      "sha256": "840d7778e50c5e38d1e9844f8eca86fe5c9b20c09c5dd659cbbe6920b60f548d"
+    },
+    "Square284x284Logo.png": {
+      "bytes": 13142,
+      "sha256": "b7fea97f11e9b7096b11e4f3b28f08719a19272a107169ffb66ae8b479409291"
+    },
+    "Square310x310Logo.png": {
+      "bytes": 14397,
+      "sha256": "f5c2daf16dfea2b2fc67bbe1b6e2d1d190bd7b02f3aa101e23260fd302d8b4fc"
+    },
+    "StoreLogo.png": {
+      "bytes": 1834,
+      "sha256": "cb408d5525f64410286f117c4f5d349b9b14ac6be5e47596bda6ba3df7d89e37"
+    },
+    "tray.png": {
+      "bytes": 995,
+      "sha256": "2d94895e19a59d49910fb15582d4f7aecf0323f391924437bd926be98090e16a"
+    },
+    "tray-16.png": {
+      "bytes": 467,
+      "sha256": "a83ae4e3c14cf1bb7bf821ae25d786e8d0f7929603b0f8a3ba35f6219b646bee"
+    },
+    "tray-24.png": {
+      "bytes": 719,
+      "sha256": "ae2b0cca6a3e9571754229a13c89ed2d1d20c2fbf12950c8c91e7cc10cb85aad"
+    },
+    "tray-48.png": {
+      "bytes": 1444,
+      "sha256": "456001ca560637ac8e892cf61ab91621cb22ff7c3cb5619f2efe011fda3a656e"
+    }
+  },
+  "limitations": [
+    "No installed Windows shell or taskbar icon-cache verification.",
+    "No native tray DPI selection verification."
+  ]
+}

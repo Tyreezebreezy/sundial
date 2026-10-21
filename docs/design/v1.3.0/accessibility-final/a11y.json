@@ -1,0 +1,153 @@
+{
+  "axNames": {
+    "study-setup": {
+      "interactiveNodes": 13,
+      "unnamed": []
+    },
+    "timer-setup": {
+      "interactiveNodes": 17,
+      "unnamed": []
+    },
+    "settings": {
+      "interactiveNodes": 21,
+      "unnamed": []
+    },
+    "custom-preset": {
+      "interactiveNodes": 17,
+      "unnamed": []
+    },
+    "active": {
+      "interactiveNodes": 6,
+      "unnamed": []
+    },
+    "focus-display": {
+      "interactiveNodes": 5,
+      "unnamed": []
+    },
+    "widget": {
+      "interactiveNodes": 3,
+      "unnamed": []
+    }
+  },
+  "tabOrder": {
+    "study-setup": [
+      "input:radio \"Disk\"",
+      "button:button \"Options\"",
+      "button:button \"Start 2h Deep Study\""
+    ],
+    "timer-setup": [
+      "input:radio \"Disk\"",
+      "button:button \"Start 25 min timer\""
+    ],
+    "settings": [
+      "button:button \"Close settings\"",
+      "input:radio \"Disk\"",
+      "input:checkbox \"OnAdvance to the next phase automa\"",
+      "input:checkbox \"OnShow widget\"",
+      "input:checkbox \"OnAlways on top\"",
+      "input:radio \"Medium\"",
+      "input:checkbox \"OnSound\"",
+      "select:select-one \"Study complete\"",
+      "button:button \"Test study complete sound\"",
+      "select:select-one \"Break complete\"",
+      "button:button \"Test break complete sound\"",
+      "select:select-one \"Timer complete\"",
+      "button:button \"Test timer complete sound\"",
+      "input:range \"Volume\"",
+      "input:radio \"Keep SUNDIAL running\"",
+      "button:button \"Quit SUNDIAL\""
+    ],
+    "custom-preset": [
+      "input:number \"Focus (minutes)\"",
+      "input:number \"Break (minutes)\"",
+      "input:radio \"1 hour\"",
+      "input:checkbox \"OnAdvance to the next phase automa\"",
+      "input:radio \"Disk\"",
+      "button:submit \"Save preset\"",
+      "button:button \"Cancel\""
+    ],
+    "active": [
+      "button:button \"Settings\"",
+      "button:button \"Pause\"",
+      "button:button \"Add 5 minutes\"",
+      "button:button \"Skip phase\"",
+      "button:button \"Focus Display\"",
+      "button:button \"Reset\""
+    ],
+    "focus-display": [
+      "button:button \"Pause\"",
+      "button:button \"Add 5 minutes\"",
+      "button:button \"Skip phase\"",
+      "button:button \"Reset\"",
+      "button:button \"Exit Focus Display\""
+    ]
+  },
+  "focusRing": {
+    "study-setup": {
+      "stops": 3,
+      "withoutVisibleRing": []
+    },
+    "timer-setup": {
+      "stops": 2,
+      "withoutVisibleRing": []
+    },
+    "settings": {
+      "stops": 16,
+      "withoutVisibleRing": []
+    },
+    "custom-preset": {
+      "stops": 7,
+      "withoutVisibleRing": []
+    },
+    "active": {
+      "stops": 6,
+      "withoutVisibleRing": []
+    },
+    "focus-display": {
+      "stops": 5,
+      "withoutVisibleRing": []
+    }
+  },
+  "reducedMotion": {
+    "normal, running": {
+      "running": 0,
+      "infinite": 0,
+      "extra": {
+        "stream": true
+      }
+    },
+    "normal, paused": {
+      "running": 0,
+      "infinite": 0,
+      "extra": {
+        "stream": false
+      }
+    },
+    "reduced, running": {
+      "running": 0,
+      "infinite": 0,
+      "extra": {
+        "stream": false
+      }
+    }
+  },
+  "widgetKeyboard": {
+    "controlsOpacityBeforeFocus": "0",
+    "controlsOpacityAfterTab": "1",
+    "firstFocused": "Pause"
+  },
+  "activeDescribe": {
+    "role": "timer",
+    "label": "45 minutes remaining",
+    "live": "polite",
+    "tabular": "tabular-nums"
+  },
+  "presetMenu": {
+    "opensOnEnter": true,
+    "focusMovesIn": true,
+    "arrowSelectsNext": "Classic",
+    "escapeCloses": true,
+    "focusReturnsToTrigger": true
+  },
+  "segmentedArrow": "180"
+}

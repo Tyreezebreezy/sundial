@@ -1,0 +1,88 @@
+PASS  viewports include the default window size
+PASS  viewports include the minimum window size
+
+## study-setup
+PASS  study-setup @ 640x560
+PASS  study-setup @ 900x760
+PASS  study-setup @ 1200x900
+PASS  study-setup @ 1920x1080
+PASS  study-setup @ 900x760@125
+PASS  study-setup @ 900x760@150
+PASS  study-setup @ zoom200-of-900x760
+PASS  study-setup @ zoom200-of-640x560
+
+## study-options
+PASS  study-options @ 640x560
+PASS  study-options @ 900x760
+PASS  study-options @ 1200x900
+PASS  study-options @ 1920x1080
+PASS  study-options @ 900x760@125
+PASS  study-options @ 900x760@150
+PASS  study-options @ zoom200-of-900x760
+PASS  study-options @ zoom200-of-640x560
+
+## timer-setup
+PASS  timer-setup @ 640x560
+PASS  timer-setup @ 900x760
+PASS  timer-setup @ 1200x900
+PASS  timer-setup @ 1920x1080
+PASS  timer-setup @ 900x760@125
+PASS  timer-setup @ 900x760@150
+PASS  timer-setup @ zoom200-of-900x760
+PASS  timer-setup @ zoom200-of-640x560
+
+## timer-setup-custom
+PASS  timer-setup-custom @ 640x560
+PASS  timer-setup-custom @ 900x760
+PASS  timer-setup-custom @ 1200x900
+PASS  timer-setup-custom @ 1920x1080
+PASS  timer-setup-custom @ 900x760@125
+PASS  timer-setup-custom @ 900x760@150
+PASS  timer-setup-custom @ zoom200-of-900x760
+PASS  timer-setup-custom @ zoom200-of-640x560
+
+## active-sundial
+PASS  active-sundial @ 640x560
+PASS  active-sundial @ 900x760
+PASS  active-sundial @ 1200x900
+PASS  active-sundial @ 1920x1080
+PASS  active-sundial @ 900x760@125
+PASS  active-sundial @ 900x760@150
+PASS  active-sundial @ zoom200-of-900x760
+PASS  active-sundial @ zoom200-of-640x560
+
+## active-hourglass
+PASS  active-hourglass @ 640x560
+PASS  active-hourglass @ 900x760
+PASS  active-hourglass @ 1200x900
+PASS  active-hourglass @ 1920x1080
+PASS  active-hourglass @ 900x760@125
+PASS  active-hourglass @ 900x760@150
+PASS  active-hourglass @ zoom200-of-900x760
+PASS  active-hourglass @ zoom200-of-640x560
+
+## paused
+PASS  paused @ 640x560
+PASS  paused @ 900x760
+PASS  paused @ 1200x900
+PASS  paused @ 1920x1080
+PASS  paused @ 900x760@125
+PASS  paused @ 900x760@150
+PASS  paused @ zoom200-of-900x760
+PASS  paused @ zoom200-of-640x560
+
+## settings
+PASS  settings @ 640x560
+PASS  settings @ 900x760
+PASS  settings @ 1200x900
+PASS  settings @ 1920x1080
+PASS  settings @ 900x760@125
+PASS  settings @ 900x760@150
+PASS  settings @ zoom200-of-900x760
+PASS  settings @ zoom200-of-640x560
+      64 surface/viewport combinations
+      vertical scroll (informational): study-setup @ zoom200-of-900x760; study-setup @ zoom200-of-640x560; study-options @ 640x560; study-options @ 900x760; study-options @ 900x760@125; study-options @ 900x760@150; study-options @ zoom200-of-900x760; study-options @ zoom200-of-640x560; timer-setup @ zoom200-of-900x760; timer-setup @ zoom200-of-640x560; timer-setup-custom @ zoom200-of-900x760; timer-setup-custom @ zoom200-of-640x560; active-sundial @ zoom200-of-900x760; active-sundial @ zoom200-of-640x560; active-hourglass @ zoom200-of-900x760; active-hourglass @ zoom200-of-640x560; paused @ zoom200-of-900x760; paused @ zoom200-of-640x560; settings @ 640x560; settings @ 900x760; settings @ 1200x900; settings @ 1920x1080; settings @ 900x760@125; settings @ 900x760@150; settings @ zoom200-of-900x760; settings @ zoom200-of-640x560
+PASS  no surface needs vertical scrolling unless it is expanded on purpose (or at 200% zoom)
+      uncaught page exceptions: 0
+
+67 passed, 0 failed

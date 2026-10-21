@@ -72,11 +72,11 @@
 
 @keyframes tv-settle {
   from {
-    filter: brightness(1.7);
+    opacity: 0.55;
   }
 
   to {
-    filter: none;
+    opacity: 1;
   }
 }
 
@@ -108,7 +108,7 @@
 
 .tv-light-1 {
   stop-color: var(--tv-lit-1);
-  stop-opacity: calc(var(--tv-glow) * 0.85);
+  stop-opacity: calc(var(--tv-glow) * 0.55);
 }
 
 .tv-light-2 {
@@ -123,7 +123,7 @@
 
 .tv-shadow-2 {
   stop-color: var(--color-canvas);
-  stop-opacity: 0.1;
+  stop-opacity: 0.25;
 }
 
 .tv-lit {
@@ -253,4 +253,11 @@
   width: var(--visual-size, 240px);
   aspect-ratio: 1;
   flex: none;
+}
+
+.tv-plate-edge {
+  fill: none;
+  stroke: var(--color-border-control);
+  stroke-width: 0.75;
+  opacity: 0.4;
 }

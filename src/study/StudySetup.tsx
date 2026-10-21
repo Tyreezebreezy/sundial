@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { formatMinutesLabel } from "../format";
+import { formatDuration, formatMinutesLabel } from "../format";
 import { BUILT_IN_PRESETS } from "../presets";
 import { buildStudySchedule, lastConfig, summarizeSchedule } from "../session";
 import { api } from "../tauri";
@@ -135,6 +135,14 @@ export function StudySetup({
               reducedMotion
             />
           </div>
+          {ready && (
+            <p className="instrument-caption">
+              {formatDuration(summary.totalMinutes)}
+            </p>
+          )}
+          <p className="instrument-note">
+            {ready ? "Total session" : "Choose your rhythm"}
+          </p>
         </div>
 
         <div className="session-composer">

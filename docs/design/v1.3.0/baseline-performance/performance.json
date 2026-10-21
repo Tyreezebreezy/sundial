@@ -1,0 +1,147 @@
+{
+  "idle": {
+    "cpu": {
+      "percentOfAllCores": 0,
+      "logicalCores": 16,
+      "seconds": 5,
+      "identifier": "com.sundial.app.uidev",
+      "processes": 9,
+      "percentOfOneCore": 0
+    },
+    "windows": {
+      "widget": {
+        "layoutPerSec": 0,
+        "stylePerSec": 0,
+        "scriptMsPerSec": 0.25,
+        "taskMsPerSec": 1.16,
+        "nodes": 94,
+        "heapMB": 4.9
+      },
+      "main": {
+        "layoutPerSec": 0,
+        "stylePerSec": 0,
+        "scriptMsPerSec": 0.41,
+        "taskMsPerSec": 1.04,
+        "nodes": 1209,
+        "heapMB": 10.6
+      }
+    },
+    "budget": 10
+  },
+  "disk running": {
+    "cpu": {
+      "percentOfAllCores": 0.39,
+      "logicalCores": 16,
+      "seconds": 5,
+      "identifier": "com.sundial.app.uidev",
+      "processes": 9,
+      "percentOfOneCore": 6.23
+    },
+    "windows": {
+      "widget": {
+        "layoutPerSec": 7.2,
+        "stylePerSec": 7.2,
+        "scriptMsPerSec": 25.65,
+        "taskMsPerSec": 34.7,
+        "nodes": 109,
+        "heapMB": 5.1
+      },
+      "main": {
+        "layoutPerSec": 7.2,
+        "stylePerSec": 7.2,
+        "scriptMsPerSec": 37.45,
+        "taskMsPerSec": 52.17,
+        "nodes": 113,
+        "heapMB": 6.1
+      }
+    },
+    "budget": 30
+  },
+  "sundial running": {
+    "cpu": {
+      "percentOfAllCores": 0.45,
+      "logicalCores": 16,
+      "seconds": 5,
+      "identifier": "com.sundial.app.uidev",
+      "processes": 9,
+      "percentOfOneCore": 7.16
+    },
+    "windows": {
+      "widget": {
+        "layoutPerSec": 7.4,
+        "stylePerSec": 7.4,
+        "scriptMsPerSec": 26.66,
+        "taskMsPerSec": 36.07,
+        "nodes": 141,
+        "heapMB": 4.9
+      },
+      "main": {
+        "layoutPerSec": 7.4,
+        "stylePerSec": 7.4,
+        "scriptMsPerSec": 37.04,
+        "taskMsPerSec": 49.76,
+        "nodes": 145,
+        "heapMB": 6.2
+      }
+    },
+    "budget": 30
+  },
+  "hourglass running": {
+    "cpu": {
+      "percentOfAllCores": 0.9,
+      "logicalCores": 16,
+      "seconds": 5,
+      "identifier": "com.sundial.app.uidev",
+      "processes": 9,
+      "percentOfOneCore": 14.34
+    },
+    "windows": {
+      "widget": {
+        "layoutPerSec": 7.6,
+        "stylePerSec": 7.6,
+        "scriptMsPerSec": 25.19,
+        "taskMsPerSec": 40.45,
+        "nodes": 163,
+        "heapMB": 5.1
+      },
+      "main": {
+        "layoutPerSec": 7.6,
+        "stylePerSec": 7.6,
+        "scriptMsPerSec": 33.56,
+        "taskMsPerSec": 53.55,
+        "nodes": 167,
+        "heapMB": 5.5
+      }
+    },
+    "budget": 30
+  },
+  "hourglass paused": {
+    "cpu": {
+      "percentOfAllCores": 0.1,
+      "logicalCores": 16,
+      "seconds": 5,
+      "identifier": "com.sundial.app.uidev",
+      "processes": 9,
+      "percentOfOneCore": 1.56
+    },
+    "windows": {
+      "widget": {
+        "layoutPerSec": 0,
+        "stylePerSec": 0,
+        "scriptMsPerSec": 0.28,
+        "taskMsPerSec": 0.86,
+        "nodes": 166,
+        "heapMB": 5.5
+      },
+      "main": {
+        "layoutPerSec": 0,
+        "stylePerSec": 0,
+        "scriptMsPerSec": 0.36,
+        "taskMsPerSec": 4.65,
+        "nodes": 108,
+        "heapMB": 4.5
+      }
+    },
+    "budget": 10
+  }
+}

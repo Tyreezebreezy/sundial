@@ -109,6 +109,7 @@ public static class QaWin32 {
   [DllImport("user32.dll")] public static extern bool EnumWindows(EnumProc p, IntPtr l);
   [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
   [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr h);
+  [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr h);
   [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr h, out RECT r);
   [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int GetWindowText(IntPtr h, StringBuilder s, int n);
   [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr h, uint m, IntPtr w, IntPtr l);
@@ -120,7 +121,7 @@ public static class QaWin32 {
       if (pids.Contains(pid) && IsWindowVisible(h)) {
         RECT r; GetWindowRect(h, out r);
         var sb = new StringBuilder(256); GetWindowText(h, sb, 256);
-        if (r.R - r.L > 50) res.Add(new object[] { h.ToInt64(), r.R - r.L, r.B - r.T, sb.ToString() });
+        if (r.R - r.L > 50) res.Add(new object[] { h.ToInt64(), r.R - r.L, r.B - r.T, sb.ToString(), IsIconic(h) });
       }
       return true;
     }, IntPtr.Zero);
@@ -133,7 +134,7 @@ public static class QaWin32 {
   foreach ($p in $ProcessIds) { [void]$set.Add([uint32]$p) }
   $out = @()
   foreach ($w in [QaWin32]::Visible($set)) {
-    $out += [pscustomobject]@{ hwnd = [int64]$w[0]; width = [int]$w[1]; height = [int]$w[2]; title = [string]$w[3] }
+    $out += [pscustomobject]@{ hwnd = [int64]$w[0]; width = [int]$w[1]; height = [int]$w[2]; title = [string]$w[3]; minimized = [bool]$w[4] }
   }
   return $out
 }

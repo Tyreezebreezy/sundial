@@ -32,25 +32,39 @@ export function useShortcuts({
         onExitOverlay();
         return;
       }
-      if (isFormControlFocused() || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (
+        e.defaultPrevented ||
+        isFormControlFocused() ||
+        e.ctrlKey ||
+        e.metaKey ||
+        e.altKey
+      )
+        return;
+      // Space activates the focused button; it must not also toggle the timer.
+      if (
+        e.key === " " &&
+        (document.activeElement?.tagName === "BUTTON" ||
+          document.activeElement?.tagName === "A")
+      )
+        return;
 
       const plan = state?.plan;
       if ((e.key === "f" || e.key === "F") && plan) {
         e.preventDefault();
-        onEnterFocusDisplay();
+        if (!e.repeat) onEnterFocusDisplay();
         return;
       }
       if (!plan || !state!.isRunning || state!.awaitingAdvance) return;
 
       if (e.key === " ") {
         e.preventDefault();
-        void (state!.isPaused ? api.resume() : api.pause());
+        if (!e.repeat) void (state!.isPaused ? api.resume() : api.pause());
       } else if (e.key === "+" || e.key === "=") {
         e.preventDefault();
-        void api.addMinutes(5);
+        if (!e.repeat) void api.addMinutes(5);
       } else if ((e.key === "s" || e.key === "S") && plan.mode === "study") {
         e.preventDefault();
-        void api.advancePhase();
+        if (!e.repeat) void api.advancePhase();
       }
     }
     document.addEventListener("keydown", onKeyDown);

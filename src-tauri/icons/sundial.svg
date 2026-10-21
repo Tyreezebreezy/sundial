@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>SUNDIAL — a gnomon, light, and its shadow</title>
+  <defs>
+    <radialGradient id="light" cx="77%" cy="22%" r="100%">
+      <stop offset="0" stop-color="#e3b85d"/>
+      <stop offset=".6" stop-color="#d5a84c"/>
+      <stop offset="1" stop-color="#8b6a2d"/>
+    </radialGradient>
+    <clipPath id="plate"><circle cx="256" cy="258" r="174"/></clipPath>
+  </defs>
+  <rect x="8" y="8" width="496" height="496" rx="100" fill="#10100f"/>
+  <circle cx="256" cy="258" r="174" fill="url(#light)"/>
+  <path d="M270 280 62 418 64 262 250 266Z" fill="#292824" clip-path="url(#plate)"/>
+  <path d="M270 158 270 284 244 284Z" fill="#706044"/>
+  <path d="M270 158 305 284 270 284Z" fill="#f1ede4"/>
+</svg>

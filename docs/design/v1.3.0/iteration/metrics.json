@@ -1,0 +1,72 @@
+{
+  "01-study-setup": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 13,
+    "names": [
+      "STUDY",
+      "TIMER",
+      "Settings",
+      "Study rhythm: Deep Study",
+      "60",
+      "120",
+      "180",
+      "custom",
+      "disk",
+      "hourglass",
+      "sundial",
+      "Options",
+      "START 2H DEEP STUDY"
+    ]
+  },
+  "04-study-active-disk": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "06-study-active-sundial": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 6,
+    "names": [
+      "Settings",
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "Focus Display",
+      "RESET"
+    ]
+  },
+  "17-focus-display": {
+    "scrollW": 900,
+    "innerW": 900,
+    "scrollH": 760,
+    "innerH": 760,
+    "dpr": 1,
+    "controls": 5,
+    "names": [
+      "PAUSE",
+      "Add 5 minutes",
+      "SKIP PHASE",
+      "RESET",
+      "EXIT FOCUS DISPLAY"
+    ]
+  }
+}
