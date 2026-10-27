@@ -1,4 +1,4 @@
-PASS C:\Users\Tyree\Documents\Codex\2026-10-20\1-ui-instrument-stage-session-composer\work\installer-payload\sundial.exe : all 6 canonical ICO frames embedded; wrong-frame negative control rejected
-PASS C:\Users\Tyree\Documents\Codex\2026-10-20\1-ui-instrument-stage-session-composer\outputs\SUNDIAL_1.3.0_x64-setup.exe : all 6 canonical ICO frames embedded; wrong-frame negative control rejected
+PASS <work>\work\installer-payload\sundial.exe : all 6 canonical ICO frames embedded; wrong-frame negative control rejected
+PASS <work>\outputs\SUNDIAL_1.3.0_x64-setup.exe : all 6 canonical ICO frames embedded; wrong-frame negative control rejected
 
 PASS mutated reference ICO frame rejected; original reference passes again.

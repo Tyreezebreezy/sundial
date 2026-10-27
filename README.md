@@ -18,14 +18,14 @@ I built SUNDIAL because I wanted a timer that fit the way I actually study: a lo
 
 The built-in presets are Deep Study (45 / 15, the default), Classic (25 / 5), Quick (15 / 5), Standard (30 / 10), Extended (50 / 10) and Long (60 / 15). You can also make custom presets.
 
-| Study setup | Choosing a rhythm |
-| --- | --- |
+| Study setup                                           | Choosing a rhythm                                           |
+| ----------------------------------------------------- | ----------------------------------------------------------- |
 | ![Setup](docs/design/v1.3.0/final/01-study-setup.png) | ![Presets](docs/design/v1.3.0/final/15-preset-selector.png) |
 
 ## During a session
 
-| Disk | Sundial | Timer mode |
-| --- | --- | --- |
+| Disk                                                       | Sundial                                                          | Timer mode                                             |
+| ---------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
 | ![Disk](docs/design/v1.3.0/final/04-study-active-disk.png) | ![Sundial](docs/design/v1.3.0/final/06-study-active-sundial.png) | ![Timer](docs/design/v1.3.0/final/11-timer-active.png) |
 
 Keyboard shortcuts while a session is running: `Space` pause/resume, `+` add five minutes, `S` skip the phase (study sessions), `F` open Focus Display, `Esc` close whatever overlay is open. They're ignored while you're typing in a field.
@@ -67,7 +67,9 @@ The repo also contains the QA harness I used for the release evidence under [`do
 - Windows only.
 - No code signing is configured in this repo, so Windows SmartScreen may warn about an installer you build yourself.
 - It's a timer. No task lists, statistics dashboards or sync.
+- I don't ship a prebuilt installer from this repo yet; you build it yourself (below).
+- The alert sounds are generated in the app with the Web Audio API, so there are no audio files to license or swap out.
 
 ## License
 
-No license has been chosen yet, so all rights are reserved for now.
+The source is publicly viewable, but I haven't picked an open-source license, so none has been granted. All rights are reserved for now.

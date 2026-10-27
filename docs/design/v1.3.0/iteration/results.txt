@@ -10,4 +10,4 @@ PASS  captured widget-large-study-hover
       uncaught page exceptions: 0
 
 5 passed, 0 failed
-output: C:\Dev\sundial\docs\design\v1.3.0\iteration
+output: <repo>\docs\design\v1.3.0\iteration
